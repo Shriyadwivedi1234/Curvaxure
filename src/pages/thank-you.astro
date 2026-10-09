@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import { booking } from '@/config/booking';
+const hasCal = !booking.calUrl.includes('YOUR-USERNAME');
+---
+<BaseLayout title="Thank you" noindex>
+  <section class="mx-auto max-w-4xl px-5 pb-24 pt-16 text-center">
+    <h1 class="text-[clamp(38px,5.6vw,64px)]">Thanks, we've got your request.</h1>
+    <p class="mx-auto mb-10 mt-5 max-w-[34em] text-[19px] text-slate">
+      Pick a time for your free {booking.callMinutes}-minute call. We'll talk about your data and what you want to decide, then recommend where we can help and share pricing.
+    </p>
+    {hasCal
+      ? <iframe src={`${booking.calUrl}?embed=true`} title="Choose a time for your call" loading="lazy" class="h-[700px] w-full rounded-[28px] border border-line bg-white"></iframe>
+      : <p class="rounded-2xl border border-line bg-white p-6 text-slate">The calendar is being set up. We'll email you shortly to arrange a time.</p>}
+    <p class="mt-8 text-sm text-slate">No need to send files or confidential data before the call.</p>
+    <div class="mt-6"><Button href="/" variant="secondary">Back to home</Button></div>
+  </section>
+</BaseLayout>

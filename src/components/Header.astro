@@ -1,0 +1,37 @@
+---
+import { site, nav } from '@/config/site';
+const path = Astro.url.pathname;
+---
+<header id="site-header" class="glass-header sticky top-3 z-40 mx-auto mt-3 w-[calc(100%-24px)] max-w-[1120px] rounded-full">
+  <div class="flex h-16 items-center justify-between pl-[22px] pr-2.5">
+    <a href="/" class="flex items-center gap-2.5 font-display text-[21px] font-extrabold tracking-[-0.03em] text-white">
+      <span class="logo-tile grid h-[34px] w-[34px] place-items-center rounded-[11px] text-lg text-ink" aria-hidden="true">c</span>
+      {site.name}
+    </a>
+
+    <nav aria-label="Main" class="hidden items-center gap-7 lg:flex">
+      {nav.map((i) => (
+        <a href={i.href} aria-current={path.startsWith(i.href) ? 'page' : undefined}
+           class="text-sm font-semibold text-white/80 transition-colors hover:text-[#f3e7c0] aria-[current=page]:text-white">{i.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <a href={site.ctaHref} class="cta-sheen inline-flex items-center rounded-full px-5 py-2.5 text-[15px] font-semibold text-ink transition-shadow hover:shadow-[0_0_26px_rgb(217_196_142/0.55)]">Book a consult</a>
+      <!-- Mobile menu: native <details>, no JavaScript -->
+      <details class="relative lg:hidden">
+        <summary class="cursor-pointer list-none rounded-full border border-white/25 px-4 py-2.5 text-sm font-semibold text-white">Menu</summary>
+        <nav aria-label="Mobile" class="absolute right-0 mt-3 w-60 rounded-3xl border border-white/15 bg-ink/95 p-4 text-white shadow-xl backdrop-blur">
+          <ul class="space-y-3">{nav.map((i) => <li><a href={i.href} class="block text-base">{i.label}</a></li>)}</ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const update = () => header?.classList.toggle('sc', window.scrollY > 24);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+</script>
