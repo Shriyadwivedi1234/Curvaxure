@@ -1,62 +1,124 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { booking, industries, focusAreas } from '@/config/booking';
+
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-const field = 'w-full rounded-xl border-[1.5px] border-line bg-white px-4 py-3 text-[15px] outline-none focus:border-ink';
-const label = 'mb-1.5 block text-sm font-semibold';
+const field = 'field';
+const label = 'mb-1.5 block text-[13px] font-medium text-ink';
+const steps = [
+  'We learn how your business runs and where your data lives.',
+  'We talk through what you need to understand or decide.',
+  'We recommend where we can help and share pricing.',
+];
 ---
-<BaseLayout title="Book your free data assessment call" description="A free, no-obligation conversation about your data and what you want to decide. We recommend where we can help and share pricing.">
-  <section class="mx-auto grid max-w-6xl gap-12 px-5 pb-24 pt-16 lg:grid-cols-[1fr_1.05fr]">
+<BaseLayout
+  title="Book a data assessment"
+  description="A free, no-obligation conversation about your data and what you need to decide. We recommend where we can help and share pricing."
+>
+  <section class="container-page grid gap-12 py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16 lg:py-24">
     <div>
-      <span class="label text-slate">Free · {booking.callMinutes} minutes · no obligation</span>
-      <h1 class="mb-5 mt-3 text-[clamp(38px,5.6vw,64px)]">Book your free data assessment call</h1>
-      <p class="mb-8 max-w-[30em] text-[19px] text-slate">Tell us a little about your business. Then pick a time that suits you.</p>
-      <h2 class="mb-3 text-[22px]">What happens on the call</h2>
-      <ul class="mb-8 space-y-3 text-[16px]">
-        <li class="flex gap-3"><i class="mt-2 h-[10px] w-[10px] flex-none rounded-full bg-champagne"></i>We learn how your business runs and where your data lives.</li>
-        <li class="flex gap-3"><i class="mt-2 h-[10px] w-[10px] flex-none rounded-full bg-champagne"></i>We talk through what you want to understand or decide.</li>
-        <li class="flex gap-3"><i class="mt-2 h-[10px] w-[10px] flex-none rounded-full bg-champagne"></i>We recommend where we can help and share pricing.</li>
-      </ul>
-      <p class="text-sm text-slate">You don't need to send any files or confidential data before the call.</p>
+      <p class="eyebrow">Free · {booking.callMinutes} minutes · no obligation</p>
+      <h1 class="mt-4 text-[clamp(38px,4.8vw,56px)]">Book a data assessment</h1>
+      <p class="mt-5 max-w-[30em] text-[17px] leading-[1.65] text-slate">
+        Tell us a little about your business. Then pick a time that suits you.
+      </p>
+
+      <h2 class="mt-10 text-[20px]">What happens on the call</h2>
+      <ol class="mt-4 divide-y divide-line border-y border-line">
+        {steps.map((step, index) => (
+          <li class="grid grid-cols-[32px_1fr] gap-4 py-4">
+            <span class="text-[12px] font-medium tabular-nums text-brass">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span class="text-[15px] leading-[1.65] text-ink">{step}</span>
+          </li>
+        ))}
+      </ol>
+
+      <p class="mt-5 text-[13px] leading-[1.6] text-slate">
+        You don't need to send any files or confidential data before the call.
+      </p>
     </div>
 
-    <form method="post" action="/api/lead" class="rounded-[28px] border border-line bg-white p-6 shadow-[0_30px_60px_-30px_rgb(23_22_26/0.35)] md:p-8">
-      <p id="form-error" role="alert" hidden class="mb-4 rounded-xl bg-coral/10 px-4 py-3 text-sm text-coral"></p>
+    <form
+      method="post"
+      action="/api/lead"
+      class="h-fit rounded-[16px] border border-line bg-paper-2 p-6 md:p-8"
+    >
+      <p id="form-error" role="alert" hidden class="mb-4 rounded-[8px] bg-coral/10 px-4 py-3 text-[13px] text-coral"></p>
+
       <div class="grid gap-4 sm:grid-cols-2">
-        <div><label class={label} for="name">Name</label><input class={field} id="name" name="name" required minlength="2" maxlength="120" autocomplete="name" /></div>
-        <div><label class={label} for="email">Work email</label><input class={field} id="email" name="email" type="email" required maxlength="200" autocomplete="email" /></div>
-        <div><label class={label} for="company">Company</label><input class={field} id="company" name="company" required minlength="2" maxlength="160" autocomplete="organization" /></div>
-        <div><label class={label} for="industry">Industry</label>
-          <select class={field} id="industry" name="industry" required><option value="" disabled selected>Select</option>{industries.map((i) => <option value={i.value}>{i.label}</option>)}</select></div>
-        <div class="sm:col-span-2"><label class={label} for="focus">What do you want to improve?</label>
-          <select class={field} id="focus" name="focus" required><option value="" disabled selected>Select</option>{focusAreas.map((a) => <option value={a.value}>{a.label}</option>)}</select></div>
-        <div class="sm:col-span-2"><label class={label} for="message">Anything else we should know? <span class="font-normal text-slate">(optional)</span></label>
-          <textarea class={field} id="message" name="message" rows="3" maxlength="2000"></textarea></div>
+        <div>
+          <label class={label} for="name">Name</label>
+          <input class={field} id="name" name="name" required minlength="2" maxlength="120" autocomplete="name" />
+        </div>
+        <div>
+          <label class={label} for="email">Work email</label>
+          <input class={field} id="email" name="email" type="email" required maxlength="200" autocomplete="email" />
+        </div>
+        <div>
+          <label class={label} for="company">Company</label>
+          <input class={field} id="company" name="company" required minlength="2" maxlength="160" autocomplete="organization" />
+        </div>
+        <div>
+          <label class={label} for="industry">Industry</label>
+          <select class={field} id="industry" name="industry" required>
+            <option value="" disabled selected>Select</option>
+            {industries.map((industry) => <option value={industry.value}>{industry.label}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class={label} for="focus">What do you want to improve?</label>
+          <select class={field} id="focus" name="focus" required>
+            <option value="" disabled selected>Select</option>
+            {focusAreas.map((area) => <option value={area.value}>{area.label}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class={label} for="message">
+            Anything else we should know? <span class="font-normal text-slate">(optional)</span>
+          </label>
+          <textarea class={field} id="message" name="message" rows="3" maxlength="2000"></textarea>
+        </div>
       </div>
 
       <input type="hidden" name="source" id="source" />
       <input type="hidden" name="plan" id="plan" />
-      <div class="absolute -left-[9999px]" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label>Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
       {siteKey && <div class="cf-turnstile mt-4" data-sitekey={siteKey}></div>}
       {siteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>}
 
-      <button type="submit" class="mt-6 w-full rounded-full border-[1.5px] border-ink bg-ink px-6 py-3.5 text-[15px] font-semibold text-white transition hover:shadow-[0_0_30px_rgb(217_196_142/0.55)]">Request my free call</button>
-      <p class="mt-3 text-xs text-slate">Next, you'll choose a time. By sending this form you agree to be contacted about your request. See our <a href="/privacy-policy" class="underline">Privacy Policy</a>.</p>
+      <button type="submit" class="btn btn-primary mt-6 w-full">Request my free call</button>
+      <p class="mt-3 text-[12px] leading-[1.6] text-slate">
+        Next, you'll choose a time. By sending this form you agree to be contacted about
+        your request. See our <a href="/privacy-policy" class="underline underline-offset-2">Privacy Policy</a>.
+      </p>
     </form>
   </section>
 </BaseLayout>
 
 <script>
-  const q = new URLSearchParams(location.search);
-  const set = (id: string, v: string | null) => { const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null; if (el && v) el.value = v; };
-  set('source', q.get('source')); set('plan', q.get('plan'));
-  set('focus', q.get('focus')); set('industry', q.get('industry'));
-  const msgs: Record<string, string> = {
+  const query = new URLSearchParams(location.search);
+  const set = (id: string, value: string | null) => {
+    const element = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+    if (element && value) element.value = value;
+  };
+  set('source', query.get('source'));
+  set('plan', query.get('plan'));
+  set('focus', query.get('focus'));
+  set('industry', query.get('industry'));
+
+  const messages: Record<string, string> = {
     invalid: 'Please check the form. Name, work email, company, industry and focus are required.',
     spam: 'We could not verify the spam check. Please try again.',
     server: 'Something went wrong on our side. Please try again in a moment.',
   };
-  const err = q.get('error');
+  const error = query.get('error');
   const box = document.getElementById('form-error');
-  if (err && box && msgs[err]) { box.textContent = msgs[err]; box.hidden = false; }
+  if (error && box && messages[error]) {
+    box.textContent = messages[error];
+    box.hidden = false;
+  }
 </script>

@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config/site';
+---
+<BaseLayout
+  title="Privacy policy"
+  description="How Curvaxure handles the information you send through this website."
+>
+  <section class="container-page py-16 md:py-24">
+    <div class="max-w-[46em]">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-4 text-[clamp(36px,4.6vw,52px)]">Privacy policy</h1>
+      <p class="mt-4 text-[13px] text-slate">Last updated 5 November 2026</p>
+
+      <div class="mt-10 space-y-8 text-[15px] leading-[1.7]">
+        <section>
+          <h2 class="text-[20px]">What we collect</h2>
+          <p class="mt-3 text-slate">
+            When you submit the assessment form, we collect your name, work email, company,
+            industry, focus area and any optional message. We also receive the page or plan
+            that referred you and a spam-check token.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">Why we use it</h2>
+          <p class="mt-3 text-slate">
+            We use this information to respond to your request, arrange a call and keep a
+            record of the enquiry. We do not sell it or use it for advertising.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">Who processes it</h2>
+          <p class="mt-3 text-slate">
+            We use Supabase for the enquiry database, Resend for email notifications,
+            Cloudflare Turnstile for spam protection, Vercel for hosting and Cal.com for
+            scheduling when the calendar is enabled. These providers process data on our
+            behalf.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">How long we keep it</h2>
+          <p class="mt-3 text-slate">
+            We keep enquiry records for as long as needed to respond and maintain our
+            business records. You can ask us to delete your enquiry at any time.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">Cookies</h2>
+          <p class="mt-3 text-slate">
+            This site does not run analytics or advertising cookies. The spam check and the
+            calendar embed may process technical data or set their own cookies.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">Your choices</h2>
+          <p class="mt-3 text-slate">
+            Email us to request access to, correction of, or deletion of the information you
+            sent through this site.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-[20px]">Changes</h2>
+          <p class="mt-3 text-slate">
+            We may update this page. The date above shows the latest version.
+          </p>
+        </section>
+      </div>
+
+      <p class="mt-10 border-t border-line pt-6 text-[13px] text-slate">
+        Questions about this page? Email
+        <a href={`mailto:${site.contactEmail}`} class="text-ink underline underline-offset-2">{site.contactEmail}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

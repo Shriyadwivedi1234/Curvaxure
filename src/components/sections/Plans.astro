@@ -1,49 +1,142 @@
 ---
 import Button from '@/components/ui/Button.astro';
 import { site } from '@/config/site';
+
 // Plan limits are examples until packages and pricing are decided. No prices shown.
 const plans = [
-  { name: 'Starter', sub: 'Get clarity fast', price: 'Setup + retainer', cta: 'Start here', featured: false,
-    features: ['Up to 3 data sources', '2 dashboards', 'Cleaning and modeling', 'Scheduled refresh', 'Monthly insight review'] },
-  { name: 'Growth', sub: 'Decide with confidence', price: 'Setup + retainer', cta: 'Choose Growth →', featured: true,
-    features: ['Up to 8 data sources', '6 dashboards', 'Custom KPI development', 'Weekly insight meetings', 'Forecasting add-on'] },
-  { name: 'Enterprise', sub: 'Scale the whole curve', price: 'Custom', cta: 'Talk to us', featured: false,
-    features: ['Custom data source scope', 'Tailored dashboards', 'Advanced analytics and automation', 'Weekly meetings, priority support', 'User access and security'] },
+  {
+    name: 'Starter',
+    sub: 'Get your key numbers in one place',
+    price: 'Setup + retainer',
+    cta: 'Start here',
+    featured: false,
+    features: [
+      'Up to 3 data sources',
+      '2 dashboards',
+      'Cleaning and modeling',
+      'Scheduled refresh',
+      'Monthly insight review',
+    ],
+  },
+  {
+    name: 'Growth',
+    sub: 'Connect more of the business',
+    price: 'Setup + retainer',
+    cta: 'Choose Growth',
+    featured: true,
+    features: [
+      'Up to 8 data sources',
+      '6 dashboards',
+      'Custom KPI development',
+      'Weekly insight meetings',
+      'Forecasting add-on',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    sub: 'Custom scope and support',
+    price: 'Custom',
+    cta: 'Talk to us',
+    featured: false,
+    features: [
+      'Custom data source scope',
+      'Tailored dashboards',
+      'Advanced analytics and automation',
+      'Weekly meetings, priority support',
+      'User access and security',
+    ],
+  },
 ];
 ---
-<section id="plans" class="relative -mt-10 rounded-t-[40px] bg-paper pb-24 pt-24">
-  <div class="mx-auto max-w-6xl px-5">
-    <div class="mx-auto mb-12 max-w-[34em] text-center">
-      <h2 class="text-[clamp(34px,5.4vw,58px)]">Flexible plans, real impact</h2>
-      <p class="mt-4 text-[19px] text-slate">One-time discovery and setup, then an optional monthly partnership. Weekly insight meetings come with Growth and Enterprise.</p>
+<section id="plans" class="pb-20 pt-24 md:pb-24 md:pt-32">
+  <div class="container-page">
+    <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
+      <div>
+        <p class="eyebrow">Plans</p>
+        <h2 class="mt-4 max-w-[14em] text-[clamp(32px,4.4vw,56px)]">
+          Start where you are. Add as you grow
+        </h2>
+      </div>
+      <p class="max-w-[30em] text-[15px] leading-[1.7] text-slate md:justify-self-end">
+        One-time discovery and setup, then an optional monthly partnership. Weekly
+        insight meetings come with Growth and Enterprise.
+      </p>
     </div>
 
-    <div class="plans-grid grid items-end gap-5 md:grid-cols-[1fr_1.1fr_1fr]">
-      {plans.map((p, k) => (
-        <article class:list={['plan reveal rounded-[28px]', p.featured ? 'plan-dark bg-ink p-10 text-white' : 'border-[1.5px] border-line bg-white p-8']} style={`--d:${k}`}>
-          {p.featured && <span class="label absolute -top-3 right-6 rounded-full bg-champagne px-3 py-1.5 text-ink">Most requested</span>}
-          <h3 class="text-[30px]">{p.name}</h3>
-          <p class:list={['mb-4 mt-1.5 text-sm', p.featured ? 'text-mist' : 'text-slate']}>{p.sub}</p>
-          <p class="mb-4 font-display text-[26px] font-extrabold tracking-[-0.03em]">{p.price}</p>
-          <ul class="mb-6 text-[15px]">
-            {p.features.map((f, i) => (
-              <li class="relative py-1.5 pl-6" style={`--i:${i}`}><i class="absolute left-0 top-[13px] h-[11px] w-[11px] rounded-full bg-champagne"></i>{f}</li>
+    <div class="mt-12 grid items-stretch gap-4 lg:grid-cols-3">
+      {plans.map((plan, index) => (
+        <article
+          class:list={[
+            'flex flex-col rounded-[16px] border p-6 md:p-8',
+            plan.featured ? 'border-ink bg-ink text-paper' : 'border-line bg-paper-2 text-ink',
+          ]}
+        >
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="text-[28px]">{plan.name}</h3>
+            <p class:list={['text-[11px] tabular-nums', plan.featured ? 'text-mist' : 'text-slate']}>
+              Plan {String(index + 1).padStart(2, '0')}
+            </p>
+          </div>
+
+          <p class:list={['mt-2 text-[14px]', plan.featured ? 'text-mist' : 'text-slate']}>
+            {plan.sub}
+          </p>
+
+          <p
+            class:list={[
+              'mt-6 border-t pt-5 text-[16px] font-medium',
+              plan.featured ? 'border-line-dark text-paper' : 'border-line text-ink',
+            ]}
+          >
+            {plan.price}
+          </p>
+
+          <ul
+            class:list={[
+              'mt-6 flex-1 space-y-3 text-[14px]',
+              plan.featured ? 'text-mist' : 'text-slate',
+            ]}
+          >
+            {plan.features.map((feature) => (
+              <li class="flex gap-3">
+                <i
+                  class:list={[
+                    'mt-[9px] h-1 w-1 flex-none rounded-full',
+                    plan.featured ? 'bg-champagne' : 'bg-brass',
+                  ]}
+                ></i>
+                <span>{feature}</span>
+              </li>
             ))}
           </ul>
-          <Button href={`/book-consultation?plan=${p.name.toLowerCase()}&source=plans`} variant={p.featured ? 'accent' : 'secondary'} class="w-full">{p.cta}</Button>
+
+          <Button
+            href={`/book-consultation?plan=${plan.name.toLowerCase()}&source=plans`}
+            variant={plan.featured ? 'accent' : 'secondary'}
+            class="mt-8 w-full"
+          >
+            {plan.cta}
+          </Button>
         </article>
       ))}
     </div>
 
-    <div class="relative mt-14 grid items-center gap-6 overflow-hidden rounded-[36px] bg-gradient-to-br from-pan to-[#3e3d45] p-9 text-white md:grid-cols-[1.3fr_1fr] md:p-12">
-      <i class="pointer-events-none absolute -right-14 -top-16 h-64 w-64 rounded-full bg-champagne/20" aria-hidden="true"></i>
-      <div class="relative">
-        <h2 class="text-[clamp(32px,4.6vw,52px)]">Not sure where your curve is heading?</h2>
-        <p class="mt-3.5 text-mist">Book a free consultation or request a data assessment. We'll map your sources and show you what's possible.</p>
-      </div>
-      <div class="relative flex flex-wrap gap-3">
-        <Button href="/book-consultation?source=final-cta" variant="accent">Book a consultation →</Button>
-        <Button href={`mailto:${site.contactEmail}`} variant="secondary">Email us</Button>
+    <div class="mt-16 rounded-[16px] bg-ink p-8 text-paper md:p-12">
+      <div class="grid items-center gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        <div>
+          <p class="eyebrow text-mist">Next step</p>
+          <h2 class="mt-3 text-[clamp(28px,3.4vw,44px)]">Not sure what to fix first?</h2>
+          <p class="mt-3 max-w-[34em] text-[15px] leading-[1.7] text-mist">
+            Book a free consultation or request a data assessment. We'll map your
+            sources and tell you what we'd build first.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3 md:justify-end">
+          <Button href="/book-consultation?source=final-cta" variant="accent">
+            Book a consultation
+          </Button>
+          <Button href={`mailto:${site.contactEmail}`} variant="outline-dark">Email us</Button>
+        </div>
       </div>
     </div>
   </div>

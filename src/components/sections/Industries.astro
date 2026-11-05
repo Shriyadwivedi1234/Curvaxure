@@ -1,32 +1,161 @@
 ---
-// Illustrative mini-widgets only. No client data.
-const industries = [
-  { name: 'Construction', outcome: 'See where the project curve is moving before margin disappears.', href: '/industries/construction-analytics', kind: 'bars', bars: [40, 60, 80, 55, 70], alert: 2 },
-  { name: 'E-commerce', outcome: 'Grow the channels that create profit, not just traffic.', href: '/industries/ecommerce-analytics', kind: 'bars', bars: [30, 75, 50, 90, 45], alert: 2 },
-  { name: 'Professional services', outcome: 'Turn team capacity into more profitable work.', href: '/industries/professional-services-analytics', kind: 'ring', bars: [], alert: -1 },
+type IndustryBase = {
+  name: string;
+  question: string;
+  description: string;
+  meta: string;
+  href: string;
+};
+type Industry =
+  | (IndustryBase & {
+      kind: 'costs';
+      rows: { label: string; value: number; alert?: boolean }[];
+    })
+  | (IndustryBase & {
+      kind: 'channels';
+      bars: { label: string; value: number; highlight?: boolean }[];
+    })
+  | (IndustryBase & { kind: 'capacity'; booked: number });
+
+const industries: Industry[] = [
+  {
+    name: 'Construction',
+    question: 'Where is margin slipping?',
+    description: 'Project costs against progress, with overruns called out.',
+    meta: 'Project costs',
+    href: '/book-consultation?industry=construction&focus=control-project-costs&source=industries',
+    kind: 'costs',
+    rows: [
+      { label: 'Project A', value: 82 },
+      { label: 'Project B', value: 64 },
+      { label: 'Project C', value: 94, alert: true },
+      { label: 'Project D', value: 58 },
+    ],
+  },
+  {
+    name: 'E-commerce',
+    question: 'Which channel makes money?',
+    description: 'Contribution margin by channel, not just traffic.',
+    meta: 'Channel margin',
+    href: '/book-consultation?industry=ecommerce&focus=improve-marketing&source=industries',
+    kind: 'channels',
+    bars: [
+      { label: 'Paid', value: 64 },
+      { label: 'Email', value: 82, highlight: true },
+      { label: 'Social', value: 48 },
+      { label: 'Direct', value: 71 },
+    ],
+  },
+  {
+    name: 'Professional services',
+    question: 'Where is capacity going?',
+    description: 'Booked capacity by team for the next four weeks.',
+    meta: 'Capacity',
+    href: '/book-consultation?industry=professional-services&focus=improve-profitability&source=industries',
+    kind: 'capacity',
+    booked: 74,
+  },
 ];
 ---
-<section id="industries" class="relative overflow-hidden rounded-t-[40px] bg-ink pb-24 pt-16 text-white">
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-6xl px-5">
-    <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
-      <h2 class="text-[clamp(34px,5.4vw,58px)]">Built for your industry</h2>
-      <span class="label text-mist">3 focus industries · more coming</span>
+<section id="industries" class="bg-ink pb-20 pt-24 text-paper md:pb-24 md:pt-32">
+  <div class="container-page">
+    <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
+      <div>
+        <p class="eyebrow text-mist">Industries</p>
+        <h2 class="mt-4 max-w-[14em] text-[clamp(32px,4.4vw,56px)]">
+          Built for the questions your industry asks
+        </h2>
+      </div>
+      <p class="max-w-[30em] text-[15px] leading-[1.7] text-mist md:justify-self-end">
+        Same method, different numbers. Each view starts with the question that decides
+        margin, capacity or channel profit.
+      </p>
     </div>
-    <div class="grid gap-5 md:grid-cols-3">
-      {industries.map((it, i) => (
-        <a href={it.href} class="glass-dark reveal group block rounded-[28px] p-6 hover:-translate-y-1.5" style={`--d:${i}`}>
-          <div class="mb-5 flex h-[120px] items-end justify-center gap-2 rounded-2xl bg-white/5 p-4" aria-hidden="true">
-            {it.kind === 'bars'
-              ? it.bars.map((h, j) => (
-                  <span class:list={['block w-[22px] rounded-t-lg', j === it.alert ? 'bg-coral' : 'bg-steel/70']} style={`height:${h}%`}></span>
-                ))
-              : <span class="grid h-[84px] w-[84px] place-items-center self-center rounded-full" style="background:conic-gradient(#d9c48e 0 68%,rgb(255 255 255/.15) 0)"><span class="h-[52px] w-[52px] rounded-full bg-pan"></span></span>}
+
+    <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {industries.map((industry, index) => (
+        <article
+          class:list={[
+            'flex flex-col rounded-[16px] border border-line-dark bg-ink-2 p-6 md:p-7',
+            index === 2 && 'md:col-span-2 lg:col-span-1',
+          ]}
+        >
+          <div class="flex items-center justify-between gap-4">
+            <p class="text-[12px] font-medium tabular-nums text-mist">
+              {String(index + 1).padStart(2, '0')}
+            </p>
+            <p class="text-[11px] text-mist">{industry.meta}</p>
           </div>
-          <h3 class="mb-2 text-[28px]">{it.name}</h3>
-          <p class="mb-4 text-[15px] text-mist">{it.outcome}</p>
-          <span class="text-sm font-semibold text-champagne">Explore analytics <span class="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        </a>
+
+          <h3 class="mt-6 text-[28px] leading-[1.05]">{industry.name}</h3>
+          <p class="mt-4 font-display text-[20px] leading-[1.2] text-paper">{industry.question}</p>
+          <p class="mt-2 text-[14px] leading-[1.6] text-mist">{industry.description}</p>
+
+          <div class="mt-7 min-h-[132px] rounded-[8px] border border-line-dark p-4">
+            {industry.kind === 'costs' && (
+              <div class="space-y-3">
+                {industry.rows.map((row) => (
+                  <div class="grid grid-cols-[64px_1fr_32px] items-center gap-3">
+                    <span class="text-[11px] text-mist">{row.label}</span>
+                    <span class="h-1.5 overflow-hidden rounded-full bg-line-dark">
+                      <span
+                        class:list={[
+                          'block h-full rounded-full',
+                          row.alert ? 'bg-coral' : 'bg-champagne',
+                        ]}
+                        style={`width:${row.value}%`}
+                      ></span>
+                    </span>
+                    <span class="text-right text-[11px] tabular-nums text-paper">{row.value}%</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {industry.kind === 'channels' && (
+              <div>
+                <div class="grid h-[92px] grid-cols-4 items-end gap-3">
+                  {industry.bars.map((bar) => (
+                    <div class="flex h-full items-end">
+                      <span
+                        class:list={[
+                          'w-full rounded-t-[3px]',
+                          bar.highlight ? 'bg-champagne' : 'bg-[#4a443b]',
+                        ]}
+                        style={`height:${bar.value}%`}
+                      ></span>
+                    </div>
+                  ))}
+                </div>
+                <div class="mt-3 grid grid-cols-4 gap-3">
+                  {industry.bars.map((bar) => (
+                    <span class="text-[11px] text-mist">{bar.label}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {industry.kind === 'capacity' && (
+              <div>
+                <p class="text-[11px] text-mist">Next four weeks</p>
+                <div class="mt-4 h-2 overflow-hidden rounded-full bg-line-dark">
+                  <span class="block h-full rounded-full bg-champagne" style={`width:${industry.booked}%`}></span>
+                </div>
+                <div class="mt-3 flex items-center justify-between text-[11px] text-mist">
+                  <span><span class="tabular-nums text-paper">{industry.booked}%</span> booked</span>
+                  <span><span class="tabular-nums text-paper">{100 - industry.booked}%</span> open</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <a
+            href={industry.href}
+            class="mt-auto inline-flex items-center gap-2 border-t border-line-dark pt-5 text-[14px] font-medium text-paper transition-colors duration-150 hover:text-champagne"
+          >
+            Talk through this view <span aria-hidden="true">→</span>
+          </a>
+        </article>
       ))}
     </div>
   </div>
