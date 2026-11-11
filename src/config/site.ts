@@ -18,7 +18,7 @@ export const nav = [
 
 export const footerLinks = {
   Services: [
-    { label: 'Digital Presence & Search', href: '/services/digital-presence' },
+    { label: 'Digital Presence', href: '/services/digital-presence' },
     { label: 'Marketing & Growth', href: '/services/marketing-growth' },
     { label: 'Data & Intelligence', href: '/services/data-intelligence' },
     { label: 'Automation', href: '/services/automation' },
