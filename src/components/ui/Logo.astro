@@ -1,0 +1,21 @@
+---
+interface Props {
+  tone?: 'dark' | 'light';
+  class?: string;
+}
+const { class: extra = '' } = Astro.props;
+const wordmark = 'text-primary';
+---
+<a href="/" class:list={['inline-flex items-center gap-2.5 group', extra]}>
+  <img
+    src="/curvaxure-mark.png"
+    alt="Curvaxure Logo Mark"
+    class="h-7 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+    width="28"
+    height="28"
+    loading="eager"
+  />
+  <span class:list={['font-display text-[20px] font-semibold tracking-[-0.01em]', wordmark]}>
+    Curvaxure
+  </span>
+</a>

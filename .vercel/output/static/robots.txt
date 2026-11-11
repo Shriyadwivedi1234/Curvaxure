@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://curvaxure.com/sitemap-index.xml

@@ -6,21 +6,21 @@ export const booking = {
 } as const;
 
 export const industries = [
-  { value: 'construction', label: 'Construction' },
-  { value: 'ecommerce', label: 'E-commerce' },
-  { value: 'professional-services', label: 'Professional services' },
-  { value: 'logistics', label: 'Logistics' },
-  { value: 'other', label: 'Other' },
+  { value: 'ecommerce', label: 'E-commerce & D2C' },
+  { value: 'construction', label: 'Construction & Real Estate' },
+  { value: 'professional-services', label: 'Professional Services & B2B' },
+  { value: 'small-brands', label: 'Small Brands & Startups' },
+  { value: 'logistics', label: 'Logistics & Supply Chain' },
+  { value: 'other', label: 'Other Industry' },
 ] as const;
 
-// Values match the growth console scenarios, so the console can pre-select one.
+// Values match the growth console scenarios and main service categories
 export const focusAreas = [
-  { value: 'increase-sales', label: 'Increase sales' },
-  { value: 'improve-profitability', label: 'Improve profitability' },
-  { value: 'control-project-costs', label: 'Control project costs' },
-  { value: 'improve-marketing', label: 'Improve marketing' },
-  { value: 'understand-customers', label: 'Understand customers' },
-  { value: 'improve-operations', label: 'Improve operations' },
-  { value: 'plan-future-growth', label: 'Plan future growth' },
+  { value: 'low-online-visibility', label: 'Search Visibility (SEO / GEO / AEO)' },
+  { value: 'low-conversion-rate', label: 'Website & Conversion Rate (CRO)' },
+  { value: 'poor-lead-quality', label: 'Marketing & Brand Positioning' },
+  { value: 'manual-operations', label: 'Workflow & AI Automation (n8n / Zapier)' },
+  { value: 'no-data-visibility', label: 'Custom CRM & Business Intelligence' },
+  { value: 'stalled-growth', label: 'Comprehensive Growth Strategy' },
   { value: 'other', label: 'Something else' },
 ] as const;

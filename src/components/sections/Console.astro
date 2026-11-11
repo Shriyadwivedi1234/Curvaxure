@@ -1,47 +1,148 @@
 ---
-import Button from '@/components/ui/Button.astro';
-// Illustrative scenarios. Dummy data, not client results.
 const scenarios = [
-  { slug: 'increase-sales', label: 'Increase sales', insight: 'Repeat customers order less this quarter, while new-customer orders hold steady.', decision: 'Focus on keeping customers or winning new ones?', direction: 'Compare sales by customer segment and product before the next campaign plan.' },
-  { slug: 'improve-profitability', label: 'Improve profitability', insight: 'Revenue is growing, but rising labor and supplier costs are reducing project margins.', decision: 'Which projects and cost categories deserve action first?', direction: 'Review cost categories, project performance and margin changes before the next planning cycle.' },
-  { slug: 'control-project-costs', label: 'Control project costs', insight: 'Labor costs are rising faster than project progress on two active projects.', decision: 'Adjust resources now or wait for the next milestone?', direction: 'Review crew allocation, overtime and subcontractor performance before the next milestone.' },
-  { slug: 'improve-marketing', label: 'Improve marketing', insight: 'One channel brings high traffic but low contribution margin.', decision: 'Where should the next marketing budget go?', direction: 'Shift budget by profitable customer acquisition, not traffic volume alone.' },
-  { slug: 'understand-customers', label: 'Understand customers', insight: 'A small group of customers accounts for most repeat purchases.', decision: 'Which customer groups are worth investing in?', direction: 'Compare segments by lifetime value and repeat behavior.' },
-  { slug: 'improve-operations', label: 'Improve operations', insight: 'Delays cluster around a few recurring steps in the process.', decision: 'Which step is worth fixing first?', direction: 'Review timing step by step and compare against the plan.' },
-  { slug: 'plan-future-growth', label: 'Plan future growth', insight: 'Capacity looks fully booked early in the year and open later.', decision: 'Hire, pause, or push sales now?', direction: 'Compare the pipeline with planned capacity before making commitments.' },
+  {
+    slug: 'low-online-visibility',
+    label: 'Low online visibility',
+    insight: 'The business does not appear in search results or AI-generated answers for relevant queries.',
+    decision: 'Is the gap in SEO, GEO, or brand awareness?',
+    direction: 'Audit search rankings and AI tool citations. Build a combined SEO + GEO content strategy.',
+  },
+  {
+    slug: 'low-conversion-rate',
+    label: 'Low conversion rate',
+    insight: 'Traffic is growing but leads and sales are not following.',
+    decision: 'Is the issue the website, the offer, or the funnel?',
+    direction: "Review the site's landing pages, CTAs, and lead capture. Run a CRO sprint before scaling spend.",
+  },
+  {
+    slug: 'poor-lead-quality',
+    label: 'Poor lead quality',
+    insight: "Leads are coming in but most don't convert to clients.",
+    decision: 'Are we targeting the wrong audience or converting the wrong signals?',
+    direction: 'Review ICP fit, channel attribution, and CRM data before the next campaign.',
+  },
+  {
+    slug: 'manual-operations',
+    label: 'Manual operations slowing growth',
+    insight: 'The team spends time on tasks that could be automated, like follow-ups, reporting, and data entry.',
+    decision: 'Which workflows have the highest automation ROI?',
+    direction: 'Map the top five manual tasks and implement no-code automations for the highest-volume ones first.',
+  },
+  {
+    slug: 'weak-brand-positioning',
+    label: 'Weak brand positioning',
+    insight: 'The business is hard to describe in one sentence and loses to better-known competitors.',
+    decision: 'Is the gap in messaging, visual identity, or distribution?',
+    direction: 'Run a brand audit and position the business around one clear outcome it delivers.',
+  },
+  {
+    slug: 'no-data-visibility',
+    label: 'No data visibility',
+    insight: 'Key metrics like CAC, LTV, margin and pipeline are tracked across spreadsheets or not at all.',
+    decision: 'What decisions are we making blind that a dashboard would fix?',
+    direction: 'Identify three decisions made monthly without data. Build a BI view for those first.',
+  },
+  {
+    slug: 'stalled-growth',
+    label: 'Growth has stalled',
+    insight: 'Revenue or leads have plateaued after a period of growth. The team is not sure why.',
+    decision: 'Is the stall in acquisition, retention, or operations?',
+    direction: 'Compare the last growth period to now. Find the metric that changed first and trace it back.',
+  },
 ];
-const start = 1;
-const blocks = [
-  { key: 'insight', title: 'What the data might show', tone: 'border-champagne' },
-  { key: 'decision', title: 'Decision point', tone: 'border-coral' },
-  { key: 'direction', title: 'Possible direction', tone: 'border-steel' },
-] as const;
+
+const start = 0;
 ---
-<section id="console" class="relative bg-ink pb-24 text-white" data-console>
-  <div class="mx-auto max-w-6xl px-5">
-    <div class="glass-dark rounded-[32px] p-6 md:p-9">
-      <h2 class="mb-6 max-w-[16em] text-[clamp(30px,4.6vw,46px)]">Which part of your growth curve needs attention?</h2>
-      <div class="mb-6 flex flex-wrap gap-2.5" role="group" aria-label="Choose a focus area">
-        {scenarios.map((s, i) => (
-          <button type="button" data-chip aria-pressed={i === start}
-            class="rounded-full border-[1.5px] border-white/20 px-[18px] py-2.5 text-[15px] font-medium transition hover:border-champagne/60 aria-pressed:border-champagne aria-pressed:bg-champagne aria-pressed:font-semibold aria-pressed:text-ink">{s.label}</button>
-        ))}
+<section id="console" class="pb-24 pt-20 md:pb-32 md:pt-24" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)" data-console>
+  <div class="container-page">
+    <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
+      <div>
+        <p class="eyebrow" style="color: var(--color-lime-text)">Growth diagnosis</p>
+        <h2 class="mt-4 max-w-[15em] text-[clamp(32px,4.4vw,56px)]">
+          Pick a symptom. See the lever.
+        </h2>
       </div>
-      <div aria-live="polite">
-        {scenarios.map((s, i) => (
-          <div data-panel data-slug={s.slug} hidden={i !== start} class="grid gap-3 md:grid-cols-3">
-            {blocks.map((b) => (
-              <div class:list={['glass-dark rounded-2xl border-t-[3px] p-5', b.tone]}>
-                <h3 class="label mb-2.5 text-mist">{b.title}</h3>
-                <p class="text-[#e9e2fa]">{s[b.key]}</p>
+      <p class="max-w-[30em] text-[15px] leading-[1.7] md:justify-self-end" style="color: var(--color-secondary)">
+        Seven common growth blockers. Each one maps to a service category and a first move.
+      </p>
+    </div>
+
+    <div class="mt-12 overflow-hidden rounded-[16px]" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+      <div class="px-6 py-4 md:px-8" style="border-bottom: 1px solid var(--color-line)">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="text-[12px] font-medium" style="color: var(--color-secondary)">Growth diagnosis</p>
+          <p class="text-[12px]" style="color: var(--color-muted)">Seven blockers</p>
+        </div>
+      </div>
+
+      <div class="grid min-w-0 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+        <div class="min-w-0 p-6 md:p-8" style="border-bottom: 1px solid var(--color-line)">
+          <p class="text-[12px] font-medium md:block hidden" style="color: var(--color-secondary)">Symptoms</p>
+          <div
+            class="mt-4 grid min-w-0 grid-cols-2 gap-2 md:block md:space-y-1"
+            role="group"
+            aria-label="Choose a symptom"
+          >
+            {scenarios.map((scenario, index) => (
+              <button
+                type="button"
+                data-chip
+                aria-pressed={index === start}
+                class="flex w-full items-center gap-3 rounded-[6px] px-3 py-2.5 text-left text-[14px] transition-colors duration-150"
+                style="color: var(--color-secondary)"
+              >
+                <span class="text-[11px] tabular-nums opacity-70">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{scenario.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div class="min-w-0 p-6 md:border-l md:p-8" style="border-left: 1px solid var(--color-line)">
+          <div class="min-w-0" aria-live="polite">
+            {scenarios.map((scenario, index) => (
+              <div data-panel data-slug={scenario.slug} hidden={index !== start}>
+                <div class="flex items-baseline justify-between gap-4 pb-4" style="border-bottom: 1px solid var(--color-line)">
+                  <h3 class="text-[24px]">{scenario.label}</h3>
+                  <p class="text-[12px] tabular-nums" style="color: var(--color-secondary)">
+                    {String(index + 1).padStart(2, '0')} / {String(scenarios.length).padStart(2, '0')}
+                  </p>
+                </div>
+
+                <div>
+                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6" style="border-bottom: 1px solid var(--color-line)">
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">What we see</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.insight}</p>
+                  </div>
+                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6" style="border-bottom: 1px solid var(--color-line)">
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">The question</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.decision}</p>
+                  </div>
+                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6">
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">First move</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.direction}</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                  <p class="text-[12px]" style="color: var(--color-muted)">Diagnosis framework. Not a client result.</p>
+                  <a
+                    data-cta
+                    href={`/book-consultation?focus=${scenarios[start].slug}&source=console`}
+                    class="inline-flex h-10 w-full items-center justify-center rounded-[8px] px-4 text-[13px] font-medium transition-colors duration-150 sm:w-auto"
+                    style="background: var(--color-lime); color: #000"
+                    onmouseover="this.style.background='var(--color-lime-dark)'"
+                    onmouseout="this.style.background='var(--color-lime)'"
+                  >
+                    Talk through your situation
+                  </a>
+                </div>
               </div>
             ))}
           </div>
-        ))}
-      </div>
-      <p class="mt-4 text-[13px] text-mist">Illustrative example using dummy data. Not a client result.</p>
-      <div class="mt-6">
-        <Button data-cta href={`/book-consultation?focus=${scenarios[start].slug}&source=console`} variant="accent">Explore this with a free Data Assessment</Button>
+        </div>
       </div>
     </div>
   </div>
@@ -53,11 +154,32 @@ const blocks = [
     const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-chip]')];
     const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
     const cta = root.querySelector<HTMLAnchorElement>('[data-cta]');
-    chips.forEach((chip, i) =>
+
+    function updateChipStyles() {
+      chips.forEach((chip) => {
+        const pressed = chip.getAttribute('aria-pressed') === 'true';
+        if (pressed) {
+          chip.style.background = 'var(--color-violet)';
+          chip.style.color = '#fff';
+        } else {
+          chip.style.background = '';
+          chip.style.color = 'var(--color-secondary)';
+        }
+      });
+    }
+
+    updateChipStyles();
+
+    chips.forEach((chip, index) =>
       chip.addEventListener('click', () => {
-        chips.forEach((c, j) => c.setAttribute('aria-pressed', String(j === i)));
-        panels.forEach((p, j) => (p.hidden = j !== i));
-        if (cta) cta.href = `/book-consultation?focus=${panels[i].dataset.slug}&source=console`;
+        chips.forEach((item, itemIndex) =>
+          item.setAttribute('aria-pressed', String(itemIndex === index)),
+        );
+        panels.forEach((panel, panelIndex) => (panel.hidden = panelIndex !== index));
+        if (cta) {
+          cta.href = `/book-consultation?focus=${panels[index].dataset.slug}&source=console`;
+        }
+        updateChipStyles();
       }),
     );
   }

@@ -1,49 +1,153 @@
 ---
-import Button from '@/components/ui/Button.astro';
 import { site } from '@/config/site';
-// Plan limits are examples until packages and pricing are decided. No prices shown.
+
 const plans = [
-  { name: 'Starter', sub: 'Get clarity fast', price: 'Setup + retainer', cta: 'Start here', featured: false,
-    features: ['Up to 3 data sources', '2 dashboards', 'Cleaning and modeling', 'Scheduled refresh', 'Monthly insight review'] },
-  { name: 'Growth', sub: 'Decide with confidence', price: 'Setup + retainer', cta: 'Choose Growth →', featured: true,
-    features: ['Up to 8 data sources', '6 dashboards', 'Custom KPI development', 'Weekly insight meetings', 'Forecasting add-on'] },
-  { name: 'Enterprise', sub: 'Scale the whole curve', price: 'Custom', cta: 'Talk to us', featured: false,
-    features: ['Custom data source scope', 'Tailored dashboards', 'Advanced analytics and automation', 'Weekly meetings, priority support', 'User access and security'] },
+  {
+    name: 'Foundation',
+    sub: 'Establish your digital presence',
+    price: 'Setup + retainer',
+    cta: 'Start here',
+    featured: false,
+    features: [
+      'Website design & development',
+      'SEO + basic GEO setup',
+      'Google Analytics & Search Console',
+      'Monthly performance report',
+      'Email support',
+    ],
+  },
+  {
+    name: 'Growth',
+    sub: 'Scale acquisition and operations',
+    price: 'Setup + retainer',
+    cta: 'Choose Growth',
+    featured: true,
+    features: [
+      'Everything in Foundation',
+      'Performance marketing management',
+      'Custom CRM + automation workflows',
+      'BI dashboard (up to 5 sources)',
+      'Weekly strategy review',
+    ],
+  },
+  {
+    name: 'Scale',
+    sub: 'Full-service growth partnership',
+    price: 'Custom',
+    cta: 'Talk to us',
+    featured: false,
+    features: [
+      'Full-funnel marketing operations',
+      'Advanced AI automations',
+      'Custom data infrastructure',
+      'Dedicated growth team',
+      'Weekly meetings, priority support',
+    ],
+  },
 ];
 ---
-<section id="plans" class="relative -mt-10 rounded-t-[40px] bg-paper pb-24 pt-24">
-  <div class="mx-auto max-w-6xl px-5">
-    <div class="mx-auto mb-12 max-w-[34em] text-center">
-      <h2 class="text-[clamp(34px,5.4vw,58px)]">Flexible plans, real impact</h2>
-      <p class="mt-4 text-[19px] text-slate">One-time discovery and setup, then an optional monthly partnership. Weekly insight meetings come with Growth and Enterprise.</p>
+<section id="plans" class="pb-20 pt-24 md:pb-24 md:pt-32">
+  <div class="container-page">
+    <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
+      <div>
+        <p class="eyebrow" style="color: var(--color-lime-text)">Plans</p>
+        <h2 class="mt-4 max-w-[14em] text-[clamp(32px,4.4vw,56px)]">
+          Start where you are. Add as you grow
+        </h2>
+      </div>
+      <p class="max-w-[30em] text-[15px] leading-[1.7] md:justify-self-end" style="color: var(--color-secondary)">
+        One-time discovery and setup, then an optional monthly partnership. Weekly strategy reviews come with Growth and Scale.
+      </p>
     </div>
 
-    <div class="plans-grid grid items-end gap-5 md:grid-cols-[1fr_1.1fr_1fr]">
-      {plans.map((p, k) => (
-        <article class:list={['plan reveal rounded-[28px]', p.featured ? 'plan-dark bg-ink p-10 text-white' : 'border-[1.5px] border-line bg-white p-8']} style={`--d:${k}`}>
-          {p.featured && <span class="label absolute -top-3 right-6 rounded-full bg-champagne px-3 py-1.5 text-ink">Most requested</span>}
-          <h3 class="text-[30px]">{p.name}</h3>
-          <p class:list={['mb-4 mt-1.5 text-sm', p.featured ? 'text-mist' : 'text-slate']}>{p.sub}</p>
-          <p class="mb-4 font-display text-[26px] font-extrabold tracking-[-0.03em]">{p.price}</p>
-          <ul class="mb-6 text-[15px]">
-            {p.features.map((f, i) => (
-              <li class="relative py-1.5 pl-6" style={`--i:${i}`}><i class="absolute left-0 top-[13px] h-[11px] w-[11px] rounded-full bg-champagne"></i>{f}</li>
+    <div class="mt-12 grid items-stretch gap-4 lg:grid-cols-3">
+      {plans.map((plan, index) => (
+        <article
+          class="flex flex-col rounded-[16px] p-6 md:p-8"
+          style={plan.featured
+            ? 'background: var(--color-violet); border: none'
+            : `border: 1px solid var(--color-line); background: var(--color-surface-2)`}
+        >
+          <div class="flex items-baseline justify-between gap-4">
+            <h3 class="text-[28px]" style={plan.featured ? 'color: #fff' : 'color: var(--color-primary)'}>{plan.name}</h3>
+            <p class="text-[11px] tabular-nums" style={plan.featured ? 'color: rgba(255,255,255,0.6)' : 'color: var(--color-muted)'}>
+              Plan {String(index + 1).padStart(2, '0')}
+            </p>
+          </div>
+
+          <p class="mt-2 text-[14px]" style={plan.featured ? 'color: rgba(255,255,255,0.7)' : 'color: var(--color-secondary)'}>
+            {plan.sub}
+          </p>
+
+          <p
+            class="mt-6 pt-5 text-[16px] font-medium"
+            style={plan.featured
+              ? 'border-top: 1px solid rgba(255,255,255,0.15); color: #fff'
+              : 'border-top: 1px solid var(--color-line); color: var(--color-primary)'}
+          >
+            {plan.price}
+          </p>
+
+          <ul class="mt-6 flex-1 space-y-3 text-[14px]">
+            {plan.features.map((feature) => (
+              <li class="flex gap-3">
+                <i
+                  class="mt-[9px] h-1 w-1 flex-none rounded-full"
+                  style={plan.featured ? 'background: var(--color-lime)' : 'background: var(--color-violet)'}
+                ></i>
+                <span style={plan.featured ? 'color: rgba(255,255,255,0.85)' : 'color: var(--color-secondary)'}>{feature}</span>
+              </li>
             ))}
           </ul>
-          <Button href={`/book-consultation?plan=${p.name.toLowerCase()}&source=plans`} variant={p.featured ? 'accent' : 'secondary'} class="w-full">{p.cta}</Button>
+
+          <a
+            href={`/book-consultation?plan=${plan.name.toLowerCase()}&source=plans`}
+            class="mt-8 inline-flex h-11 w-full items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style={plan.featured
+              ? 'background: var(--color-lime); color: #000'
+              : 'border: 1px solid var(--color-line-mid); background: transparent; color: var(--color-primary)'}
+            onmouseover={plan.featured
+              ? "this.style.background='var(--color-lime-dark)'"
+              : "this.style.background='var(--color-surface-3)'"}
+            onmouseout={plan.featured
+              ? "this.style.background='var(--color-lime)'"
+              : "this.style.background='transparent'"}
+          >
+            {plan.cta}
+          </a>
         </article>
       ))}
     </div>
 
-    <div class="relative mt-14 grid items-center gap-6 overflow-hidden rounded-[36px] bg-gradient-to-br from-pan to-[#3e3d45] p-9 text-white md:grid-cols-[1.3fr_1fr] md:p-12">
-      <i class="pointer-events-none absolute -right-14 -top-16 h-64 w-64 rounded-full bg-champagne/20" aria-hidden="true"></i>
-      <div class="relative">
-        <h2 class="text-[clamp(32px,4.6vw,52px)]">Not sure where your curve is heading?</h2>
-        <p class="mt-3.5 text-mist">Book a free consultation or request a data assessment. We'll map your sources and show you what's possible.</p>
-      </div>
-      <div class="relative flex flex-wrap gap-3">
-        <Button href="/book-consultation?source=final-cta" variant="accent">Book a consultation →</Button>
-        <Button href={`mailto:${site.contactEmail}`} variant="secondary">Email us</Button>
+    <div class="mt-16 rounded-[16px] p-8 md:p-12" style="background: var(--color-violet)">
+      <div class="grid items-center gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+        <div>
+          <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Next step</p>
+          <h2 class="mt-3 text-[clamp(28px,3.4vw,44px)]" style="color: #fff">Not sure where to start?</h2>
+          <p class="mt-3 max-w-[34em] text-[15px] leading-[1.7]" style="color: rgba(255,255,255,0.7)">
+            Book a free growth call. We'll map your curve and tell you which lever to pull first.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3 md:justify-end">
+          <a
+            href="/book-consultation?source=final-cta"
+            class="inline-flex h-11 items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style="background: var(--color-lime); color: #000"
+            onmouseover="this.style.background='var(--color-lime-dark)'"
+            onmouseout="this.style.background='var(--color-lime)'"
+          >
+            Book a growth call
+          </a>
+          <a
+            href={`mailto:${site.contactEmail}`}
+            class="inline-flex h-11 items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style="border: 1px solid rgba(255,255,255,0.25); color: #fff; background: transparent"
+            onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+            onmouseout="this.style.background='transparent'"
+          >
+            Email us
+          </a>
+        </div>
       </div>
     </div>
   </div>
