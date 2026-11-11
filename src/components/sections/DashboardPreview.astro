@@ -8,113 +8,127 @@ type Kpi = {
 };
 
 const kpis: Kpi[] = [
-  { label: 'Revenue', value: '$1.24M', change: '+4.2%', comparison: 'vs last year' },
-  { label: 'Gross margin', value: '31.8%', change: '−1.6 pts', comparison: 'vs plan', negative: true },
-  { label: 'Orders', value: '8,420', change: '+2.1%', comparison: 'vs last year' },
-  { label: 'CAC', value: '$42', change: '+9%', comparison: 'vs last year', negative: true },
+  { label: 'Organic reach', value: '142K', change: '+28%', comparison: 'vs last mo' },
+  { label: 'Leads tracked', value: '920', change: '+34%', comparison: 'vs last mo' },
+  { label: 'Conversion rate', value: '3.8%', change: '+0.8 pts', comparison: 'vs last qtr' },
+  { label: 'Avg. ROAS', value: '4.4×', change: '+1.1×', comparison: 'vs target' },
 ];
 
-const actual = 'M8 112L32 104L56 108L80 94L104 98L128 76L152 82L176 66L200 70L224 56L248 60L272 46L296 40';
-const target = 'M8 96L296 52';
-
-const notes = [
-  { text: 'Repeat orders are down 6% this quarter.', tone: 'coral' },
-  { text: 'Channel C margin is below plan for three months.', tone: 'coral' },
-  { text: 'Review pricing before the next campaign.', tone: 'champagne' },
-];
+const curvePath = 'M 10 95 C 60 70, 85 105, 120 102 C 160 98, 190 120, 230 115 C 280 110, 310 40, 380 25';
 ---
 <figure class="mx-auto min-w-0 w-full max-w-[680px] xl:mx-0">
   <div
-    class="min-w-0 rounded-[16px] border border-line-dark bg-ink-2 p-5 text-paper md:p-6"
+    class="min-w-0 rounded-[20px] p-6 shadow-2xl backdrop-blur-xl transition-colors duration-200"
+    style="border: 1px solid var(--color-line-mid); background: var(--console-bg); color: var(--color-primary)"
     aria-hidden="true"
   >
-    <div class="flex items-start justify-between gap-4 border-b border-line-dark pb-4">
-      <div>
-        <p class="text-[11px] font-medium text-mist">Sales &amp; margin</p>
-        <p class="mt-1 font-display text-[20px] font-medium leading-none">Year to date</p>
+    <!-- Card Header -->
+    <div class="flex items-center justify-between gap-4 pb-4" style="border-bottom: 1px solid var(--color-line)">
+      <div class="flex items-center gap-3">
+        <div class="h-2.5 w-2.5 rounded-full" style="background: var(--color-lime)"></div>
+        <div>
+          <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">GROWTH CURVE CONSOLE</p>
+          <p class="font-display text-[19px] font-medium leading-none mt-0.5" style="color: var(--color-primary)">What shapes the curve</p>
+        </div>
       </div>
-      <p class="text-[11px] text-mist">Sample data</p>
+      <span class="rounded-full px-2.5 py-1 text-[11px] font-mono" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3); color: var(--color-secondary)">
+        Real-time telemetry
+      </span>
     </div>
 
-    <div class="mt-4 grid min-w-0 grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-line-dark bg-line-dark sm:grid-cols-4">
+    <!-- 4 KPI counters in a row -->
+    <div class="mt-4 grid min-w-0 grid-cols-2 gap-px overflow-hidden rounded-[12px] sm:grid-cols-4" style="background: var(--color-line); border: 1px solid var(--color-line)">
       {kpis.map((kpi) => (
-        <div class="bg-ink-2 p-3">
-          <p class="text-[11px] text-mist">{kpi.label}</p>
-          <p class="mt-1 text-[21px] font-medium leading-none tabular-nums">{kpi.value}</p>
-          <p class="mt-2 text-[11px] text-mist">
-            <span class:list={[kpi.negative ? 'text-coral' : 'text-champagne']}>{kpi.change}</span>
+        <div class="p-3.5" style="background: var(--color-surface-2)">
+          <p class="text-[11px] font-mono uppercase tracking-wide" style="color: var(--color-muted)">{kpi.label}</p>
+          <p class="mt-1 text-[22px] font-medium leading-none tabular-nums" style="color: var(--color-primary)">{kpi.value}</p>
+          <p class="mt-2 text-[11px]" style="color: var(--color-muted)">
+            <span style={kpi.negative ? 'color: var(--color-negative)' : 'color: var(--color-positive)'}>{kpi.change}</span>
             {' '}{kpi.comparison}
           </p>
         </div>
       ))}
     </div>
 
-    <div class="mt-4 grid min-w-0 gap-4 md:grid-cols-[1.45fr_1fr]">
-      <div class="min-w-0 rounded-[8px] border border-line-dark p-4">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <p class="text-[11px] text-mist">Revenue vs target</p>
-          <div class="flex items-center gap-3 text-[11px] text-mist">
-            <span class="inline-flex items-center gap-1.5">
-              <i class="h-1.5 w-1.5 rounded-full bg-champagne"></i>Actual
-            </span>
-            <span class="inline-flex items-center gap-1.5">
-              <i class="h-px w-3 border-t border-dashed border-mist"></i>Target
-            </span>
-          </div>
-        </div>
-
-        <svg viewBox="0 0 320 130" class="mt-3 block w-full max-w-full" role="presentation">
-          <g stroke="#3A352E" stroke-width="1">
-            <line x1="8" y1="116" x2="296" y2="116" />
-            <line x1="8" y1="78" x2="296" y2="78" />
-            <line x1="8" y1="40" x2="296" y2="40" />
-          </g>
-          <path d={target} fill="none" stroke="#B7AD9D" stroke-width="1.2" stroke-dasharray="4 5" />
-          <path d={actual} fill="none" stroke="#D8C08A" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" />
-          <circle cx="152" cy="82" r="3" fill="#C9563B" />
-        </svg>
-        <div class="mt-2 flex items-center justify-between text-[11px] text-mist">
-          <span>Jan</span>
-          <span>Jun</span>
-          <span>Dec</span>
-        </div>
-        <p class="mt-3 flex items-center gap-1.5 text-[11px] text-coral">
-          <i class="h-1.5 w-1.5 flex-none rounded-full bg-coral"></i>
-          Channel C margin below plan
-        </p>
+    <!-- The Interactive Curve Visual -->
+    <div class="mt-4 rounded-[12px] p-4 relative overflow-hidden" style="border: 1px solid var(--color-line); background: var(--chart-bg)">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-[11px] font-mono uppercase tracking-wider" style="color: var(--color-muted)">Curve dynamics: friction vs acceleration</span>
+        <span class="text-[11px] font-mono font-medium" style="color: var(--color-lime-text)">● Rising trajectory</span>
       </div>
 
-      <div class="min-w-0 rounded-[8px] border border-line-dark p-4">
-        <p class="text-[11px] text-mist">Decision notes</p>
-        <ul class="mt-3 space-y-3 text-[11px] leading-[1.5] text-paper">
-          {notes.map((note) => (
-            <li class="flex gap-2">
-              <i
-                class:list={[
-                  'mt-1.5 h-1.5 w-1.5 flex-none rounded-full',
-                  note.tone === 'coral' ? 'bg-coral' : 'bg-champagne',
-                ]}
-              ></i>
-              <span>{note.text}</span>
-            </li>
-          ))}
-        </ul>
-        <div class="mt-4 border-t border-line-dark pt-3">
-          <p class="text-[11px] text-mist">Next decision</p>
-          <p class="mt-1 text-[12px] leading-[1.5] text-paper">
-            Hold channel C spend or fix the margin first?
-          </p>
+      <div class="relative w-full h-[140px]">
+        <!-- Technical grid lines -->
+        <svg viewBox="0 0 400 140" class="w-full h-full block" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="curveGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#7D39EB" />
+              <stop offset="60%" stop-color="#7D39EB" />
+              <stop offset="100%" stop-color="#C6FF33" />
+            </linearGradient>
+          </defs>
+
+          <!-- Horizontal guide lines -->
+          <line x1="0" y1="30" x2="400" y2="30" stroke="var(--color-line)" stroke-dasharray="3 3" />
+          <line x1="0" y1="70" x2="400" y2="70" stroke="var(--color-line)" stroke-dasharray="3 3" />
+          <line x1="0" y1="110" x2="400" y2="110" stroke="var(--color-line)" stroke-dasharray="3 3" />
+
+          <!-- Target benchmark line -->
+          <line x1="10" y1="85" x2="390" y2="45" stroke="var(--color-line-mid)" stroke-width="1.2" stroke-dasharray="4 4" />
+
+          <!-- The Growth Curve Line -->
+          <path
+            d={curvePath}
+            fill="none"
+            stroke="url(#curveGradient)"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+
+          <!-- Inflection Dots -->
+          <circle cx="100" cy="103" r="4.5" fill="#7D39EB" stroke="#fff" stroke-width="1.5" />
+          <circle cx="210" cy="118" r="4.5" fill="#7D39EB" stroke="#fff" stroke-width="1.5" />
+          <circle cx="360" cy="28" r="5" fill="#C6FF33" stroke="#000" stroke-width="1.5" />
+        </svg>
+
+        <!-- Annotations floating over the SVG -->
+        <div class="absolute left-[20%] top-[70%] -translate-x-1/2">
+          <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-mono font-medium text-white shadow-md backdrop-blur-sm" style="background: rgba(125, 57, 235, 0.9); border: 1px solid rgba(255,255,255,0.2)">
+            Hidden costs
+          </span>
+        </div>
+
+        <div class="absolute left-[50%] top-[82%] -translate-x-1/2">
+          <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-mono font-medium text-white shadow-md backdrop-blur-sm" style="background: rgba(125, 57, 235, 0.9); border: 1px solid rgba(255,255,255,0.2)">
+            Slow processes
+          </span>
+        </div>
+
+        <div class="absolute right-[5%] top-[8%]">
+          <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-mono font-semibold text-black shadow-lg" style="background: var(--color-lime)">
+            Better decisions ↑
+          </span>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-line-dark pt-3 text-[11px] text-mist">
-      <p>Illustrative dashboard · dummy data</p>
-      <p>Curvaxure</p>
+    <!-- Bottom summary pills (Search / Automation / CRM) -->
+    <div class="mt-4 grid grid-cols-3 gap-2.5 text-center">
+      <div class="rounded-[8px] p-2.5" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+        <p class="font-mono text-[10px] uppercase" style="color: var(--color-muted)">Acquisition</p>
+        <p class="text-[13px] font-medium mt-0.5" style="color: var(--color-primary)">SEO · GEO · Ads</p>
+      </div>
+      <div class="rounded-[8px] p-2.5" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+        <p class="font-mono text-[10px] uppercase" style="color: var(--color-muted)">Operations</p>
+        <p class="text-[13px] font-medium mt-0.5" style="color: var(--color-primary)">n8n · Zapier</p>
+      </div>
+      <div class="rounded-[8px] p-2.5" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+        <p class="font-mono text-[10px] uppercase" style="color: var(--color-muted)">Intelligence</p>
+        <p class="text-[13px] font-medium mt-0.5" style="color: var(--color-primary)">Custom CRM · BI</p>
+      </div>
     </div>
   </div>
   <figcaption class="sr-only">
-    Sample sales and margin dashboard showing revenue, gross margin, orders and customer acquisition cost,
-    with a revenue chart and decision notes.
+    Interactive growth curve console demonstrating points of friction like hidden costs and slow processes shifting upward to better decisions.
   </figcaption>
 </figure>

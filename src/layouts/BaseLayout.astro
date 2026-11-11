@@ -26,7 +26,7 @@ const orgSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5f1e8" />
+    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -38,12 +38,29 @@ const orgSchema = {
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
-    <!-- GA4 is added later, after cookie-consent decisions. -->
+
+    <!-- Anti-flash theme initialization -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('curvaxure-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+          if (theme === 'light') {
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+          }
+        } catch (_) {}
+      })();
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:px-4 focus:py-2"
+      style="background: var(--color-violet); color: #fff"
     >
       Skip to content
     </a>

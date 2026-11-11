@@ -4,54 +4,54 @@ import { Resend } from "resend";
 //#region src/config/booking.ts
 var industries = [
 	{
-		value: "construction",
-		label: "Construction"
+		value: "ecommerce",
+		label: "E-commerce & D2C"
 	},
 	{
-		value: "ecommerce",
-		label: "E-commerce"
+		value: "construction",
+		label: "Construction & Real Estate"
 	},
 	{
 		value: "professional-services",
-		label: "Professional services"
+		label: "Professional Services & B2B"
+	},
+	{
+		value: "small-brands",
+		label: "Small Brands & Startups"
 	},
 	{
 		value: "logistics",
-		label: "Logistics"
+		label: "Logistics & Supply Chain"
 	},
 	{
 		value: "other",
-		label: "Other"
+		label: "Other Industry"
 	}
 ];
 var focusAreas = [
 	{
-		value: "increase-sales",
-		label: "Increase sales"
+		value: "low-online-visibility",
+		label: "Search Visibility (SEO / GEO / AEO)"
 	},
 	{
-		value: "improve-profitability",
-		label: "Improve profitability"
+		value: "low-conversion-rate",
+		label: "Website & Conversion Rate (CRO)"
 	},
 	{
-		value: "control-project-costs",
-		label: "Control project costs"
+		value: "poor-lead-quality",
+		label: "Marketing & Brand Positioning"
 	},
 	{
-		value: "improve-marketing",
-		label: "Improve marketing"
+		value: "manual-operations",
+		label: "Workflow & AI Automation (n8n / Zapier)"
 	},
 	{
-		value: "understand-customers",
-		label: "Understand customers"
+		value: "no-data-visibility",
+		label: "Custom CRM & Business Intelligence"
 	},
 	{
-		value: "improve-operations",
-		label: "Improve operations"
-	},
-	{
-		value: "plan-future-growth",
-		label: "Plan future growth"
+		value: "stalled-growth",
+		label: "Comprehensive Growth Strategy"
 	},
 	{
 		value: "other",

@@ -3,21 +3,18 @@ interface Props {
   tone?: 'dark' | 'light';
   class?: string;
 }
-const { tone = 'dark', class: extra = '' } = Astro.props;
-const wordmark = tone === 'dark' ? 'text-ink' : 'text-paper';
+const { class: extra = '' } = Astro.props;
+const wordmark = 'text-primary';
 ---
-<a href="/" class:list={['inline-flex items-center gap-2.5', extra]}>
-  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-    <rect width="28" height="28" rx="7" fill="#171512" />
-    <rect x="0.5" y="0.5" width="27" height="27" rx="6.5" stroke="#F5F1E8" stroke-opacity="0.14" />
-    <path
-      d="M6 19.5C8.8 19.5 10.4 8.5 14.2 8.5C17.4 8.5 18.6 13 22 13"
-      stroke="#D8C08A"
-      stroke-width="1.6"
-      stroke-linecap="round"
-    />
-    <circle cx="22" cy="13" r="2" fill="#D8C08A" />
-  </svg>
+<a href="/" class:list={['inline-flex items-center gap-2.5 group', extra]}>
+  <img
+    src="/curvaxure-mark.png"
+    alt="Curvaxure Logo Mark"
+    class="h-7 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+    width="28"
+    height="28"
+    loading="eager"
+  />
   <span class:list={['font-display text-[20px] font-semibold tracking-[-0.01em]', wordmark]}>
     Curvaxure
   </span>

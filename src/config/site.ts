@@ -1,44 +1,36 @@
 export const site = {
   name: 'Curvaxure',
-  url: 'https://curvaxure.com', // update after domain purchase
-  tagline: 'Data analytics and decision support for growing businesses',
+  url: 'https://curvaxure.com',
+  tagline: 'Shape your growth curve',
   description:
-    'Curvaxure connects sales, finance, project and operations data into Power BI dashboards, then helps growing teams decide where to focus.',
-  contactEmail: 'hello@curvaxure.com', // placeholder until email is set up
-  ctaLabel: 'Book a free data assessment',
+    'Curvaxure helps businesses understand and shape their growth curve through web presence, search visibility, marketing, data intelligence, and workflow automation.',
+  contactEmail: 'hello@curvaxure.com',
+  ctaLabel: 'Book a growth call',
   ctaHref: '/book-consultation',
 } as const;
 
 export const nav = [
-  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'Services', href: '/#services' },
   { label: 'Industries', href: '/#industries' },
-  { label: 'Sample decisions', href: '/#console' },
+  { label: 'How it works', href: '/#how-it-works' },
   { label: 'Plans', href: '/#plans' },
 ] as const;
 
 export const footerLinks = {
-  Explore: [
-    { label: 'How it works', href: '/#how-it-works' },
-    { label: 'Industries', href: '/#industries' },
-    { label: 'Sample decisions', href: '/#console' },
-    { label: 'Plans', href: '/#plans' },
+  Services: [
+    { label: 'Digital Presence & Search', href: '/services/digital-presence' },
+    { label: 'Marketing & Growth', href: '/services/marketing-growth' },
+    { label: 'Data & Intelligence', href: '/services/data-intelligence' },
+    { label: 'Automation', href: '/services/automation' },
   ],
   Industries: [
-    {
-      label: 'Construction',
-      href: '/book-consultation?industry=construction&focus=control-project-costs&source=footer',
-    },
-    {
-      label: 'E-commerce',
-      href: '/book-consultation?industry=ecommerce&focus=improve-marketing&source=footer',
-    },
-    {
-      label: 'Professional services',
-      href: '/book-consultation?industry=professional-services&focus=improve-profitability&source=footer',
-    },
+    { label: 'Ecommerce', href: '/book-consultation?industry=ecommerce&source=footer' },
+    { label: 'Construction', href: '/book-consultation?industry=construction&source=footer' },
+    { label: 'Professional services', href: '/book-consultation?industry=professional-services&source=footer' },
+    { label: 'Small brands', href: '/book-consultation?industry=small-brands&source=footer' },
   ],
   Contact: [
-    { label: 'Book a consultation', href: '/book-consultation' },
+    { label: 'Book a growth call', href: '/book-consultation' },
     { label: 'Email us', href: 'mailto:hello@curvaxure.com' },
   ],
 } as const;

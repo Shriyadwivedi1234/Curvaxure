@@ -1,97 +1,95 @@
 ---
-import Button from '@/components/ui/Button.astro';
-
 const scenarios = [
   {
-    slug: 'increase-sales',
-    label: 'Increase sales',
-    insight: 'Repeat customers order less this quarter, while new-customer orders hold steady.',
-    decision: 'Focus on keeping customers or winning new ones?',
-    direction: 'Compare sales by customer segment and product before the next campaign plan.',
+    slug: 'low-online-visibility',
+    label: 'Low online visibility',
+    insight: 'The business does not appear in search results or AI-generated answers for relevant queries.',
+    decision: 'Is the gap in SEO, GEO, or brand awareness?',
+    direction: 'Audit search rankings and AI tool citations. Build a combined SEO + GEO content strategy.',
   },
   {
-    slug: 'improve-profitability',
-    label: 'Improve profitability',
-    insight: 'Revenue is growing, but rising labor and supplier costs are reducing project margins.',
-    decision: 'Which projects and cost categories deserve action first?',
-    direction: 'Review cost categories, project performance and margin changes before the next planning cycle.',
+    slug: 'low-conversion-rate',
+    label: 'Low conversion rate',
+    insight: 'Traffic is growing but leads and sales are not following.',
+    decision: 'Is the issue the website, the offer, or the funnel?',
+    direction: "Review the site's landing pages, CTAs, and lead capture. Run a CRO sprint before scaling spend.",
   },
   {
-    slug: 'control-project-costs',
-    label: 'Control project costs',
-    insight: 'Labor costs are rising faster than project progress on two active projects.',
-    decision: 'Adjust resources now or wait for the next milestone?',
-    direction: 'Review crew allocation, overtime and subcontractor performance before the next milestone.',
+    slug: 'poor-lead-quality',
+    label: 'Poor lead quality',
+    insight: "Leads are coming in but most don't convert to clients.",
+    decision: 'Are we targeting the wrong audience or converting the wrong signals?',
+    direction: 'Review ICP fit, channel attribution, and CRM data before the next campaign.',
   },
   {
-    slug: 'improve-marketing',
-    label: 'Improve marketing',
-    insight: 'One channel brings high traffic but low contribution margin.',
-    decision: 'Where should the next marketing budget go?',
-    direction: 'Shift budget by profitable customer acquisition, not traffic volume alone.',
+    slug: 'manual-operations',
+    label: 'Manual operations slowing growth',
+    insight: 'The team spends time on tasks that could be automated, like follow-ups, reporting, and data entry.',
+    decision: 'Which workflows have the highest automation ROI?',
+    direction: 'Map the top five manual tasks and implement no-code automations for the highest-volume ones first.',
   },
   {
-    slug: 'understand-customers',
-    label: 'Understand customers',
-    insight: 'A small group of customers accounts for most repeat purchases.',
-    decision: 'Which customer groups are worth investing in?',
-    direction: 'Compare segments by lifetime value and repeat behavior.',
+    slug: 'weak-brand-positioning',
+    label: 'Weak brand positioning',
+    insight: 'The business is hard to describe in one sentence and loses to better-known competitors.',
+    decision: 'Is the gap in messaging, visual identity, or distribution?',
+    direction: 'Run a brand audit and position the business around one clear outcome it delivers.',
   },
   {
-    slug: 'improve-operations',
-    label: 'Improve operations',
-    insight: 'Delays cluster around a few recurring steps in the process.',
-    decision: 'Which step is worth fixing first?',
-    direction: 'Review timing step by step and compare against the plan.',
+    slug: 'no-data-visibility',
+    label: 'No data visibility',
+    insight: 'Key metrics like CAC, LTV, margin and pipeline are tracked across spreadsheets or not at all.',
+    decision: 'What decisions are we making blind that a dashboard would fix?',
+    direction: 'Identify three decisions made monthly without data. Build a BI view for those first.',
   },
   {
-    slug: 'plan-future-growth',
-    label: 'Plan future growth',
-    insight: 'Capacity looks fully booked early in the year and open later.',
-    decision: 'Hire, pause, or push sales now?',
-    direction: 'Compare the pipeline with planned capacity before making commitments.',
+    slug: 'stalled-growth',
+    label: 'Growth has stalled',
+    insight: 'Revenue or leads have plateaued after a period of growth. The team is not sure why.',
+    decision: 'Is the stall in acquisition, retention, or operations?',
+    direction: 'Compare the last growth period to now. Find the metric that changed first and trace it back.',
   },
 ];
 
 const start = 0;
 ---
-<section id="console" class="border-t border-line-dark bg-ink pb-24 pt-20 text-paper md:pb-32 md:pt-24" data-console>
+<section id="console" class="pb-24 pt-20 md:pb-32 md:pt-24" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)" data-console>
   <div class="container-page">
     <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
       <div>
-        <p class="eyebrow text-mist">Sample decision</p>
+        <p class="eyebrow" style="color: var(--color-lime-text)">Growth diagnosis</p>
         <h2 class="mt-4 max-w-[15em] text-[clamp(32px,4.4vw,56px)]">
-          Pick a question. See how the numbers become a decision
+          Pick a symptom. See the lever.
         </h2>
       </div>
-      <p class="max-w-[30em] text-[15px] leading-[1.7] text-mist md:justify-self-end">
-        Seven illustrative examples using dummy data. Each one follows the same three
-        steps: what the data shows, the decision, and a next move.
+      <p class="max-w-[30em] text-[15px] leading-[1.7] md:justify-self-end" style="color: var(--color-secondary)">
+        Seven common growth blockers. Each one maps to a service category and a first move.
       </p>
     </div>
 
-    <div class="mt-12 overflow-hidden rounded-[16px] border border-line-dark bg-paper text-ink">
-      <div class="border-b border-line px-6 py-4 md:px-8">
+    <div class="mt-12 overflow-hidden rounded-[16px]" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+      <div class="px-6 py-4 md:px-8" style="border-bottom: 1px solid var(--color-line)">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <p class="text-[12px] font-medium text-slate">Decision brief</p>
-          <p class="text-[12px] text-slate">Illustrative · dummy data</p>
+          <p class="text-[12px] font-medium" style="color: var(--color-secondary)">Growth diagnosis</p>
+          <p class="text-[12px]" style="color: var(--color-muted)">Seven blockers</p>
         </div>
       </div>
 
       <div class="grid min-w-0 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
-        <div class="min-w-0 border-b border-line p-6 md:border-b-0 md:border-r md:p-8">
-          <p class="text-[12px] font-medium text-slate">Questions</p>
+        <div class="min-w-0 p-6 md:p-8" style="border-bottom: 1px solid var(--color-line)">
+          <p class="text-[12px] font-medium md:block hidden" style="color: var(--color-secondary)">Symptoms</p>
           <div
             class="mt-4 grid min-w-0 grid-cols-2 gap-2 md:block md:space-y-1"
             role="group"
-            aria-label="Choose a question"
+            aria-label="Choose a symptom"
           >
             {scenarios.map((scenario, index) => (
               <button
                 type="button"
                 data-chip
                 aria-pressed={index === start}
-                class="flex w-full items-center gap-3 rounded-[6px] px-3 py-2.5 text-left text-[14px] text-slate transition-colors duration-150 hover:bg-paper-2 hover:text-ink aria-pressed:bg-ink aria-pressed:text-paper"
+                class="flex w-full items-center gap-3 rounded-[6px] px-3 py-2.5 text-left text-[14px] transition-colors duration-150"
+                style="color: var(--color-secondary)"
               >
                 <span class="text-[11px] tabular-nums opacity-70">
                   {String(index + 1).padStart(2, '0')}
@@ -102,41 +100,44 @@ const start = 0;
           </div>
         </div>
 
-        <div class="min-w-0 p-6 md:p-8">
+        <div class="min-w-0 p-6 md:border-l md:p-8" style="border-left: 1px solid var(--color-line)">
           <div class="min-w-0" aria-live="polite">
             {scenarios.map((scenario, index) => (
               <div data-panel data-slug={scenario.slug} hidden={index !== start}>
-                <div class="flex items-baseline justify-between gap-4 border-b border-line pb-4">
+                <div class="flex items-baseline justify-between gap-4 pb-4" style="border-bottom: 1px solid var(--color-line)">
                   <h3 class="text-[24px]">{scenario.label}</h3>
-                  <p class="text-[12px] tabular-nums text-slate">
+                  <p class="text-[12px] tabular-nums" style="color: var(--color-secondary)">
                     {String(index + 1).padStart(2, '0')} / {String(scenarios.length).padStart(2, '0')}
                   </p>
                 </div>
 
-                <div class="divide-y divide-line">
-                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6">
-                    <p class="text-[12px] font-medium text-slate">What the data shows</p>
-                    <p class="text-[15px] leading-[1.65] text-ink">{scenario.insight}</p>
+                <div>
+                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6" style="border-bottom: 1px solid var(--color-line)">
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">What we see</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.insight}</p>
+                  </div>
+                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6" style="border-bottom: 1px solid var(--color-line)">
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">The question</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.decision}</p>
                   </div>
                   <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6">
-                    <p class="text-[12px] font-medium text-slate">The decision</p>
-                    <p class="text-[15px] leading-[1.65] text-ink">{scenario.decision}</p>
-                  </div>
-                  <div class="grid gap-2 py-5 sm:grid-cols-[140px_1fr] sm:gap-6">
-                    <p class="text-[12px] font-medium text-slate">A next move</p>
-                    <p class="text-[15px] leading-[1.65] text-ink">{scenario.direction}</p>
+                    <p class="text-[12px] font-medium" style="color: var(--color-secondary)">First move</p>
+                    <p class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{scenario.direction}</p>
                   </div>
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-                  <p class="text-[12px] text-slate">Illustrative example. Not a client result.</p>
-                  <Button
+                  <p class="text-[12px]" style="color: var(--color-muted)">Diagnosis framework. Not a client result.</p>
+                  <a
                     data-cta
                     href={`/book-consultation?focus=${scenarios[start].slug}&source=console`}
-                    class="h-10 w-full px-4 text-[13px] sm:w-auto"
+                    class="inline-flex h-10 w-full items-center justify-center rounded-[8px] px-4 text-[13px] font-medium transition-colors duration-150 sm:w-auto"
+                    style="background: var(--color-lime); color: #000"
+                    onmouseover="this.style.background='var(--color-lime-dark)'"
+                    onmouseout="this.style.background='var(--color-lime)'"
                   >
-                    Talk through your own numbers
-                  </Button>
+                    Talk through your situation
+                  </a>
                 </div>
               </div>
             ))}
@@ -154,6 +155,21 @@ const start = 0;
     const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
     const cta = root.querySelector<HTMLAnchorElement>('[data-cta]');
 
+    function updateChipStyles() {
+      chips.forEach((chip) => {
+        const pressed = chip.getAttribute('aria-pressed') === 'true';
+        if (pressed) {
+          chip.style.background = 'var(--color-violet)';
+          chip.style.color = '#fff';
+        } else {
+          chip.style.background = '';
+          chip.style.color = 'var(--color-secondary)';
+        }
+      });
+    }
+
+    updateChipStyles();
+
     chips.forEach((chip, index) =>
       chip.addEventListener('click', () => {
         chips.forEach((item, itemIndex) =>
@@ -163,6 +179,7 @@ const start = 0;
         if (cta) {
           cta.href = `/book-consultation?focus=${panels[index].dataset.slug}&source=console`;
         }
+        updateChipStyles();
       }),
     );
   }

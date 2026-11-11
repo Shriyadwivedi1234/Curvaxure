@@ -4,48 +4,51 @@ import { booking, industries, focusAreas } from '@/config/booking';
 
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const field = 'field';
-const label = 'mb-1.5 block text-[13px] font-medium text-ink';
+const label = 'mb-1.5 block text-[13px] font-medium text-white/90';
 const steps = [
-  'We learn how your business runs and where your data lives.',
-  'We talk through what you need to understand or decide.',
-  'We recommend where we can help and share pricing.',
+  'We map how your business currently acquires customers and manages data.',
+  'We identify what is bending your growth curve and where friction lives.',
+  'We recommend an exact strategic sequence across search, marketing, data, or automation.',
 ];
 ---
 <BaseLayout
-  title="Book a data assessment"
-  description="A free, no-obligation conversation about your data and what you need to decide. We recommend where we can help and share pricing."
+  title="Book a growth call"
+  description="A free, no-obligation conversation about your growth curve, operational friction, and key levers for expansion."
 >
   <section class="container-page grid gap-12 py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16 lg:py-24">
     <div>
-      <p class="eyebrow">Free · {booking.callMinutes} minutes · no obligation</p>
-      <h1 class="mt-4 text-[clamp(38px,4.8vw,56px)]">Book a data assessment</h1>
-      <p class="mt-5 max-w-[30em] text-[17px] leading-[1.65] text-slate">
-        Tell us a little about your business. Then pick a time that suits you.
+      <div class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-mono tracking-wider uppercase mb-4" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2); color: var(--color-lime)">
+        <span>FREE · {booking.callMinutes} MINUTES · NO OBLIGATION</span>
+      </div>
+      <h1 class="text-[clamp(38px,4.8vw,56px)] font-medium text-white">Book a growth call</h1>
+      <p class="mt-5 max-w-[30em] text-[17px] leading-[1.65]" style="color: var(--color-secondary)">
+        Tell us about your business and where you want to take your curve next.
       </p>
 
-      <h2 class="mt-10 text-[20px]">What happens on the call</h2>
-      <ol class="mt-4 divide-y divide-line border-y border-line">
+      <h2 class="mt-10 text-[20px] font-medium text-white">What happens on the call</h2>
+      <ol class="mt-4 divide-y" style="border-color: var(--color-line); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line)">
         {steps.map((step, index) => (
-          <li class="grid grid-cols-[32px_1fr] gap-4 py-4">
-            <span class="text-[12px] font-medium tabular-nums text-brass">
+          <li class="grid grid-cols-[32px_1fr] gap-4 py-4" style="border-color: var(--color-line)">
+            <span class="text-[12px] font-mono font-medium tabular-nums" style="color: var(--color-lime)">
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span class="text-[15px] leading-[1.65] text-ink">{step}</span>
+            <span class="text-[15px] leading-[1.65]" style="color: var(--color-primary)">{step}</span>
           </li>
         ))}
       </ol>
 
-      <p class="mt-5 text-[13px] leading-[1.6] text-slate">
-        You don't need to send any files or confidential data before the call.
+      <p class="mt-5 text-[13px] leading-[1.6]" style="color: var(--color-muted)">
+        No high-pressure sales. Just an honest evaluation of what's working and what's holding you back.
       </p>
     </div>
 
     <form
       method="post"
       action="/api/lead"
-      class="h-fit rounded-[16px] border border-line bg-paper-2 p-6 md:p-8"
+      class="h-fit rounded-[20px] p-6 md:p-8"
+      style="border: 1px solid var(--color-line); background: var(--color-surface-2)"
     >
-      <p id="form-error" role="alert" hidden class="mb-4 rounded-[8px] bg-coral/10 px-4 py-3 text-[13px] text-coral"></p>
+      <p id="form-error" role="alert" hidden class="mb-4 rounded-[8px] px-4 py-3 text-[13px]" style="background: rgba(229, 72, 77, 0.15); color: var(--color-negative)"></p>
 
       <div class="grid gap-4 sm:grid-cols-2">
         <div>
@@ -68,7 +71,7 @@ const steps = [
           </select>
         </div>
         <div class="sm:col-span-2">
-          <label class={label} for="focus">What do you want to improve?</label>
+          <label class={label} for="focus">Primary growth objective?</label>
           <select class={field} id="focus" name="focus" required>
             <option value="" disabled selected>Select</option>
             {focusAreas.map((area) => <option value={area.value}>{area.label}</option>)}
@@ -76,7 +79,7 @@ const steps = [
         </div>
         <div class="sm:col-span-2">
           <label class={label} for="message">
-            Anything else we should know? <span class="font-normal text-slate">(optional)</span>
+            Anything else we should know? <span class="font-normal" style="color: var(--color-muted)">(optional)</span>
           </label>
           <textarea class={field} id="message" name="message" rows="3" maxlength="2000"></textarea>
         </div>
@@ -90,10 +93,9 @@ const steps = [
       {siteKey && <div class="cf-turnstile mt-4" data-sitekey={siteKey}></div>}
       {siteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>}
 
-      <button type="submit" class="btn btn-primary mt-6 w-full">Request my free call</button>
-      <p class="mt-3 text-[12px] leading-[1.6] text-slate">
-        Next, you'll choose a time. By sending this form you agree to be contacted about
-        your request. See our <a href="/privacy-policy" class="underline underline-offset-2">Privacy Policy</a>.
+      <button type="submit" class="btn btn-lime mt-6 w-full shadow-lg">Request my growth call</button>
+      <p class="mt-3 text-[12px] leading-[1.6]" style="color: var(--color-muted)">
+        We'll reach out within 24 hours to schedule your session. See our <a href="/privacy-policy" class="underline underline-offset-2 hover:text-white">Privacy Policy</a>.
       </p>
     </form>
   </section>

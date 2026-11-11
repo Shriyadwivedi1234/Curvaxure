@@ -2,22 +2,95 @@
 @import "@fontsource-variable/bricolage-grotesque";
 @import "@fontsource-variable/inter";
 
-@theme {
-  --color-paper: #f5f1e8;
-  --color-paper-2: #fbf8f1;
-  --color-ink: #171512;
-  --color-ink-2: #211e1a;
-  --color-ink-3: #2c2823;
-  --color-line: #d9d2c4;
-  --color-line-dark: #3a352e;
-  --color-slate: #6f675b;
-  --color-mist: #b7ad9d;
-  --color-champagne: #d8c08a;
-  --color-brass: #9a7433;
-  --color-coral: #c9563b;
+:root {
+  /* Default: Dark mode */
+  --color-black: #000000;
+  --color-surface: #0a0a0a;      /* page background */
+  --color-surface-2: #111111;    /* card */
+  --color-surface-3: #1a1a1a;    /* raised / input */
+  --color-line: rgba(255, 255, 255, 0.08); /* hairline */
+  --color-line-mid: rgba(255, 255, 255, 0.12);
+
+  /* Text */
+  --color-primary: #f2f2f4;      /* primary text */
+  --color-secondary: #9ea3ae;    /* secondary text */
+  --color-muted: #656a76;        /* muted / meta */
+
+  /* Brand */
+  --color-violet: #7D39EB;       /* primary accent */
+  --color-violet-dark: #6628d4;  /* hover state */
+  --color-lime: #C6FF33;         /* signal / highlight */
+  --color-lime-dark: #aee020;    /* hover */
+  --color-lime-text: #C6FF33;    /* text highlight */
+
+  /* Semantic */
+  --color-positive: #4cc38a;
+  --color-negative: #e5484d;
+
+  /* Crisp dot grid tokens (tighter spacing) */
+  --dot-color: rgba(255, 255, 255, 0.18);
+  --dot-size: 18px;
+  --header-bg: rgba(15, 15, 17, 0.88);
+  --console-bg: rgba(17, 17, 19, 0.96);
+  --chart-bg: #0d0d0f;
+
+  /* Fonts */
   --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 }
+
+/* Light Mode Overrides */
+[data-theme="light"],
+html.light {
+  --color-black: #ffffff;
+  --color-surface: #fafafc;      /* page background */
+  --color-surface-2: #ffffff;    /* card */
+  --color-surface-3: #f1f3f7;    /* raised / input */
+  --color-line: rgba(0, 0, 0, 0.08);
+  --color-line-mid: rgba(0, 0, 0, 0.14);
+
+  --color-primary: #121316;
+  --color-secondary: #4b5262;
+  --color-muted: #737b8c;
+
+  --color-violet: #7D39EB;
+  --color-violet-dark: #6628d4;
+  --color-lime: #C6FF33;
+  --color-lime-dark: #b0e828;
+  --color-lime-text: #598c00;    /* High contrast (>=4.5:1) on white */
+
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+
+  /* Crisp dot grid for light mode (tighter spacing matching screenshot) */
+  --dot-color: rgba(0, 0, 0, 0.16);
+  --dot-size: 18px;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --console-bg: rgba(255, 255, 255, 0.98);
+  --chart-bg: #f8f9fc;
+}
+
+/* Constant-sized typing cursor styling */
+.typing-cursor {
+  position: relative;
+}
+
+.typing-cursor::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%; /* Vertically centers the cursor relative to your text */
+  height: 75%; /* Forces the cursor to stay perfectly locked at this height */
+  width: 2px; /* The thickness of your cursor */
+  background-color: currentColor;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  50% { background-color: transparent; }
+}
+
 
 @layer base {
   html {
@@ -25,13 +98,20 @@
     scroll-padding-top: 96px;
   }
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    background-color: var(--color-surface);
+    background-image: radial-gradient(var(--dot-color) 1.15px, transparent 1.15px);
+    background-size: var(--dot-size) var(--dot-size);
+    background-position: 0 0;
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
     font-feature-settings: "cv11", "ss01";
+    transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   h1,
   h2,
   h3 {
-    @apply font-display;
+    font-family: var(--font-display);
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.03em;
@@ -41,11 +121,11 @@
     text-wrap: pretty;
   }
   ::selection {
-    background: var(--color-champagne);
-    color: var(--color-ink);
+    background: var(--color-violet);
+    color: #ffffff;
   }
   :focus-visible {
-    outline: 2px solid var(--color-brass);
+    outline: 2px solid var(--color-violet);
     outline-offset: 3px;
   }
 }
@@ -56,11 +136,14 @@
   }
 
   .eyebrow {
-    @apply text-[12px] font-medium tracking-[0.01em] text-slate;
+    @apply text-[12px] font-medium tracking-[0.08em] uppercase;
+    color: var(--color-muted);
   }
 
   .meta {
-    @apply text-[12px] font-medium tracking-[0.01em] text-slate;
+    @apply text-[12px];
+    color: var(--color-muted);
+    font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
   }
 
@@ -68,42 +151,52 @@
     @apply inline-flex h-11 items-center justify-center gap-2 rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150;
   }
   .btn-primary {
-    @apply bg-ink text-paper;
+    background: var(--color-violet);
+    color: #ffffff;
   }
   .btn-primary:hover {
-    background: var(--color-ink-3);
+    background: var(--color-violet-dark);
   }
   .btn-secondary {
-    @apply border border-line bg-transparent text-ink;
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-line-mid);
   }
   .btn-secondary:hover {
-    background: var(--color-paper-2);
+    background: var(--color-surface-3);
   }
-  .btn-accent {
-    @apply bg-champagne text-ink;
+  .btn-lime {
+    background: var(--color-lime);
+    color: #000000;
   }
-  .btn-accent:hover {
-    background: #cdb377;
+  .btn-lime:hover {
+    background: var(--color-lime-dark);
   }
-  .btn-outline-dark {
-    @apply border border-line-dark bg-transparent text-paper;
+  .btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-line-mid);
   }
-  .btn-outline-dark:hover {
-    background: var(--color-ink-3);
+  .btn-outline:hover {
+    background: var(--color-surface-3);
   }
 
   .field {
-    @apply w-full rounded-[8px] border border-line bg-paper-2 px-4 py-3 text-[15px] text-ink outline-none transition-colors duration-150;
+    @apply w-full rounded-[8px] px-4 py-3 text-[15px] outline-none transition-colors duration-150;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface-2);
+    color: var(--color-primary);
   }
   .field:focus {
-    border-color: var(--color-ink);
+    border-color: var(--color-violet);
   }
 
   .link-arrow {
-    @apply inline-flex items-center gap-2 text-[14px] font-medium text-ink transition-colors duration-150;
+    @apply inline-flex items-center gap-2 text-[14px] font-medium transition-colors duration-150;
+    color: var(--color-primary);
   }
   .link-arrow:hover {
-    color: var(--color-brass);
+    color: var(--color-lime-text);
   }
 }
 

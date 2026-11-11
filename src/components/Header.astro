@@ -1,46 +1,68 @@
 ---
 import Logo from '@/components/ui/Logo.astro';
+import ThemeToggle from '@/components/ui/ThemeToggle.astro';
 import { nav } from '@/config/site';
 ---
-<header class="sticky top-0 z-50 border-b border-line bg-paper">
-  <div class="container-page flex h-[72px] items-center justify-between gap-6">
+<header class="sticky top-0 z-50 w-full px-4 pt-3 pb-2 transition-all">
+  <div
+    class="container-page flex h-14 items-center justify-between gap-4 rounded-full px-5 md:px-6 shadow-xl backdrop-blur-md transition-colors duration-200"
+    style="background: var(--header-bg); border: 1px solid var(--color-line-mid)"
+  >
     <Logo />
 
-    <nav aria-label="Main" class="hidden items-center gap-8 md:flex">
+    <nav aria-label="Main" class="hidden items-center gap-7 md:flex">
       {nav.map((item) => (
         <a
           href={item.href}
-          class="whitespace-nowrap text-[14px] font-medium text-slate transition-colors duration-150 hover:text-ink"
+          class="group flex items-center gap-1 whitespace-nowrap text-[14px] font-medium transition-colors duration-150"
+          style="color: var(--color-secondary)"
+          onmouseover="this.style.color='var(--color-primary)'"
+          onmouseout="this.style.color='var(--color-secondary)'"
         >
-          {item.label}
+          <span>{item.label}</span>
+          <svg class="h-3 w-3 opacity-60 transition-transform group-hover:translate-y-0.5 group-hover:opacity-100" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
       ))}
     </nav>
 
     <div class="flex items-center gap-2.5">
+      <!-- Dark/Light Theme Toggle -->
+      <ThemeToggle />
+
       <a
         href="/book-consultation"
-        class="inline-flex h-9 items-center justify-center rounded-[8px] bg-ink px-4 text-[13px] font-medium text-paper transition-colors duration-150 hover:bg-ink-3"
+        class="inline-flex h-9 items-center justify-center gap-2 rounded-full px-4 text-[13px] font-medium text-white transition-all duration-150 shadow-md"
+        style="background: var(--color-violet)"
+        onmouseover="this.style.background='var(--color-violet-dark)'"
+        onmouseout="this.style.background='var(--color-violet)'"
       >
-        Book a call
+        <span>Contact us</span>
+        <span class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[11px]">→</span>
       </a>
 
       <details class="relative md:hidden">
         <summary
-          class="flex h-9 cursor-pointer list-none items-center rounded-[8px] border border-line px-3 text-[13px] font-medium text-ink [&::-webkit-details-marker]:hidden"
+          class="flex h-9 cursor-pointer list-none items-center rounded-full px-3 text-[13px] font-medium [&::-webkit-details-marker]:hidden"
+          style="border: 1px solid var(--color-line-mid); color: var(--color-primary)"
         >
           Menu
         </summary>
         <nav
           aria-label="Mobile"
-          class="absolute right-0 mt-2 w-60 rounded-[12px] border border-line bg-paper p-2"
+          class="absolute right-0 mt-3 w-60 rounded-[16px] p-2 shadow-2xl backdrop-blur-lg"
+          style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)"
         >
-          <ul>
+          <ul class="space-y-1">
             {nav.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="block rounded-[6px] px-3 py-2.5 text-[14px] font-medium text-slate transition-colors hover:bg-paper-2 hover:text-ink"
+                  class="block rounded-[8px] px-3 py-2 text-[14px] font-medium transition-colors"
+                  style="color: var(--color-secondary)"
+                  onmouseover="this.style.background='var(--color-surface-3)'; this.style.color='var(--color-primary)'"
+                  onmouseout="this.style.background=''; this.style.color='var(--color-secondary)'"
                 >
                   {item.label}
                 </a>

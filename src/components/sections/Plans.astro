@@ -1,49 +1,47 @@
 ---
-import Button from '@/components/ui/Button.astro';
 import { site } from '@/config/site';
 
-// Plan limits are examples until packages and pricing are decided. No prices shown.
 const plans = [
   {
-    name: 'Starter',
-    sub: 'Get your key numbers in one place',
+    name: 'Foundation',
+    sub: 'Establish your digital presence',
     price: 'Setup + retainer',
     cta: 'Start here',
     featured: false,
     features: [
-      'Up to 3 data sources',
-      '2 dashboards',
-      'Cleaning and modeling',
-      'Scheduled refresh',
-      'Monthly insight review',
+      'Website design & development',
+      'SEO + basic GEO setup',
+      'Google Analytics & Search Console',
+      'Monthly performance report',
+      'Email support',
     ],
   },
   {
     name: 'Growth',
-    sub: 'Connect more of the business',
+    sub: 'Scale acquisition and operations',
     price: 'Setup + retainer',
     cta: 'Choose Growth',
     featured: true,
     features: [
-      'Up to 8 data sources',
-      '6 dashboards',
-      'Custom KPI development',
-      'Weekly insight meetings',
-      'Forecasting add-on',
+      'Everything in Foundation',
+      'Performance marketing management',
+      'Custom CRM + automation workflows',
+      'BI dashboard (up to 5 sources)',
+      'Weekly strategy review',
     ],
   },
   {
-    name: 'Enterprise',
-    sub: 'Custom scope and support',
+    name: 'Scale',
+    sub: 'Full-service growth partnership',
     price: 'Custom',
     cta: 'Talk to us',
     featured: false,
     features: [
-      'Custom data source scope',
-      'Tailored dashboards',
-      'Advanced analytics and automation',
+      'Full-funnel marketing operations',
+      'Advanced AI automations',
+      'Custom data infrastructure',
+      'Dedicated growth team',
       'Weekly meetings, priority support',
-      'User access and security',
     ],
   },
 ];
@@ -52,90 +50,103 @@ const plans = [
   <div class="container-page">
     <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
       <div>
-        <p class="eyebrow">Plans</p>
+        <p class="eyebrow" style="color: var(--color-lime-text)">Plans</p>
         <h2 class="mt-4 max-w-[14em] text-[clamp(32px,4.4vw,56px)]">
           Start where you are. Add as you grow
         </h2>
       </div>
-      <p class="max-w-[30em] text-[15px] leading-[1.7] text-slate md:justify-self-end">
-        One-time discovery and setup, then an optional monthly partnership. Weekly
-        insight meetings come with Growth and Enterprise.
+      <p class="max-w-[30em] text-[15px] leading-[1.7] md:justify-self-end" style="color: var(--color-secondary)">
+        One-time discovery and setup, then an optional monthly partnership. Weekly strategy reviews come with Growth and Scale.
       </p>
     </div>
 
     <div class="mt-12 grid items-stretch gap-4 lg:grid-cols-3">
       {plans.map((plan, index) => (
         <article
-          class:list={[
-            'flex flex-col rounded-[16px] border p-6 md:p-8',
-            plan.featured ? 'border-ink bg-ink text-paper' : 'border-line bg-paper-2 text-ink',
-          ]}
+          class="flex flex-col rounded-[16px] p-6 md:p-8"
+          style={plan.featured
+            ? 'background: var(--color-violet); border: none'
+            : `border: 1px solid var(--color-line); background: var(--color-surface-2)`}
         >
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="text-[28px]">{plan.name}</h3>
-            <p class:list={['text-[11px] tabular-nums', plan.featured ? 'text-mist' : 'text-slate']}>
+            <h3 class="text-[28px]" style={plan.featured ? 'color: #fff' : 'color: var(--color-primary)'}>{plan.name}</h3>
+            <p class="text-[11px] tabular-nums" style={plan.featured ? 'color: rgba(255,255,255,0.6)' : 'color: var(--color-muted)'}>
               Plan {String(index + 1).padStart(2, '0')}
             </p>
           </div>
 
-          <p class:list={['mt-2 text-[14px]', plan.featured ? 'text-mist' : 'text-slate']}>
+          <p class="mt-2 text-[14px]" style={plan.featured ? 'color: rgba(255,255,255,0.7)' : 'color: var(--color-secondary)'}>
             {plan.sub}
           </p>
 
           <p
-            class:list={[
-              'mt-6 border-t pt-5 text-[16px] font-medium',
-              plan.featured ? 'border-line-dark text-paper' : 'border-line text-ink',
-            ]}
+            class="mt-6 pt-5 text-[16px] font-medium"
+            style={plan.featured
+              ? 'border-top: 1px solid rgba(255,255,255,0.15); color: #fff'
+              : 'border-top: 1px solid var(--color-line); color: var(--color-primary)'}
           >
             {plan.price}
           </p>
 
-          <ul
-            class:list={[
-              'mt-6 flex-1 space-y-3 text-[14px]',
-              plan.featured ? 'text-mist' : 'text-slate',
-            ]}
-          >
+          <ul class="mt-6 flex-1 space-y-3 text-[14px]">
             {plan.features.map((feature) => (
               <li class="flex gap-3">
                 <i
-                  class:list={[
-                    'mt-[9px] h-1 w-1 flex-none rounded-full',
-                    plan.featured ? 'bg-champagne' : 'bg-brass',
-                  ]}
+                  class="mt-[9px] h-1 w-1 flex-none rounded-full"
+                  style={plan.featured ? 'background: var(--color-lime)' : 'background: var(--color-violet)'}
                 ></i>
-                <span>{feature}</span>
+                <span style={plan.featured ? 'color: rgba(255,255,255,0.85)' : 'color: var(--color-secondary)'}>{feature}</span>
               </li>
             ))}
           </ul>
 
-          <Button
+          <a
             href={`/book-consultation?plan=${plan.name.toLowerCase()}&source=plans`}
-            variant={plan.featured ? 'accent' : 'secondary'}
-            class="mt-8 w-full"
+            class="mt-8 inline-flex h-11 w-full items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style={plan.featured
+              ? 'background: var(--color-lime); color: #000'
+              : 'border: 1px solid var(--color-line-mid); background: transparent; color: var(--color-primary)'}
+            onmouseover={plan.featured
+              ? "this.style.background='var(--color-lime-dark)'"
+              : "this.style.background='var(--color-surface-3)'"}
+            onmouseout={plan.featured
+              ? "this.style.background='var(--color-lime)'"
+              : "this.style.background='transparent'"}
           >
             {plan.cta}
-          </Button>
+          </a>
         </article>
       ))}
     </div>
 
-    <div class="mt-16 rounded-[16px] bg-ink p-8 text-paper md:p-12">
+    <div class="mt-16 rounded-[16px] p-8 md:p-12" style="background: var(--color-violet)">
       <div class="grid items-center gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
         <div>
-          <p class="eyebrow text-mist">Next step</p>
-          <h2 class="mt-3 text-[clamp(28px,3.4vw,44px)]">Not sure what to fix first?</h2>
-          <p class="mt-3 max-w-[34em] text-[15px] leading-[1.7] text-mist">
-            Book a free consultation or request a data assessment. We'll map your
-            sources and tell you what we'd build first.
+          <p class="eyebrow" style="color: rgba(255,255,255,0.6)">Next step</p>
+          <h2 class="mt-3 text-[clamp(28px,3.4vw,44px)]" style="color: #fff">Not sure where to start?</h2>
+          <p class="mt-3 max-w-[34em] text-[15px] leading-[1.7]" style="color: rgba(255,255,255,0.7)">
+            Book a free growth call. We'll map your curve and tell you which lever to pull first.
           </p>
         </div>
         <div class="flex flex-wrap gap-3 md:justify-end">
-          <Button href="/book-consultation?source=final-cta" variant="accent">
-            Book a consultation
-          </Button>
-          <Button href={`mailto:${site.contactEmail}`} variant="outline-dark">Email us</Button>
+          <a
+            href="/book-consultation?source=final-cta"
+            class="inline-flex h-11 items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style="background: var(--color-lime); color: #000"
+            onmouseover="this.style.background='var(--color-lime-dark)'"
+            onmouseout="this.style.background='var(--color-lime)'"
+          >
+            Book a growth call
+          </a>
+          <a
+            href={`mailto:${site.contactEmail}`}
+            class="inline-flex h-11 items-center justify-center rounded-[8px] px-5 text-[14px] font-medium transition-colors duration-150"
+            style="border: 1px solid rgba(255,255,255,0.25); color: #fff; background: transparent"
+            onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+            onmouseout="this.style.background='transparent'"
+          >
+            Email us
+          </a>
         </div>
       </div>
     </div>

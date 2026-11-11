@@ -23,7 +23,7 @@ const industries: Industry[] = [
     question: 'Where is margin slipping?',
     description: 'Project costs against progress, with overruns called out.',
     meta: 'Project costs',
-    href: '/book-consultation?industry=construction&focus=control-project-costs&source=industries',
+    href: '/book-consultation?industry=construction&source=industries',
     kind: 'costs',
     rows: [
       { label: 'Project A', value: 82 },
@@ -33,11 +33,11 @@ const industries: Industry[] = [
     ],
   },
   {
-    name: 'E-commerce',
-    question: 'Which channel makes money?',
+    name: 'Ecommerce',
+    question: "What's driving conversions?",
     description: 'Contribution margin by channel, not just traffic.',
-    meta: 'Channel margin',
-    href: '/book-consultation?industry=ecommerce&focus=improve-marketing&source=industries',
+    meta: 'Channel performance',
+    href: '/book-consultation?industry=ecommerce&source=industries',
     kind: 'channels',
     bars: [
       { label: 'Paid', value: 64 },
@@ -51,24 +51,23 @@ const industries: Industry[] = [
     question: 'Where is capacity going?',
     description: 'Booked capacity by team for the next four weeks.',
     meta: 'Capacity',
-    href: '/book-consultation?industry=professional-services&focus=improve-profitability&source=industries',
+    href: '/book-consultation?industry=professional-services&source=industries',
     kind: 'capacity',
     booked: 74,
   },
 ];
 ---
-<section id="industries" class="bg-ink pb-20 pt-24 text-paper md:pb-24 md:pt-32">
+<section id="industries" class="pb-20 pt-24 md:pb-24 md:pt-32" style="background: var(--color-surface-2)">
   <div class="container-page">
     <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
       <div>
-        <p class="eyebrow text-mist">Industries</p>
+        <p class="eyebrow" style="color: var(--color-lime-text)">Industries</p>
         <h2 class="mt-4 max-w-[14em] text-[clamp(32px,4.4vw,56px)]">
-          Built for the questions your industry asks
+          Built for businesses that want to grow
         </h2>
       </div>
-      <p class="max-w-[30em] text-[15px] leading-[1.7] text-mist md:justify-self-end">
-        Same method, different numbers. Each view starts with the question that decides
-        margin, capacity or channel profit.
+      <p class="max-w-[30em] text-[15px] leading-[1.7] md:justify-self-end" style="color: var(--color-secondary)">
+        Same method, different levers. Each engagement starts with the question that matters most for your market.
       </p>
     </div>
 
@@ -76,37 +75,35 @@ const industries: Industry[] = [
       {industries.map((industry, index) => (
         <article
           class:list={[
-            'flex flex-col rounded-[16px] border border-line-dark bg-ink-2 p-6 md:p-7',
+            'flex flex-col rounded-[16px] p-6 md:p-7',
             index === 2 && 'md:col-span-2 lg:col-span-1',
           ]}
+          style="border: 1px solid var(--color-line); background: var(--color-surface-3)"
         >
           <div class="flex items-center justify-between gap-4">
-            <p class="text-[12px] font-medium tabular-nums text-mist">
+            <p class="text-[12px] font-medium tabular-nums" style="color: var(--color-lime)">
               {String(index + 1).padStart(2, '0')}
             </p>
-            <p class="text-[11px] text-mist">{industry.meta}</p>
+            <p class="text-[11px]" style="color: var(--color-muted)">{industry.meta}</p>
           </div>
 
           <h3 class="mt-6 text-[28px] leading-[1.05]">{industry.name}</h3>
-          <p class="mt-4 font-display text-[20px] leading-[1.2] text-paper">{industry.question}</p>
-          <p class="mt-2 text-[14px] leading-[1.6] text-mist">{industry.description}</p>
+          <p class="mt-4 font-display text-[20px] leading-[1.2]" style="color: var(--color-primary)">{industry.question}</p>
+          <p class="mt-2 text-[14px] leading-[1.6]" style="color: var(--color-secondary)">{industry.description}</p>
 
-          <div class="mt-7 min-h-[132px] rounded-[8px] border border-line-dark p-4">
+          <div class="mt-7 min-h-[132px] rounded-[8px] p-4" style="border: 1px solid var(--color-line)">
             {industry.kind === 'costs' && (
               <div class="space-y-3">
                 {industry.rows.map((row) => (
                   <div class="grid grid-cols-[64px_1fr_32px] items-center gap-3">
-                    <span class="text-[11px] text-mist">{row.label}</span>
-                    <span class="h-1.5 overflow-hidden rounded-full bg-line-dark">
+                    <span class="text-[11px]" style="color: var(--color-muted)">{row.label}</span>
+                    <span class="h-1.5 overflow-hidden rounded-full" style="background: var(--color-line)">
                       <span
-                        class:list={[
-                          'block h-full rounded-full',
-                          row.alert ? 'bg-coral' : 'bg-champagne',
-                        ]}
-                        style={`width:${row.value}%`}
+                        class="block h-full rounded-full"
+                        style={`width:${row.value}%; background: ${row.alert ? 'var(--color-negative)' : 'var(--color-lime)'}`}
                       ></span>
                     </span>
-                    <span class="text-right text-[11px] tabular-nums text-paper">{row.value}%</span>
+                    <span class="text-right text-[11px] tabular-nums" style="color: var(--color-primary)">{row.value}%</span>
                   </div>
                 ))}
               </div>
@@ -118,18 +115,15 @@ const industries: Industry[] = [
                   {industry.bars.map((bar) => (
                     <div class="flex h-full items-end">
                       <span
-                        class:list={[
-                          'w-full rounded-t-[3px]',
-                          bar.highlight ? 'bg-champagne' : 'bg-[#4a443b]',
-                        ]}
-                        style={`height:${bar.value}%`}
+                        class="w-full rounded-t-[3px]"
+                        style={`height:${bar.value}%; background: ${bar.highlight ? 'var(--color-lime)' : 'var(--color-surface-2)'}`}
                       ></span>
                     </div>
                   ))}
                 </div>
                 <div class="mt-3 grid grid-cols-4 gap-3">
                   {industry.bars.map((bar) => (
-                    <span class="text-[11px] text-mist">{bar.label}</span>
+                    <span class="text-[11px]" style="color: var(--color-muted)">{bar.label}</span>
                   ))}
                 </div>
               </div>
@@ -137,13 +131,13 @@ const industries: Industry[] = [
 
             {industry.kind === 'capacity' && (
               <div>
-                <p class="text-[11px] text-mist">Next four weeks</p>
-                <div class="mt-4 h-2 overflow-hidden rounded-full bg-line-dark">
-                  <span class="block h-full rounded-full bg-champagne" style={`width:${industry.booked}%`}></span>
+                <p class="text-[11px]" style="color: var(--color-muted)">Next four weeks</p>
+                <div class="mt-4 h-2 overflow-hidden rounded-full" style="background: var(--color-line)">
+                  <span class="block h-full rounded-full" style={`width:${industry.booked}%; background: var(--color-lime)`}></span>
                 </div>
-                <div class="mt-3 flex items-center justify-between text-[11px] text-mist">
-                  <span><span class="tabular-nums text-paper">{industry.booked}%</span> booked</span>
-                  <span><span class="tabular-nums text-paper">{100 - industry.booked}%</span> open</span>
+                <div class="mt-3 flex items-center justify-between text-[11px]" style="color: var(--color-muted)">
+                  <span><span class="tabular-nums" style="color: var(--color-primary)">{industry.booked}%</span> booked</span>
+                  <span><span class="tabular-nums" style="color: var(--color-primary)">{100 - industry.booked}%</span> open</span>
                 </div>
               </div>
             )}
@@ -151,7 +145,10 @@ const industries: Industry[] = [
 
           <a
             href={industry.href}
-            class="mt-auto inline-flex items-center gap-2 border-t border-line-dark pt-5 text-[14px] font-medium text-paper transition-colors duration-150 hover:text-champagne"
+            class="mt-auto inline-flex items-center gap-2 pt-5 text-[14px] font-medium transition-colors duration-150"
+            style="border-top: 1px solid var(--color-line); color: var(--color-primary); margin-top: 1.5rem"
+            onmouseover="this.style.color='var(--color-lime)'"
+            onmouseout="this.style.color='var(--color-primary)'"
           >
             Talk through this view <span aria-hidden="true">→</span>
           </a>

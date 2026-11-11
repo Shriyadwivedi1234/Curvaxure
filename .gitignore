@@ -30,3 +30,5 @@ coverage/
 
 # TypeScript build files
 *.tsbuildinfo
+
+unslop

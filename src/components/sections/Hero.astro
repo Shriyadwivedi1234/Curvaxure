@@ -1,36 +1,143 @@
 ---
-import Button from '@/components/ui/Button.astro';
 import DashboardPreview from '@/components/sections/DashboardPreview.astro';
 ---
-<section class="relative">
-  <div class="container-page grid items-center gap-12 pb-20 pt-12 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] xl:gap-16 xl:pb-20 xl:pt-16">
-    <div class="enter min-w-0 max-w-[34em]">
-      <p class="eyebrow">Data analytics for growing businesses</p>
+<section class="relative overflow-hidden pt-8 pb-20 md:pt-16 md:pb-28">
+  <!-- Ambient violet glow centered at top -->
+  <div
+    class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[380px] w-[620px] rounded-full blur-[140px] opacity-15"
+    style="background: var(--color-violet);"
+  ></div>
 
-      <h1 class="mt-5 text-[clamp(46px,5.2vw,60px)] leading-[0.98] tracking-[-0.035em]">
-        <span class="block">See the numbers.</span>
-        <span class="block">Make the call.</span>
-      </h1>
-
-      <p class="mt-6 text-[17px] leading-[1.65] text-slate">
-        We connect the data scattered across your tools into clear Power BI dashboards,
-        then help your team decide where to focus.
-      </p>
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <Button href="/book-consultation?source=hero" class="w-full sm:w-auto">Request a data assessment</Button>
-        <Button href="#console" variant="secondary" class="w-full sm:w-auto">See a sample decision</Button>
-      </div>
-
-      <div class="mt-10 border-t border-line pt-4">
-        <p class="text-[13px] leading-[1.6] text-slate">
-          Works with Excel, ERP, CRM, accounting, ads and e-commerce data.
-        </p>
-      </div>
+  <div class="container-page relative z-10 flex flex-col items-center text-center">
+    <!-- Top badge -->
+    <div
+      class="enter inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[12px] font-mono mb-6"
+      style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)"
+    >
+      <span class="h-2 w-2 rounded-full" style="background: var(--color-lime)"></span>
+      <span style="color: var(--color-secondary)">Integrated Growth Agency</span>
     </div>
 
-    <div class="enter enter-late min-w-0">
+    <!-- Centered Animated Headline -->
+    <h1
+      class="enter text-[clamp(42px,5.8vw,72px)] font-medium leading-[1.05] tracking-[-0.035em] max-w-[16em] transition-colors"
+      style="color: var(--color-primary)"
+    >
+  <span class="block text-gray-700">Your one go to pathway</span>
+  <span class="inline-flex items-baseline justify-center gap-2 mt-1 sm:mt-2 text-gray-900">
+    <span>For</span>
+    <span class="relative inline-block text-left" style="color: var(--color-violet-dark, #5c24ff)">
+      <!-- We added 'typing-cursor' and removed the shifting border utilities -->
+      <span
+        id="word-rotator"
+        class="inline-block font-semibold typing-cursor pr-1"
+        data-words='["Automation.", "Growth.", "Search Visibility.", "Custom CRM.", "Data Solutions.", "Websites & SEO."]'
+      ></span>
+    </span>
+  </span>
+
+ </h1>
+
+    <!-- Centered Subhead -->
+    <p
+      class="enter mt-6 max-w-[38em] text-[17px] md:text-[19px] leading-[1.65]"
+      style="color: var(--color-secondary)"
+    >
+      Curvaxure helps businesses understand, improve, and shape their growth curve — from web presence and search visibility to automated workflows and data intelligence.
+    </p>
+
+    <!-- Centered CTA Buttons -->
+    <div class="enter mt-8 flex flex-wrap items-center justify-center gap-3.5">
+      <a
+        href="/book-consultation?source=hero"
+        class="btn btn-lime shadow-xl shadow-lime/10 px-6 h-12 text-[15px]"
+      >
+        <span>Book a growth call</span>
+        <span class="text-[14px]">→</span>
+      </a>
+      <a
+        href="/#services"
+        class="btn btn-secondary px-6 h-12 text-[15px]"
+      >
+        Explore services
+      </a>
+    </div>
+
+    <!-- Micro-badges / pill list -->
+    <div
+      class="enter mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-6 text-[13px]"
+      style="border-top: 1px solid var(--color-line); max-width: 44em"
+    >
+      <span class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">Capabilities:</span>
+      <span style="color: var(--color-secondary)">Websites + SEO, GEO, AEO</span>
+      <span style="color: var(--color-line-mid)">·</span>
+      <span style="color: var(--color-secondary)">Custom CRM</span>
+      <span style="color: var(--color-line-mid)">·</span>
+      <span style="color: var(--color-secondary)">AI Automations (n8n, Zapier)</span>
+      <span style="color: var(--color-line-mid)">·</span>
+      <span style="color: var(--color-secondary)">Data Solutions &amp; BI</span>
+      <span style="color: var(--color-line-mid)">·</span>
+      <span style="color: var(--color-secondary)">GTM &amp; Marketing</span>
+    </div>
+
+    <!-- Centered Dashboard Visual beneath the headline -->
+    <div class="enter enter-late mt-14 w-full max-w-[820px]">
       <DashboardPreview />
     </div>
   </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const rotator = document.getElementById("word-rotator");
+  if (!rotator) return;
+
+  // Parse the array of words from the data attribute
+  const words = JSON.parse(rotator.getAttribute("data-words") || "[]");
+  if (words.length === 0) return;
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  // Speed configurations (in milliseconds)
+  const typingSpeed = 100;
+  const erasingSpeed = 50;
+  const delayBetweenWords = 2000; // Pause when full word is typed
+
+  function type() {
+    const currentWord = words[wordIndex];
+    
+    if (isDeleting) {
+      // Remove a character
+      rotator.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      // Add a character
+      rotator.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    // Determine next interval speed
+    let nextSpeed = isDeleting ? erasingSpeed : typingSpeed;
+
+    // Word completed typing
+    if (!isDeleting && charIndex === currentWord.length) {
+      nextSpeed = delayBetweenWords;
+      isDeleting = true;
+    } 
+    // Word completely erased
+    else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      // Move to the next word index, loop back to 0 if at the end
+      wordIndex = (wordIndex + 1) % words.length;
+      nextSpeed = 300; // Brief pause before typing next word
+    }
+
+    setTimeout(type, nextSpeed);
+  }
+
+  // Start the typing loop
+  type();
+});
+</script>

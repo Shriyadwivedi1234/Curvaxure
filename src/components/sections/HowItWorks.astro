@@ -1,49 +1,67 @@
 ---
 const steps = [
   {
-    title: 'Connect',
-    body: 'We pull sales, finance, project and operations data into one model.',
+    title: 'Audit',
+    body: "We map your current growth curve — traffic, leads, revenue, and operations — to find what's bending it.",
   },
   {
-    title: 'Clarify',
-    body: 'You get dashboards for revenue, margin, capacity and channel performance.',
+    title: 'Build',
+    body: 'We deploy the right services: web presence, marketing, data systems, or automation — based on what moves the curve.',
   },
   {
-    title: 'Decide',
-    body: 'We meet monthly to review the changes and agree what to do next.',
+    title: 'Grow',
+    body: 'Monthly reviews track the curve. We adjust, optimize, and scale what works.',
   },
 ];
 ---
-<section id="how-it-works" class="border-t border-line py-20 md:py-28">
+<section id="how-it-works" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line)">
   <div class="container-page grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
     <div>
-      <p class="eyebrow">How it works</p>
+      <p class="eyebrow" style="color: var(--color-lime-text)">How it works</p>
       <h2 class="mt-4 max-w-[13em] text-[clamp(32px,3.6vw,48px)]">
-        From scattered data to a monthly decision
+        From scattered signals to a shaped curve
       </h2>
-      <p class="mt-5 max-w-[28em] text-[16px] leading-[1.7] text-slate">
-        One setup, then a monthly review. We read the changes together and agree what to do next.
+      <p class="mt-5 max-w-[28em] text-[16px] leading-[1.7]" style="color: var(--color-secondary)">
+        One engagement, one direction. We read the curve together each month and decide what to do next.
       </p>
     </div>
 
     <div>
       <div class="grid gap-8 sm:grid-cols-3 sm:gap-0">
         {steps.map((step, index) => (
-          <div class:list={[
-            'border-t border-line pt-5',
-            index > 0 && 'sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0',
-          ]}>
-            <p class="text-[12px] font-medium tabular-nums text-brass">
+          <div class="step-item" data-index={index}>
+            <p class="font-mono text-[12px] font-medium tabular-nums" style="color: var(--color-lime)">
               {String(index + 1).padStart(2, '0')}
             </p>
             <h3 class="mt-3 text-[24px]">{step.title}</h3>
-            <p class="mt-3 text-[14px] leading-[1.65] text-slate">{step.body}</p>
+            <p class="mt-3 text-[14px] leading-[1.65]" style="color: var(--color-secondary)">{step.body}</p>
           </div>
         ))}
       </div>
-      <p class="mt-8 border-t border-line pt-4 text-[13px] leading-[1.6] text-slate">
-        One-time setup. The monthly review is optional.
+      <p class="mt-8 pt-4 text-[13px] leading-[1.6]" style="border-top: 1px solid var(--color-line); color: var(--color-muted)">
+        One-time discovery. Monthly reviews are optional.
       </p>
     </div>
   </div>
 </section>
+
+<style>
+  .step-item {
+    border-top: 1px solid var(--color-line);
+    padding-top: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .step-item[data-index="0"] {
+      border-top: 1px solid var(--color-line);
+      border-left: none;
+      padding-top: 0;
+    }
+    .step-item[data-index="1"],
+    .step-item[data-index="2"] {
+      border-top: none;
+      border-left: 1px solid var(--color-line);
+      padding-top: 0;
+      padding-left: 1.5rem;
+    }
+  }
+</style>

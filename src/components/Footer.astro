@@ -2,17 +2,20 @@
 import Logo from '@/components/ui/Logo.astro';
 import { site, footerLinks } from '@/config/site';
 ---
-<footer class="bg-ink pb-8 pt-16 text-mist">
+<footer class="pb-8 pt-16" style="background: var(--color-surface-2); color: var(--color-secondary)">
   <div class="container-page">
     <div class="grid grid-cols-2 gap-10 md:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
       <div class="col-span-2 md:col-span-1">
-        <Logo tone="light" />
+        <Logo />
         <p class="mt-4 max-w-[26em] text-[14px] leading-[1.7]">
-          Power BI dashboards and reporting for growing businesses.
+          Growth agency for businesses that want to understand and shape their curve.
         </p>
         <a
           href={`mailto:${site.contactEmail}`}
-          class="mt-4 inline-block text-[14px] text-paper transition-colors duration-150 hover:text-champagne"
+          class="mt-4 inline-block text-[14px] transition-colors duration-150"
+          style="color: var(--color-secondary)"
+          onmouseover="this.style.color='var(--color-lime)'"
+          onmouseout="this.style.color='var(--color-secondary)'"
         >
           {site.contactEmail}
         </a>
@@ -20,13 +23,16 @@ import { site, footerLinks } from '@/config/site';
 
       {Object.entries(footerLinks).map(([group, links]) => (
         <nav aria-label={group}>
-          <h2 class="text-[12px] font-medium text-mist">{group}</h2>
+          <h2 class="text-[12px] font-medium" style="color: var(--color-muted)">{group}</h2>
           <ul class="mt-4 space-y-1">
             {links.map((link) => (
               <li>
                 <a
                   href={link.href}
-                  class="block py-1.5 text-[14px] leading-[1.4] transition-colors duration-150 hover:text-paper"
+                  class="block py-1.5 text-[14px] leading-[1.4] transition-colors duration-150"
+                  style="color: var(--color-secondary)"
+                  onmouseover="this.style.color='var(--color-primary)'"
+                  onmouseout="this.style.color='var(--color-secondary)'"
                 >
                   {link.label}
                 </a>
@@ -37,17 +43,24 @@ import { site, footerLinks } from '@/config/site';
       ))}
     </div>
 
-    <div class="mt-12 border-t border-line-dark pt-6">
+    <div class="mt-12 pt-6" style="border-top: 1px solid var(--color-line)">
       <div class="flex flex-wrap items-center justify-between gap-3 text-[12px]">
-        <p>© {new Date().getFullYear()} Curvaxure. Demo dashboards use dummy data.</p>
+        <p>© {new Date().getFullYear()} Curvaxure. All rights reserved.</p>
         <div class="flex gap-5">
-          <a href="/privacy-policy" class="transition-colors hover:text-paper">Privacy</a>
-          <a href="/terms-and-conditions" class="transition-colors hover:text-paper">Terms</a>
+          <a
+            href="/privacy-policy"
+            class="transition-colors"
+            onmouseover="this.style.color='var(--color-primary)'"
+            onmouseout="this.style.color=''"
+          >Privacy</a>
+          <a
+            href="/terms-and-conditions"
+            class="transition-colors"
+            onmouseover="this.style.color='var(--color-primary)'"
+            onmouseout="this.style.color=''"
+          >Terms</a>
         </div>
       </div>
-      <p class="mt-3 text-[11px] leading-[1.6]">
-        Microsoft, Power BI and Excel are trademarks of Microsoft. Curvaxure is independent.
-      </p>
     </div>
   </div>
 </footer>
