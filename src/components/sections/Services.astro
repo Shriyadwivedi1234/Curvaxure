@@ -3,59 +3,59 @@ const serviceCategories = [
   {
     id: 'digital-presence',
     num: '01',
-    title: 'Digital Presence & Search Visibility',
+    title: 'Digital Presence',
     tagline: 'Get found where modern buyers and AI engines look.',
-    summary: 'From custom web design to ranking in modern search engines and AI answer engines like Perplexity, ChatGPT, and Google Gemini.',
     services: [
-      { name: 'Web Design & Development', detail: 'High-conversion, fast, accessible digital experiences' },
-      { name: 'Search Engine Optimization (SEO)', detail: 'Technical & content architecture for traditional search' },
-      { name: 'Generative Engine Optimization (GEO)', detail: 'Positioning your brand inside ChatGPT, Claude, and Perplexity' },
-      { name: 'Answer Engine Optimization (AEO)', detail: 'Direct citation capture for voice and instant AI queries' },
+      { name: 'Web Design & Development'},
+      { name: 'Search Engine Optimization (SEO)' },
+      { name: 'Generative Engine Optimization (GEO)'},
+      { name: 'Answer Engine Optimization (AEO)'},
     ],
     accent: 'violet',
     badge: 'Presence & Search',
+    href: "/services/digital-presence"
   },
   {
     id: 'marketing-growth',
     num: '02',
-    title: 'Marketing, Branding & Growth',
-    tagline: 'Position your brand, command attention, and acquire customers profitably.',
-    summary: 'Full-spectrum growth: clear market positioning, targeted social content, high-performance acquisition campaigns, and comprehensive Go-To-Market launches.',
+    title: 'Marketing',
+    tagline: 'Position your brand and acquire customers profitably.',
     services: [
-      { name: 'Digital Marketing & Brand Positioning', detail: 'Performance marketing, ad management, and core value messaging' },
-      { name: 'Social Media Handling', detail: 'Content creation, organic distribution, and community building' },
-      { name: 'GTM Strategies', detail: 'Market launch planning, audience segmentation, and channel testing' },
+      { name: 'Digital Marketing & Brand Positioning'},
+      { name: 'Social Media Handling'},
+      { name: 'GTM Strategies'},
     ],
     accent: 'lime',
     badge: 'Brand & Acquisition',
+    href: "/services/marketing-growth"
   },
   {
     id: 'data-solutions',
     num: '03',
-    title: 'Data Solutions & Business Intelligence',
-    tagline: 'Turn scattered operational numbers into clear decision engines.',
-    summary: 'Customized CRMs and executive BI dashboards that connect marketing, sales, and operations so leadership always knows what to fix next.',
+    title: 'Data Solutions',
+    tagline: 'Turn scattered operational data into clear decision engines.',
     services: [
-      { name: 'Customized CRM Systems', detail: 'Tailored lead pipelines, customer tracking, and lifecycle stages' },
-      { name: 'Target Analytics & Dashboards', detail: 'Real-time KPI visualization across sales, ad spend, and pipeline' },
-      { name: 'Business Intelligence (BI)', detail: 'Custom executive reporting models and revenue attribution' },
+      { name: 'Customized CRM Systems'},
+      { name: 'Target Analytics & Dashboards'},
+      { name: 'Business Intelligence (BI)'},
     ],
     accent: 'violet',
     badge: 'Intelligence & CRM',
+    href: "/services/data-intelligence"
   },
   {
     id: 'automation',
     num: '04',
-    title: 'Operations & Workflow Automation',
+    title: 'Workflow Automation',
     tagline: 'Eliminate manual bottlenecks with connected AI agents and flows.',
-    summary: 'Connect your web leads, CRM, messaging, and operational tools into autonomous workflows using n8n and Zapier to save hundreds of hours.',
     services: [
-      { name: 'AI Automations (n8n, Zapier)', detail: 'Low-code / no-code system integration and webhook triggers' },
-      { name: 'Autonomous AI Agents', detail: 'Context-aware bots for qualification, intake, and research' },
-      { name: 'System Connectivity & Sync', detail: 'Seamless two-way data sync across internal stacks' },
+      { name: 'AI Automations (n8n, Zapier)'},
+      { name: 'Autonomous AI Agents' },
+      { name: 'System Connectivity & Sync'},
     ],
     accent: 'lime',
     badge: 'Automation & AI',
+    href: "/services/digital-presence"
   },
 ];
 ---
@@ -64,7 +64,7 @@ const serviceCategories = [
     <div class="grid gap-6 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:items-end">
       <div>
         <div class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-mono tracking-wider uppercase mb-4" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2); color: var(--color-lime-text)">
-          <span>WHAT WE DO</span>
+          <span>Services</span>
         </div>
         <h2 class="text-[clamp(32px,4vw,52px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">
           Four disciplines. One shaped growth curve.
@@ -76,21 +76,13 @@ const serviceCategories = [
     </div>
 
     <!-- 4 Main Service Category Cards -->
-    <div class="mt-14 grid gap-6 md:grid-cols-2">
+    <div class="mt-14 grid gap-4 md:grid-cols-2">
       {serviceCategories.map((cat) => (
         <article
-          class="group relative flex flex-col justify-between rounded-[20px] p-7 md:p-8 transition-all duration-300 shadow-sm"
+          class="group relative flex flex-col justify-between rounded-[20px] p-5 md:p-5 transition-all duration-300 shadow-sm"
           style="border: 1px solid var(--color-line); background: var(--color-surface-2)"
         >
           <div>
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-mono text-[12px] font-semibold" style="color: var(--color-lime-text)">
-                {cat.num} // {cat.badge}
-              </span>
-              <span class="rounded-full px-2.5 py-0.5 text-[10px] font-mono uppercase" style="border: 1px solid var(--color-line-mid); color: var(--color-muted)">
-                Full-service
-              </span>
-            </div>
 
             <h3 class="mt-5 text-[26px] font-medium leading-[1.15] transition-colors" style="color: var(--color-primary)">
               {cat.title}
@@ -98,10 +90,6 @@ const serviceCategories = [
             
             <p class="mt-2 text-[14px] font-medium" style="color: var(--color-lime-text)">
               {cat.tagline}
-            </p>
-
-            <p class="mt-3 text-[14px] leading-[1.65]" style="color: var(--color-secondary)">
-              {cat.summary}
             </p>
 
             <!-- Detailed Sub-services List -->
@@ -116,53 +104,11 @@ const serviceCategories = [
                 </div>
               ))}
             </div>
-
-            <!-- Visual signature element per category (Matching Moodboard) -->
-            {cat.id === 'digital-presence' && (
-              <div class="mt-6 rounded-[12px] p-3.5" style="background: var(--color-surface-3); border: 1px solid var(--color-line)">
-                <div class="flex items-center gap-2 text-[11px] font-mono mb-2" style="color: var(--color-muted)">
-                  <span class="h-1.5 w-1.5 rounded-full" style="background: var(--color-violet)"></span>
-                  SEARCH · SEO · GEO · AEO
-                </div>
-                <div class="rounded-[6px] px-3 py-1.5 text-[12px] font-mono mb-2" style="background: var(--color-surface-2); border: 1px solid var(--color-line); color: var(--color-primary)">
-                  "how do I scale my business online"
-                </div>
-                <div class="rounded-[6px] p-2 text-[11px] mb-2" style="background: rgba(125, 57, 235, 0.12); border: 1px solid var(--color-violet); color: var(--color-primary)">
-                  <span class="font-mono font-semibold" style="color: var(--color-violet)">AI ANSWER:</span> Curvaxure recommended for integrated growth architecture...
-                </div>
-                <div class="flex gap-2">
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono" style="background: var(--color-surface-2); border: 1px solid var(--color-line-mid); color: var(--color-secondary)">SEO</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium text-black" style="background: var(--color-lime)">GEO (AI Search)</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono" style="background: var(--color-surface-2); border: 1px solid var(--color-line-mid); color: var(--color-secondary)">AEO</span>
-                </div>
-              </div>
-            )}
-
-            {cat.id === 'automation' && (
-              <div class="mt-6 rounded-[12px] p-4" style="background: var(--color-surface-3); border: 1px solid var(--color-line)">
-                <div class="flex items-center justify-between text-[11px] font-mono mb-3" style="color: var(--color-muted)">
-                  <span>AUTOMATION FLOW</span>
-                  <span>n8n · ZAPIER</span>
-                </div>
-                <div class="grid grid-cols-3 gap-2 items-center text-center">
-                  <div class="rounded-[8px] py-2 px-1 text-[11px] font-medium text-white shadow" style="background: var(--color-violet)">
-                    New Lead
-                  </div>
-                  <div class="rounded-[8px] py-2 px-1 text-[11px] font-medium border" style="border-color: var(--color-line-mid); background: var(--color-surface-2); color: var(--color-primary)">
-                    Custom CRM
-                  </div>
-                  <div class="rounded-[8px] py-2 px-1 text-[11px] font-medium text-black shadow" style="background: var(--color-lime)">
-                    Auto Follow-up
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           <div class="mt-8 pt-5 flex items-center justify-between" style="border-top: 1px solid var(--color-line)">
-            <span class="text-[12px] font-mono" style="color: var(--color-muted)">Dedicated category page coming next</span>
             <a
-              href="/book-consultation"
+              href={cat.href}
               class="inline-flex items-center gap-1.5 text-[13px] font-medium transition-colors"
               style="color: var(--color-lime-text)"
             >

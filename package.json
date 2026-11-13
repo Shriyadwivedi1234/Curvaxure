@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/vercel": "^11.0.16",
+    "@astrojs/vercel": "^11.0.21",
     "@fontsource-variable/bricolage-grotesque": "^5.1.0",
     "@fontsource-variable/inter": "^5.1.0",
     "@fontsource-variable/space-grotesk": "^5.1.0",
     "@supabase/supabase-js": "^2.45.0",
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^7.4.2",
-    "resend": "^4.0.0",
+    "resend": "^6.38.0",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
