@@ -1,5 +1,4 @@
 ---
-import DashboardPreview from '@/components/sections/DashboardPreview.astro';
 ---
 <section class="relative overflow-hidden pt-8 pb-20 md:pt-16 md:pb-28">
   <!-- Ambient violet glow centered at top -->
@@ -68,8 +67,9 @@ import DashboardPreview from '@/components/sections/DashboardPreview.astro';
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const rotator = document.getElementById("word-rotator");
-  if (!rotator) return;
+  const rotatorElement = document.getElementById("word-rotator");
+  if (!(rotatorElement instanceof HTMLElement)) return;
+  const rotator: HTMLElement = rotatorElement;
 
   // Parse the array of words from the data attribute
   const words = JSON.parse(rotator.getAttribute("data-words") || "[]");
