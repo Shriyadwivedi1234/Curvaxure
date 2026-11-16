@@ -45,22 +45,33 @@ const steps = [
       class="h-fit rounded-[20px] p-6 md:p-8"
       style="border: 1px solid var(--color-line); background: var(--color-surface-2)"
     >
+      <div class="mb-6">
+        <p class="text-[22px] font-medium text-[var(--color-primary)]">Tell us where to start</p>
+        <p class="mt-1 text-[13px] leading-[1.6]" style="color: var(--color-muted)">A few details help us make the first conversation useful.</p>
+      </div>
       <p id="form-error" role="alert" hidden class="mb-4 rounded-[8px] px-4 py-3 text-[13px]" style="background: rgba(229, 72, 77, 0.15); color: var(--color-negative)"></p>
 
       <div class="grid gap-4 sm:grid-cols-2">
         <div>
           <label class={label} for="name">Name</label>
-          <input class={field} id="name" name="name" required minlength="2" maxlength="120" autocomplete="name" />
-        </div>
-        <div>
-          <label class={label} for="email">Work email</label>
-          <input class={field} id="email" name="email" type="email" required maxlength="200" autocomplete="email" />
+          <input class={field} id="name" name="name" required minlength="2" maxlength="120" autocomplete="name" placeholder="Your name" pattern="[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ .'-]{1,119}" />
         </div>
         <div>
           <label class={label} for="company">Company</label>
-          <input class={field} id="company" name="company" required minlength="2" maxlength="160" autocomplete="organization" />
+          <input class={field} id="company" name="company" required minlength="2" maxlength="160" autocomplete="organization" placeholder="Your company name" pattern="[A-Za-z0-9][A-Za-z0-9 &.,'()/-]{1,159}" />
         </div>
         <div>
+          <label class={label} for="email">Work email</label>
+          <input class={field} id="email" name="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@company.com" pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}" />
+        </div>
+        <div>
+          <label class={label} for="phone">Phone number</label>
+          <div class="flex overflow-hidden rounded-[8px]" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+            <span class="flex items-center bg-slate-200 px-3 text-[15px] font-medium text-slate-900">+91</span>
+            <input class={`${field} rounded-none border-0`} id="phone" name="phone" type="tel" required maxlength="10" autocomplete="tel-national" inputmode="numeric" placeholder="9876543210" pattern="[6-9][0-9]{9}" />
+          </div>
+        </div>
+        <div class="sm:col-span-2">
           <label class={label} for="industry">Industry</label>
           <select class={field} id="industry" name="industry" required>
             <option value="" disabled selected>Select</option>
@@ -78,7 +89,7 @@ const steps = [
           <label class={label} for="message">
             Anything else we should know? <span class="font-normal" style="color: var(--color-muted)">(optional)</span>
           </label>
-          <textarea class={field} id="message" name="message" rows="3" maxlength="2000"></textarea>
+          <textarea class={field} id="message" name="message" rows="3" maxlength="2000" placeholder="Tell us what you want to improve."></textarea>
         </div>
       </div>
 
@@ -110,8 +121,9 @@ const steps = [
   set('industry', query.get('industry'));
 
   const messages: Record<string, string> = {
-    invalid: 'Please check the form. Name, work email, company, industry and focus are required.',
+    invalid: 'Please check the form. Name, work email, phone number, company, industry and focus are required.',
     spam: 'We could not verify the spam check. Please try again.',
+    rate: 'Too many submissions. Please try again in an hour.',
     server: 'Something went wrong on our side. Please try again in a moment.',
   };
   const error = query.get('error');

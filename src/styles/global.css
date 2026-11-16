@@ -3,50 +3,10 @@
 @import "@fontsource-variable/inter";
 
 :root {
-  /* Default: Dark mode */
-  --color-black: #000000;
-  --color-surface: #0a0a0a;      /* page background */
-  --color-surface-2: #111111;    /* card */
-  --color-surface-3: #1a1a1a;    /* raised / input */
-  --color-line: rgba(255, 255, 255, 0.08); /* hairline */
-  --color-line-mid: rgba(255, 255, 255, 0.12);
-
-  /* Text */
-  --color-primary: #f2f2f4;      /* primary text */
-  --color-secondary: #9ea3ae;    /* secondary text */
-  --color-muted: #656a76;        /* muted / meta */
-
-  /* Brand */
-  --color-violet: #7D39EB;       /* primary accent */
-  --color-violet-dark: #6628d4;  /* hover state */
-  --color-lime: #C6FF33;         /* signal / highlight */
-  --color-lime-dark: #aee020;    /* hover */
-  --color-lime-text: #C6FF33;    /* text highlight */
-
-  /* Semantic */
-  --color-positive: #4cc38a;
-  --color-negative: #e5484d;
-
-  /* Crisp dot grid tokens (tighter spacing) */
-  --dot-color: rgba(255, 255, 255, 0.18);
-  --dot-size: 18px;
-  --header-bg: rgba(15, 15, 17, 0.88);
-  --console-bg: rgba(17, 17, 19, 0.96);
-  --chart-bg: #0d0d0f;
-
-  /* Fonts */
-  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, monospace;
-}
-
-/* Light Mode Overrides */
-[data-theme="light"],
-html.light {
   --color-black: #ffffff;
-  --color-surface: #fafafc;      /* page background */
-  --color-surface-2: #ffffff;    /* card */
-  --color-surface-3: #f1f3f7;    /* raised / input */
+  --color-surface: #fafafc;
+  --color-surface-2: #ffffff;
+  --color-surface-3: #f1f3f7;
   --color-line: rgba(0, 0, 0, 0.08);
   --color-line-mid: rgba(0, 0, 0, 0.14);
 
@@ -58,17 +18,25 @@ html.light {
   --color-violet-dark: #6628d4;
   --color-lime: #C6FF33;
   --color-lime-dark: #b0e828;
-  --color-lime-text: #598c00;    /* High contrast (>=4.5:1) on white */
+  --color-lime-text: #598c00;
 
   --color-positive: #16a34a;
   --color-negative: #dc2626;
 
-  /* Crisp dot grid for light mode (tighter spacing matching screenshot) */
   --dot-color: rgba(0, 0, 0, 0.16);
   --dot-size: 18px;
   --header-bg: rgba(255, 255, 255, 0.92);
   --console-bg: rgba(255, 255, 255, 0.98);
   --chart-bg: #f8f9fc;
+
+  /* Fonts */
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+html {
+  color-scheme: light;
 }
 
 /* Constant-sized typing cursor styling */
