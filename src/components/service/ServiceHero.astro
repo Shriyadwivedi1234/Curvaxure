@@ -1,0 +1,49 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  highlight?: string;
+  description: string;
+  chips?: string[];
+  source: string;
+  workHref?: string;
+  secondaryLabel?: string;
+  primaryLabel?: string;
+}
+const { eyebrow, title, highlight, description, chips = [], source, workHref = '#work', secondaryLabel = 'See our work', primaryLabel = 'Book a growth call' } = Astro.props;
+---
+<section class="relative overflow-hidden pt-10 pb-16 md:pt-20 md:pb-24">
+  <div class="container-page relative z-10 flex flex-col items-center text-center">
+    <div
+      class="enter inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[12px] font-mono mb-6"
+      style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)"
+    >
+      <span class="h-2 w-2 rounded-full" style="background: var(--color-lime)"></span>
+      <span style="color: var(--color-secondary)">{eyebrow}</span>
+    </div>
+
+    <h1 class="enter max-w-[16em] text-[clamp(38px,5.2vw,64px)] font-extrabold leading-[1.05] tracking-[-0.035em]" style="color: var(--color-primary)">
+      {title}
+      {highlight && <span class="block" style="color: var(--color-violet)">{highlight}</span>}
+    </h1>
+
+    <p class="enter mt-6 max-w-[38em] text-[17px] leading-[1.65] md:text-[19px]" style="color: var(--color-secondary)">
+      {description}
+    </p>
+
+    <div class="enter mt-8 flex flex-wrap items-center justify-center gap-3.5">
+      <a href={`/book-consultation?source=${source}`} class="btn btn-lime h-12 px-6 text-[15px] shadow-xl shadow-lime/10">
+        <span>{primaryLabel}</span><span class="text-[14px]">→</span>
+      </a>
+      <a href={workHref} class="btn btn-secondary h-12 px-6 text-[15px]">{secondaryLabel}</a>
+    </div>
+
+    {chips.length > 0 && (
+      <ul class="enter mt-10 flex flex-wrap items-center justify-center gap-2">
+        {chips.map((c) => (
+          <li class="rounded-full px-3.5 py-1.5 text-[12.5px] font-medium" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2); color: var(--color-primary)">{c}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>

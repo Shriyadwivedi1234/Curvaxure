@@ -1,0 +1,311 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import Motion from '@/components/service/Motion.astro';
+import Icon from '@/components/service/Icon.astro';
+import Illustration from '@/components/service/Illustration.astro';
+import { industries } from '@/config/industries';
+
+const ill: Record<string, string> = {
+  construction: 'construction',
+  ecommerce: 'ecommerce',
+  'professional-services': 'services',
+  'small-brands': 'startup',
+};
+
+const picker = [
+  { n: 'Builder or contractor', s: 'construction' },
+  { n: 'Interior or renovation', s: 'construction' },
+  { n: 'Real estate developer', s: 'construction' },
+  { n: 'Online store', s: 'ecommerce' },
+  { n: 'D2C brand', s: 'ecommerce' },
+  { n: 'Marketplace seller', s: 'ecommerce' },
+  { n: 'Salon, spa or nail studio', s: 'professional-services' },
+  { n: 'Doctor or clinic', s: 'professional-services' },
+  { n: 'Bakery or food brand', s: 'professional-services' },
+  { n: 'Home business', s: 'small-brands' },
+  { n: 'New startup', s: 'small-brands' },
+  { n: 'Small brand stepping up', s: 'small-brands' },
+];
+const nameOf = (slug: string) => industries.find((i) => i.slug === slug)?.name ?? '';
+
+// Leak points on the funnel (viewBox 800 x 470)
+const leaks = [
+  { n: 'Slow replies', x: 162, y: 130, side: 'l' },
+  { n: 'No follow-up', x: 231, y: 230, side: 'l' },
+  { n: 'Unknown source', x: 618, y: 160, side: 'r' },
+  { n: 'Lost in chats', x: 556, y: 250, side: 'r' },
+];
+
+// Typical focus per industry: [Presence, Marketing, Data, Automation], 1-3
+const focus = [
+  { slug: 'construction', v: [3, 2, 3, 2] },
+  { slug: 'ecommerce', v: [2, 3, 3, 2] },
+  { slug: 'professional-services', v: [3, 2, 1, 3] },
+  { slug: 'small-brands', v: [3, 3, 1, 1] },
+];
+const cols = ['Presence', 'Marketing', 'Data', 'Automation'];
+---
+<BaseLayout
+  title="Industries"
+  description="Growth systems for construction, ecommerce, professional services such as salons and clinics, and startups and small brands."
+>
+  <Motion />
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden pt-10 pb-12 md:pt-20 md:pb-16">
+    <div class="container-page relative z-10 flex flex-col items-center text-center">
+      <div class="enter mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[12px] font-mono" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)">
+        <span class="relative flex h-2 w-2"><span class="cvx-ping absolute inline-flex h-full w-full rounded-full" style="background: var(--color-lime)"></span><span class="relative inline-flex h-2 w-2 rounded-full" style="background: var(--color-lime)"></span></span>
+        <span style="color: var(--color-secondary)">Industries</span>
+      </div>
+      <h1 class="enter max-w-[16em] text-[clamp(38px,5.2vw,64px)] font-extrabold leading-[1.05] tracking-[-0.035em]" style="color: var(--color-primary)">
+        Built around how your
+        <span class="block" style="color: var(--color-violet)">business really works.</span>
+      </h1>
+      <p class="enter mt-6 max-w-[28em] text-[17px] leading-[1.6] md:text-[19px]" style="color: var(--color-secondary)">
+        Different customers. Different leaks. One connected funnel.
+      </p>
+      <div class="enter mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <a href="#pick" class="btn btn-lime h-12 px-6 text-[15px] shadow-xl shadow-lime/10"><span>Find my industry</span><span class="text-[14px]">→</span></a>
+        <a href="/book-consultation?source=industries-page" class="btn btn-secondary h-12 px-6 text-[15px]">Book a growth call</a>
+      </div>
+
+      <!-- floating illustration strip -->
+      <div class="enter mt-14 grid w-full max-w-[980px] grid-cols-2 gap-3 md:grid-cols-4">
+        {industries.map((ind, i) => (
+          <a href={`/industries/${ind.slug}`} class="tile group rounded-[20px] p-3 text-center" style={`border: 1px solid var(--color-line); background: var(--color-surface-2); animation-delay:${i * -0.8}s`}>
+            <div class="h-[110px]"><Illustration name={ill[ind.slug] as any} /></div>
+            <p class="mt-1 text-[14px] font-medium" style="color: var(--color-primary)">{ind.name}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PICKER -->
+  <section id="pick" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">Start here</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">What do you do?</h2>
+        <p class="mt-3 text-[16px]" style="color: var(--color-secondary)">Tap yours. We will show you what matters in your business.</p>
+      </div>
+      <div class="mx-auto mt-10 flex max-w-[900px] flex-wrap justify-center gap-3" data-reveal>
+        {picker.map((p) => (
+          <a href={`/industries/${p.s}`} class="pick group inline-flex items-center gap-3 rounded-full px-5 py-3 text-[15px] font-medium" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2); color: var(--color-primary)">
+            {p.n}
+            <span class="pick-arrow flex h-6 w-6 items-center justify-center rounded-full" style="background: var(--color-lime); color: #000"><Icon name="arrow" class="h-3.5 w-3.5" /></span>
+          </a>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-[13px]" style="color: var(--color-muted)">Something else? <a href="/book-consultation?industry=other&source=industries-page" class="underline underline-offset-2" style="color: var(--color-lime-text)">Tell us about your business</a>.</p>
+    </div>
+  </section>
+
+  <!-- INDUSTRY CARDS -->
+  <section id="industries" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">Four worlds</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Pick a world. See your pain, your numbers, your plan.</h2>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {industries.map((ind, i) => (
+          <div data-reveal style={`--d:${(i % 2) * 100}ms`}>
+            <article class="service-card group relative flex h-full flex-col overflow-hidden rounded-[24px] transition-all duration-300 shadow-sm" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+              <div class="h-[190px] p-6" style="background: var(--color-surface); border-bottom: 1px solid var(--color-line)">
+                <Illustration name={ill[ind.slug] as any} />
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <p class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">{String(i + 1).padStart(2, '0')}</p>
+                <h3 class="mt-2 text-[28px] font-medium leading-[1.1]" style="color: var(--color-primary)">
+                  <a href={`/industries/${ind.slug}`} class="service-card-link after:absolute after:inset-0 after:content-['']">{ind.name}</a>
+                </h3>
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  {ind.audience.slice(0, 3).map((a) => (<span class="rounded-full px-2.5 py-1 text-[11.5px]" style="border: 1px solid var(--color-line); color: var(--color-secondary)">{a}</span>))}
+                </div>
+                <p class="mt-5 font-display text-[19px] leading-[1.25]" style="color: var(--color-violet)">{ind.question}</p>
+                <ul class="mt-5 space-y-2.5">
+                  {ind.pains.slice(0, 3).map((p) => (
+                    <li class="flex items-center gap-3 text-[14px]" style="color: var(--color-primary)">
+                      <span class="flex h-5 w-5 flex-none items-center justify-center rounded-full text-[11px] font-bold" style="background: color-mix(in srgb, var(--color-negative) 18%, transparent); color: var(--color-negative)">!</span>{p.t}
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-auto flex items-center justify-between pt-6">
+                  <span class="text-[14px] font-medium" style="color: var(--color-primary)">Explore <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></span>
+                  <a href={`/book-consultation?industry=${ind.slug}&source=industries-page`} class="relative z-10 text-[13px] font-medium" style="color: var(--color-lime-text)">Talk to us →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAKY FUNNEL -->
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">The common thread</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Every industry leaks enquiries.</h2>
+      </div>
+
+      <div class="leak mt-10" data-ba data-state="before" data-reveal>
+        <div class="mx-auto flex w-fit rounded-full p-1" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)">
+          <button type="button" data-set="before" aria-pressed="true" class="ba-btn rounded-full px-5 py-2 text-[13px] font-medium">Today</button>
+          <button type="button" data-set="after" aria-pressed="false" class="ba-btn rounded-full px-5 py-2 text-[13px] font-medium">With Curvaxure</button>
+        </div>
+
+        <div class="mx-auto mt-8 max-w-[820px] rounded-[26px] p-4 md:p-6" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+          <svg viewBox="-70 0 940 470" class="h-auto w-full" role="img" aria-label="A funnel losing enquiries through holes, then sealed so more customers come out the bottom">
+            <!-- incoming enquiries -->
+            <text x="400" y="24" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-secondary)">Enquiries</text>
+            {[250, 330, 400, 470, 550].map((x, i) => (
+              <circle class="cvx-fall" style={`animation-delay:${i * -0.45}s`} cx={x} cy="40" r="7" fill="var(--color-violet)" />
+            ))}
+            <!-- funnel -->
+            <polygon points="120,70 680,70 500,330 300,330" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" stroke-width="2" />
+            <rect x="360" y="322" width="80" height="50" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" stroke-width="2" />
+
+            <!-- leaks (today) -->
+            <g class="leak-open">
+              {leaks.map((l, i) => (
+                <g>
+                  <circle cx={l.x} cy={l.y} r="10" fill="var(--color-negative)" />
+                  <circle class="cvx-drip" style={`animation-delay:${i * -0.4}s`} cx={l.x + (l.side === 'l' ? -8 : 8)} cy={l.y + 12} r="5" fill="var(--color-negative)" />
+                  <circle class="cvx-drip" style={`animation-delay:${i * -0.4 - 0.85}s`} cx={l.x + (l.side === 'l' ? -8 : 8)} cy={l.y + 12} r="4" fill="var(--color-negative)" />
+                  <text x={l.side === 'l' ? l.x - 24 : l.x + 24} y={l.y - 6} text-anchor={l.side === 'l' ? 'end' : 'start'} font-size="21" font-weight="500" fill="var(--color-negative)">{l.n}</text>
+                </g>
+              ))}
+            </g>
+
+            <!-- sealed (with Curvaxure) -->
+            <g class="leak-sealed">
+              {leaks.map((l) => (
+                <g>
+                  <circle cx={l.x} cy={l.y} r="13" fill="var(--color-lime)" />
+                  <path d={`M${l.x - 6} ${l.y}l4.5 4.5 8-9`} stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  <text x={l.side === 'l' ? l.x - 26 : l.x + 26} y={l.y - 6} text-anchor={l.side === 'l' ? 'end' : 'start'} font-size="21" font-weight="500" fill="var(--color-lime-text)">{l.n.replace('Slow replies', 'Instant replies').replace('No follow-up', 'Auto follow-up').replace('Unknown source', 'Tracked source').replace('Lost in chats', 'One inbox')}</text>
+                </g>
+              ))}
+            </g>
+
+            <!-- outcome -->
+            <g class="leak-few">
+              <circle class="cvx-fall" cx="400" cy="384" r="8" fill="var(--color-lime)" style="animation-duration:3.2s" />
+              <text x="400" y="458" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-secondary)">Few customers</text>
+            </g>
+            <g class="leak-many">
+              {[380, 400, 420].map((x, i) => (
+                <circle class="cvx-fall" style={`animation-delay:${i * -0.5}s; animation-duration:1.5s`} cx={x} cy="384" r="8" fill="var(--color-lime)" />
+              ))}
+              <text x="400" y="458" text-anchor="middle" font-size="22" font-weight="700" fill="var(--color-lime-text)">More customers</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOCUS MATRIX -->
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">Where most start</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Same four services. Different priorities.</h2>
+      </div>
+      <div class="mt-10 overflow-x-auto" data-reveal>
+        <div class="mx-auto min-w-[560px] max-w-[900px]">
+          <div class="grid grid-cols-[minmax(150px,2fr)_repeat(4,minmax(0,1fr))] gap-2 px-2 pb-3 text-center font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">
+            <span></span>{cols.map((c) => (<span>{c}</span>))}
+          </div>
+          <div class="space-y-2">
+            {focus.map((f) => (
+              <a href={`/industries/${f.slug}`} class="pick group grid grid-cols-[minmax(150px,2fr)_repeat(4,minmax(0,1fr))] items-center gap-2 rounded-[16px] px-4 py-4" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+                <span class="text-[15px] font-medium" style="color: var(--color-primary)">{nameOf(f.slug)}</span>
+                {f.v.map((n) => (
+                  <span class="flex items-center justify-center gap-1.5" aria-label={`${n} of 3`}>
+                    {[1, 2, 3].map((d) => (
+                      <span class="h-2.5 w-2.5 rounded-full" style={`background: ${d <= n ? (n === 3 ? 'var(--color-lime)' : 'var(--color-violet)') : 'var(--color-line-mid)'}`}></span>
+                    ))}
+                  </span>
+                ))}
+              </a>
+            ))}
+          </div>
+          <p class="mt-4 text-center text-[12px]" style="color: var(--color-muted)">More dots = bigger early impact, based on what we usually see. Every business is different.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="See your industry through the right lens."
+    text="Book a free growth call and we will point out the levers that matter most in your market."
+    source="industries-page-cta"
+  />
+</BaseLayout>
+
+<style>
+  .tile { animation: tile-bob 5s ease-in-out infinite; transition: border-color 250ms ease; }
+  .tile:hover { border-color: color-mix(in srgb, var(--color-violet) 50%, transparent) !important; }
+  @keyframes tile-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+  .pick { transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease; }
+  .pick:hover { transform: translateY(-2px); border-color: var(--color-violet) !important; box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--color-violet) 60%, transparent); }
+  .pick-arrow { transition: transform 200ms ease; }
+  .pick:hover .pick-arrow { transform: translateX(3px); }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-violet) 45%, transparent) !important;
+    box-shadow: 0 16px 36px -16px color-mix(in srgb, var(--color-violet) 55%, transparent);
+  }
+  .service-card:hover h3 a,
+  .service-card:focus-within h3 a { color: var(--color-violet); }
+  .service-card-link { color: inherit; text-decoration: none; }
+
+  /* Today / With Curvaxure toggle */
+  .ba-btn { color: var(--color-secondary); transition: background-color 200ms ease, color 200ms ease; }
+  .ba-btn[aria-pressed='true'] { background: var(--color-violet); color: #fff; }
+  .leak-sealed, .leak-many { opacity: 0; transition: opacity 500ms ease; }
+  .leak-open, .leak-few { transition: opacity 500ms ease; }
+  .leak[data-state='after'] .leak-sealed, .leak[data-state='after'] .leak-many { opacity: 1; }
+  .leak[data-state='after'] .leak-open, .leak[data-state='after'] .leak-few { opacity: 0; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((root) => {
+    let touched = false;
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-set]');
+    const set = (state: string) => {
+      root.dataset.state = state;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.set === state)));
+    };
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        touched = true;
+        set(b.dataset.set || 'before');
+      })
+    );
+    set('before');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            setTimeout(() => { if (!touched) set('after'); }, 2200);
+            io.disconnect();
+          }
+        },
+        { threshold: 0.4 }
+      );
+      io.observe(root);
+    } else {
+      set('after');
+    }
+  });
+</script>

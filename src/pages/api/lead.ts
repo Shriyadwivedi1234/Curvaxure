@@ -54,15 +54,47 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
     }
   }
 
-  // Store the lead. Uses the service-role key, which stays on the server.
+
+  // Store the lead. Server-side only.
   try {
-    const db = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
-    const { error } = await db.from('leads').insert(lead);
-    if (error) throw error;
+    const supabaseUrl = env.SUPABASE_URL;
+    const supabaseKey = env.SUPABASE_SECRET_KEY;
+
+    if (
+      !supabaseUrl ||
+      !supabaseKey ||
+      !supabaseKey.startsWith('sb_secret_')
+    ) {
+      throw new Error('Missing or invalid Supabase secret configuration');
+    }
+
+    const db = createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
+
+    const { error } = await db
+      .from('leads')
+      .insert(lead);
+
+    if (error) {
+      console.error('Supabase insert error:', {
+        code: error.code,
+        message: error.message,
+        hint: error.hint,
+      });
+      throw error;
+    }
+
+    console.log('Curvaxure lead successfully saved');
+
   } catch (e) {
-    console.error('lead insert failed', e);
+    console.error('Lead storage failed:', e);
     return redirect('/book-consultation?error=server', 303);
   }
+
 
   // Notify you. Best effort: the lead is already saved if this fails.
   try {

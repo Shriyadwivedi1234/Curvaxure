@@ -1,0 +1,136 @@
+---
+// Small animated line-art scenes. Colors come from the site's CSS variables so they follow light/dark mode.
+interface Props { name: 'website' | 'marketing' | 'data' | 'automation' | 'construction' | 'ecommerce' | 'services' | 'startup'; class?: string; }
+const { name, class: cls = 'h-full w-full' } = Astro.props;
+---
+<svg viewBox="0 0 240 150" fill="none" class={cls} aria-hidden="true">
+  {name === 'website' && (
+    <g>
+      <rect x="22" y="18" width="196" height="116" rx="12" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <path d="M22 40h196" stroke="var(--color-line-mid)" />
+      <circle cx="36" cy="29" r="3" fill="var(--color-line-mid)" /><circle cx="47" cy="29" r="3" fill="var(--color-line-mid)" /><circle cx="58" cy="29" r="3" fill="var(--color-line-mid)" />
+      <rect x="38" y="54" width="92" height="12" rx="6" fill="var(--color-violet)" />
+      <rect x="38" y="74" width="70" height="6" rx="3" fill="var(--color-line-mid)" />
+      <rect x="38" y="86" width="56" height="6" rx="3" fill="var(--color-line-mid)" />
+      <rect x="38" y="104" width="54" height="18" rx="9" fill="var(--color-lime)" class="cvx-pulse" />
+      <rect x="142" y="54" width="62" height="68" rx="10" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" />
+      <rect x="152" y="64" width="42" height="26" rx="6" fill="var(--color-violet)" opacity="0.35" />
+      <rect x="152" y="98" width="30" height="5" rx="2.5" fill="var(--color-line-mid)" />
+      <g class="cvx-float">
+        <rect x="150" y="4" width="76" height="22" rx="11" fill="var(--color-lime)" />
+        <text x="188" y="19" text-anchor="middle" font-size="11" font-weight="700" fill="#000">#1 on Google</text>
+      </g>
+    </g>
+  )}
+  {name === 'marketing' && (
+    <g>
+      <rect x="84" y="8" width="72" height="134" rx="14" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <rect x="92" y="28" width="56" height="48" rx="6" fill="var(--color-violet)" />
+      <path d="M104 62l10-12 8 8 6-6 12 10z" fill="#fff" opacity="0.5" />
+      <text x="96" y="94" font-size="12" fill="var(--color-negative)">♥</text>
+      <rect x="92" y="102" width="50" height="5" rx="2.5" fill="var(--color-line-mid)" />
+      <rect x="92" y="112" width="36" height="5" rx="2.5" fill="var(--color-line-mid)" />
+      <g class="cvx-float">
+        <rect x="14" y="38" width="60" height="24" rx="12" fill="var(--color-lime)" />
+        <text x="44" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#000">+128 likes</text>
+      </g>
+      <g class="cvx-float" style="animation-delay:-2s">
+        <rect x="166" y="72" width="62" height="24" rx="12" fill="var(--color-violet)" />
+        <text x="197" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Ad clicks ↗</text>
+      </g>
+    </g>
+  )}
+  {name === 'data' && (
+    <g>
+      <rect x="20" y="14" width="200" height="122" rx="12" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <rect class="cvx-bar" x="38" y="86" width="14" height="32" rx="3" fill="var(--color-violet)" />
+      <rect class="cvx-bar" style="animation-delay:-0.5s" x="60" y="70" width="14" height="48" rx="3" fill="var(--color-violet)" />
+      <rect class="cvx-bar" style="animation-delay:-1s" x="82" y="78" width="14" height="40" rx="3" fill="var(--color-violet)" />
+      <rect class="cvx-bar" style="animation-delay:-1.5s" x="104" y="54" width="14" height="64" rx="3" fill="var(--color-violet)" />
+      <rect class="cvx-bar" style="animation-delay:-2s" x="126" y="40" width="14" height="78" rx="3" fill="var(--color-lime)" />
+      <path d="M42 72L64 58L86 64L108 42L130 30" stroke="var(--color-lime)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="cvx-draw" />
+      <circle cx="184" cy="56" r="20" stroke="var(--color-surface-3)" stroke-width="9" />
+      <circle cx="184" cy="56" r="20" stroke="var(--color-violet)" stroke-width="9" stroke-dasharray="78 48" transform="rotate(-90 184 56)" />
+      <rect x="160" y="92" width="48" height="6" rx="3" fill="var(--color-line-mid)" />
+      <rect x="160" y="104" width="34" height="6" rx="3" fill="var(--color-line-mid)" />
+    </g>
+  )}
+  {name === 'automation' && (
+    <g>
+      <rect x="20" y="22" width="110" height="32" rx="13" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" />
+      <rect x="32" y="34" width="70" height="5" rx="2.5" fill="var(--color-line-mid)" />
+      <rect x="32" y="43" width="46" height="5" rx="2.5" fill="var(--color-line-mid)" />
+      <rect x="104" y="64" width="116" height="32" rx="13" fill="var(--color-violet)" />
+      <rect x="116" y="76" width="76" height="5" rx="2.5" fill="#fff" opacity="0.8" />
+      <rect x="116" y="85" width="50" height="5" rx="2.5" fill="#fff" opacity="0.8" />
+      <rect x="20" y="108" width="64" height="28" rx="14" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" />
+      <circle cx="38" cy="122" r="3.5" fill="var(--color-muted)" class="cvx-blink" />
+      <circle cx="52" cy="122" r="3.5" fill="var(--color-muted)" class="cvx-blink" style="animation-delay:-0.4s" />
+      <circle cx="66" cy="122" r="3.5" fill="var(--color-muted)" class="cvx-blink" style="animation-delay:-0.8s" />
+      <circle cx="200" cy="30" r="17" fill="var(--color-lime)" class="cvx-pulse" />
+      <path d="M203 19l-11 14h8l-3 12 11-15h-8z" fill="#000" />
+    </g>
+  )}
+  {name === 'construction' && (
+    <g>
+      <path d="M10 128h220" stroke="var(--color-line-mid)" stroke-width="2" />
+      <rect x="22" y="72" width="40" height="56" rx="3" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <rect x="30" y="82" width="8" height="8" fill="var(--color-lime)" /><rect x="46" y="82" width="8" height="8" fill="var(--color-line-mid)" />
+      <rect x="30" y="98" width="8" height="8" fill="var(--color-line-mid)" /><rect x="46" y="98" width="8" height="8" fill="var(--color-lime)" />
+      <rect x="68" y="50" width="48" height="78" rx="3" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <rect x="76" y="60" width="8" height="8" fill="var(--color-line-mid)" /><rect x="98" y="60" width="8" height="8" fill="var(--color-lime)" />
+      <rect x="76" y="78" width="8" height="8" fill="var(--color-lime)" /><rect x="98" y="78" width="8" height="8" fill="var(--color-line-mid)" />
+      <rect x="76" y="96" width="8" height="8" fill="var(--color-line-mid)" /><rect x="98" y="96" width="8" height="8" fill="var(--color-line-mid)" />
+      <rect x="176" y="22" width="7" height="106" fill="var(--color-violet)" />
+      <rect x="120" y="22" width="108" height="6" rx="2" fill="var(--color-violet)" />
+      <rect x="196" y="12" width="26" height="10" rx="2" fill="var(--color-line-mid)" />
+      <g class="cvx-swing" style="transform-origin:138px 28px">
+        <path d="M138 28v38" stroke="var(--color-muted)" stroke-width="2" />
+        <rect x="128" y="66" width="20" height="14" rx="2" fill="var(--color-lime)" />
+      </g>
+    </g>
+  )}
+  {name === 'ecommerce' && (
+    <g>
+      <path d="M26 36h22l10 54h62l10-38H54" stroke="var(--color-violet)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="68" cy="108" r="7" fill="var(--color-violet)" /><circle cx="116" cy="108" r="7" fill="var(--color-violet)" />
+      <rect x="70" y="58" width="22" height="22" rx="3" fill="var(--color-lime)" class="cvx-pop" />
+      <rect x="98" y="66" width="18" height="14" rx="3" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" />
+      <g class="cvx-float">
+        <rect x="156" y="22" width="44" height="36" rx="6" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+        <path d="M156 36h44M178 22v14" stroke="var(--color-line-mid)" />
+      </g>
+      <path d="M150 128L168 108L184 114L214 78" stroke="var(--color-lime)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="cvx-draw" />
+      <circle cx="214" cy="78" r="5" fill="var(--color-lime)" class="cvx-pulse" />
+    </g>
+  )}
+  {name === 'services' && (
+    <g>
+      <rect x="22" y="20" width="124" height="112" rx="12" fill="var(--color-surface-2)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+      <path d="M22 44a12 12 0 0112-12h100a12 12 0 0112 12v4H22z" fill="var(--color-violet)" />
+      <circle cx="50" cy="68" r="4" fill="var(--color-line-mid)" /><circle cx="74" cy="68" r="4" fill="var(--color-lime)" class="cvx-pop" /><circle cx="98" cy="68" r="4" fill="var(--color-line-mid)" /><circle cx="122" cy="68" r="4" fill="var(--color-line-mid)" />
+      <circle cx="50" cy="90" r="4" fill="var(--color-line-mid)" /><circle cx="74" cy="90" r="4" fill="var(--color-line-mid)" /><circle cx="98" cy="90" r="4" fill="var(--color-lime)" class="cvx-pop" style="animation-delay:-1s" /><circle cx="122" cy="90" r="4" fill="var(--color-line-mid)" />
+      <circle cx="50" cy="112" r="4" fill="var(--color-line-mid)" /><circle cx="74" cy="112" r="4" fill="var(--color-line-mid)" /><circle cx="98" cy="112" r="4" fill="var(--color-line-mid)" /><circle cx="122" cy="112" r="4" fill="var(--color-lime)" class="cvx-pop" style="animation-delay:-1.8s" />
+      <g class="cvx-float">
+        <rect x="132" y="30" width="92" height="30" rx="13" fill="var(--color-lime)" />
+        <text x="178" y="49" text-anchor="middle" font-size="12" font-weight="700" fill="#000">Booked ✓</text>
+      </g>
+      <g class="cvx-float" style="animation-delay:-1.5s">
+        <text x="150" y="104" font-size="18" fill="var(--color-lime)" letter-spacing="2">★★★★★</text>
+      </g>
+    </g>
+  )}
+  {name === 'startup' && (
+    <g>
+      <path d="M16 134C70 134 92 104 122 82S190 36 226 22" stroke="var(--color-line-mid)" stroke-width="2.5" stroke-linecap="round" class="cvx-dash" />
+      <circle cx="40" cy="40" r="2" fill="var(--color-lime)" class="cvx-blink" /><circle cx="196" cy="108" r="2" fill="var(--color-lime)" class="cvx-blink" style="animation-delay:-0.6s" /><circle cx="60" cy="96" r="2" fill="var(--color-violet)" class="cvx-blink" style="animation-delay:-0.3s" />
+      <g class="cvx-float">
+        <path d="M120 22c14 10 18 32 13 54h-26c-5-22-1-44 13-54z" fill="var(--color-violet)" />
+        <circle cx="120" cy="50" r="7" fill="var(--color-lime)" />
+        <path d="M107 66l-14 18 15-3z" fill="var(--color-lime)" />
+        <path d="M133 66l14 18-15-3z" fill="var(--color-lime)" />
+        <path d="M113 78q7 26 14 0z" fill="var(--color-lime)" class="cvx-flicker" />
+      </g>
+    </g>
+  )}
+</svg>

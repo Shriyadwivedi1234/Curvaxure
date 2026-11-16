@@ -1,71 +1,146 @@
 ---
-import '@/styles/global.css';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import { site } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/service/ServiceHero.astro';
+import Offerings from '@/components/service/Offerings.astro';
+import Showcase from '@/components/service/Showcase.astro';
+import Process from '@/components/service/Process.astro';
+import Faq from '@/components/service/Faq.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import SectionHead from '@/components/service/SectionHead.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
-}
-const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const offerings = [
+  {
+    title: 'Websites',
+    desc: 'Fast, clear websites designed around what your visitors need to decide.',
+    points: ['Strategy-led structure, design and copy direction', 'Responsive build on a modern, fast stack', 'Lead forms, booking and analytics wired in', 'CRM and automation integrations when you need them'],
+  },
+  {
+    title: 'SEO',
+    desc: 'The foundation of being found on Google, built on fixes that compound.',
+    points: ['Technical audit and fixes', 'Keyword and content strategy', 'On-page and local SEO, including Google Business Profile', 'Monthly reporting you can actually read'],
+  },
+  {
+    title: 'GEO',
+    desc: 'Generative Engine Optimization: making your brand easy for AI tools to understand and cite.',
+    points: ['Clear brand and entity signals across your site', 'Structured data and citation-worthy content', 'Presence on sources AI tools tend to reference', 'Tracking how AI answers mention your business'],
+  },
+  {
+    title: 'AEO',
+    desc: 'Answer Engine Optimization: being the direct answer to the questions buyers ask.',
+    points: ['Question-led content and FAQ structure', 'Featured snippet and voice search formatting', 'Schema markup for answers and services', 'Ongoing refresh of pages that answer well'],
+  },
+];
 
-const orgSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  description: site.description,
-};
+const websites = [
+  { title: 'Website project 01', tag: 'Service business · Landing + inner pages', image: '/work/web-1.png' },
+  { title: 'Website project 02', tag: 'Professional services · Lead generation', image: '/work/web-2.png' },
+  { title: 'Website project 03', tag: 'E-commerce · Catalogue + checkout', image: '/work/web-3.png' },
+];
+
+const compare = [
+  { name: 'SEO', where: 'Google and Bing results, Maps', focus: 'Technical health, content, links and local signals', measure: 'Rankings, organic traffic, enquiries' },
+  { name: 'GEO', where: 'AI assistants such as ChatGPT, Gemini and Perplexity', focus: 'Clear entity signals, structured data, trusted citations', measure: 'Brand mentions and citations in AI answers' },
+  { name: 'AEO', where: 'Featured snippets, answer boxes, voice assistants', focus: 'Direct, well-structured answers to real questions', measure: 'Snippet wins and question-led traffic' },
+];
+
+const included = [
+  'Mobile-first, responsive design',
+  'Performance and Core Web Vitals focus',
+  'SEO-ready page structure and metadata',
+  'Schema markup (organization, service, FAQ)',
+  'Analytics and Search Console setup',
+  'Lead form and booking integration',
+  'Easy content editing handover',
+  'You own the site and the code',
+];
+
+const steps = [
+  { title: 'Audit', desc: 'We review your current site, search visibility and competitors to find the biggest gaps.' },
+  { title: 'Plan', desc: 'A clear sitemap, content plan and search strategy, agreed before any build starts.' },
+  { title: 'Build', desc: 'Design, development and on-page optimization, with reviews at each milestone.' },
+  { title: 'Optimize', desc: 'Launch, measure and keep improving rankings, AI visibility and conversion.' },
+];
+
+const faqs = [
+  { q: 'How long does a website take?', a: 'It depends on scope. A focused website with a handful of pages usually takes a few weeks, while larger sites with e-commerce or custom features take longer. We give you a timeline after the discovery call.' },
+  { q: 'What is the difference between SEO, GEO and AEO?', a: 'SEO helps you rank in traditional search results. GEO helps AI assistants understand and cite your brand. AEO structures your content so it can be used as a direct answer. They overlap, and we plan them together.' },
+  { q: 'Do you guarantee rankings?', a: 'No one can honestly guarantee rankings or AI citations. We commit to the work, clear reporting and steady improvement, and we show you what is moving and why.' },
+  { q: 'Can you improve my existing website instead of rebuilding it?', a: 'Yes. We start with an audit and recommend a rebuild only when fixing the current site would cost more than it returns.' },
+  { q: 'Will I own the website?', a: 'Yes. You own the site, the content and the code. We document everything so you are never locked in.' },
+];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<BaseLayout
+  title="Digital Presence: Websites, SEO, GEO and AEO"
+  description="Websites, SEO, GEO and AEO from Curvaxure. Get found on Google and in AI answers with a site built to convert."
+>
+  <ServiceHero
+    eyebrow="Digital Presence"
+    title="Be the business people find"
+    highlight="on Google and in AI answers."
+    description="Websites, SEO, GEO and AEO that work together, so the right customers find you, trust you and get in touch."
+    chips={['Websites', 'SEO', 'GEO', 'AEO']}
+    source="digital-presence"
+  />
 
-    <!-- Anti-flash theme initialization -->
-    <script is:inline>
-      (function () {
-        try {
-          const stored = localStorage.getItem('curvaxure-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.remove('light');
-          }
-        } catch (_) {}
-      })();
-    </script>
-  </head>
-  <body class="flex min-h-screen flex-col">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:px-4 focus:py-2"
-      style="background: var(--color-violet); color: #fff"
-    >
-      Skip to content
-    </a>
-    <Header />
-    <main id="main" class="flex-1"><slot /></main>
-    <Footer />
-  </body>
-</html>
+  <Offerings
+    id="what-we-do"
+    eyebrow="What we do"
+    title="Four pieces of one visibility engine."
+    intro="A good website is not enough if nobody finds it, and visibility is wasted if the site does not convert. We build both together."
+    items={offerings}
+  />
+
+  <Showcase
+    id="work"
+    alt
+    eyebrow="Websites we build"
+    title="Our website work."
+    intro="A selection of sites designed for clarity, speed and enquiries."
+    items={websites}
+    variant="browser"
+    note="Placeholder images. Replace the files in /public/work (web-1.png to web-3.png), or add an embed URL to show a live site."
+  />
+
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <SectionHead
+        eyebrow="Search, in three layers"
+        title="Where each one shows up."
+        intro="Buyers now search on Google, ask AI assistants and use voice. Each channel rewards slightly different work."
+      />
+      <div class="mt-12 grid gap-4 md:grid-cols-3">
+        {compare.map((c) => (
+          <article class="rounded-[20px] p-6 md:p-7" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+            <h3 class="text-[28px] font-medium" style="color: var(--color-violet)">{c.name}</h3>
+            <dl class="mt-5 space-y-4 text-[14px] leading-[1.55]">
+              <div><dt class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">Where it shows up</dt><dd class="mt-1" style="color: var(--color-primary)">{c.where}</dd></div>
+              <div><dt class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">What we work on</dt><dd class="mt-1" style="color: var(--color-primary)">{c.focus}</dd></div>
+              <div><dt class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">How we measure</dt><dd class="mt-1" style="color: var(--color-primary)">{c.measure}</dd></div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <SectionHead eyebrow="Included" title="Every website ships with the essentials." />
+      <ul class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {included.map((t) => (
+          <li class="flex items-start gap-3 rounded-[16px] p-4 text-[14px] leading-[1.5]" style="border: 1px solid var(--color-line); background: var(--color-surface-3); color: var(--color-primary)">
+            <span class="mt-[7px] h-1.5 w-1.5 flex-none rounded-full" style="background: var(--color-lime)"></span>{t}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Process steps={steps} alt={false} />
+  <Faq items={faqs} />
+  <CtaBand
+    title="Ready to be easier to find?"
+    text="Tell us about your business and we will map the quickest route to better visibility and more enquiries."
+    source="digital-presence-cta"
+  />
+</BaseLayout>

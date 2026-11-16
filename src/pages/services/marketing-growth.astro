@@ -1,71 +1,148 @@
 ---
-import '@/styles/global.css';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import { site } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/service/ServiceHero.astro';
+import Offerings from '@/components/service/Offerings.astro';
+import Showcase from '@/components/service/Showcase.astro';
+import Process from '@/components/service/Process.astro';
+import Faq from '@/components/service/Faq.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import SectionHead from '@/components/service/SectionHead.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
-}
-const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const offerings = [
+  {
+    title: 'Digital Marketing & Brand Positioning',
+    desc: 'A sharp position, then the campaigns that put it in front of the right buyers.',
+    points: ['Brand positioning, messaging and tone of voice', 'Paid campaigns on Google and Meta', 'Landing pages and funnels built to convert', 'Reporting tied to leads and sales, not vanity metrics'],
+  },
+  {
+    title: 'Social Media Handling',
+    desc: 'Consistent, on-brand social presence without you managing it every day.',
+    points: ['Content calendar and post design', 'Reels, carousels and short-form video direction', 'Community replies and posting schedule', 'Monthly performance review'],
+  },
+  {
+    title: 'GTM Strategies',
+    desc: 'A go-to-market plan for a new product, service or market, before money is spent.',
+    points: ['Ideal customer and market research', 'Offer, pricing and positioning options', 'Channel and launch plan', 'Test, measure and refine loops'],
+  },
+];
 
-const orgSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  description: site.description,
-};
+const posts = [
+  { title: 'Educational carousel', tag: 'Instagram · Carousel', image: '/work/social-1.png' },
+  { title: 'Quick tips post', tag: 'Instagram · Static', image: '/work/social-2.png' },
+  { title: 'Customer story', tag: 'LinkedIn · Static', image: '/work/social-3.png' },
+  { title: 'Behind the scenes', tag: 'Instagram · Reel cover', image: '/work/social-4.png' },
+  { title: 'Launch announcement', tag: 'Multi-platform', image: '/work/social-5.png' },
+  { title: 'Weekly update', tag: 'LinkedIn · Static', image: '/work/social-6.png' },
+];
+
+const week = [
+  { d: 'Mon', t: 'Educational post', c: 'var(--color-violet)' },
+  { d: 'Tue', t: 'Reel', c: 'var(--color-lime)' },
+  { d: 'Wed', t: 'Customer story', c: 'var(--color-violet)' },
+  { d: 'Thu', t: 'Carousel', c: 'var(--color-lime)' },
+  { d: 'Fri', t: 'Offer or CTA', c: 'var(--color-violet)' },
+  { d: 'Sat', t: 'Community', c: 'var(--color-line-mid)' },
+  { d: 'Sun', t: 'Plan next week', c: 'var(--color-line-mid)' },
+];
+
+const gtm = [
+  { t: 'Customer', d: 'Who exactly buys, and why now.' },
+  { t: 'Positioning', d: 'The one idea that sets you apart.' },
+  { t: 'Offer', d: 'What you sell, how it is packaged and priced.' },
+  { t: 'Channels', d: 'Where you will reach them first.' },
+  { t: 'Launch & learn', d: 'Ship, measure, then double down.' },
+];
+
+const steps = [
+  { title: 'Position', desc: 'We define who you serve, what makes you different and how to say it clearly.' },
+  { title: 'Plan', desc: 'Channels, content and budget mapped to your goals and your sales cycle.' },
+  { title: 'Launch', desc: 'Campaigns and content go live with tracking in place from day one.' },
+  { title: 'Optimize', desc: 'Weekly and monthly reviews to cut what is not working and scale what is.' },
+];
+
+const faqs = [
+  { q: 'Is ad spend included in your fee?', a: 'No. Ad budgets are paid directly to Google, Meta or other platforms from your own account. Our fee covers strategy, setup, creative direction, management and reporting.' },
+  { q: 'Which social platforms do you handle?', a: 'Most commonly Instagram, LinkedIn and Facebook, and we recommend the ones where your buyers actually spend time rather than posting everywhere.' },
+  { q: 'Do you create the content or do I?', a: 'We handle planning, copy and design. For photos, video and behind-the-scenes content, we guide you on what to capture and edit it into finished posts.' },
+  { q: 'How will I know it is working?', a: 'You get a clear monthly report tied to enquiries, leads and cost per lead. We agree on the numbers that matter before we start.' },
+  { q: 'Do you offer GTM strategy as a stand-alone project?', a: 'Yes. Many clients start with a GTM project to decide what to launch and where, then continue with execution.' },
+];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<BaseLayout
+  title="Marketing & Growth: Brand, Social Media and GTM"
+  description="Digital marketing, brand positioning, social media handling and GTM strategy from Curvaxure."
+>
+  <ServiceHero
+    eyebrow="Marketing & Growth"
+    title="Position your brand."
+    highlight="Win customers profitably."
+    description="Digital marketing, social media and go-to-market strategy that turn a clear position into steady enquiries."
+    chips={['Digital Marketing', 'Brand Positioning', 'Social Media', 'GTM Strategy']}
+    source="marketing-growth"
+  />
 
-    <!-- Anti-flash theme initialization -->
-    <script is:inline>
-      (function () {
-        try {
-          const stored = localStorage.getItem('curvaxure-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.remove('light');
-          }
-        } catch (_) {}
-      })();
-    </script>
-  </head>
-  <body class="flex min-h-screen flex-col">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:px-4 focus:py-2"
-      style="background: var(--color-violet); color: #fff"
-    >
-      Skip to content
-    </a>
-    <Header />
-    <main id="main" class="flex-1"><slot /></main>
-    <Footer />
-  </body>
-</html>
+  <Offerings
+    id="what-we-do"
+    eyebrow="What we do"
+    title="From positioning to pipeline."
+    intro="Marketing works when the message, the channel and the offer line up. We plan all three together."
+    items={offerings}
+  />
+
+  <Showcase
+    id="work"
+    alt
+    eyebrow="Social media work"
+    title="Posts, carousels and reels."
+    intro="A look at the content we design and publish for brands."
+    items={posts}
+    variant="post"
+    note="Placeholder images. Replace the files in /public/work (social-1.png to social-6.png) with your real posts. Use 4:5 images (1080 × 1350)."
+  />
+
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <SectionHead
+        eyebrow="Social media handling"
+        title="What a typical week looks like."
+        intro="An illustrative weekly rhythm. We tailor the mix to your brand, audience and capacity."
+      />
+      <div class="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+        {week.map((w) => (
+          <div class="rounded-[16px] p-4" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+            <p class="font-mono text-[12px]" style="color: var(--color-muted)">{w.d}</p>
+            <span class="mt-3 block h-1.5 w-8 rounded-full" style={`background: ${w.c}`}></span>
+            <p class="mt-3 text-[14px] font-medium leading-[1.3]" style="color: var(--color-primary)">{w.t}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <SectionHead
+        eyebrow="GTM strategy"
+        title="A go-to-market plan in five moves."
+        intro="Before spending on ads, we make sure you know who you are selling to and how to reach them."
+      />
+      <ol class="mt-12 grid gap-3 md:grid-cols-5">
+        {gtm.map((g, i) => (
+          <li class="relative rounded-[16px] p-5" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+            <span class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-3 text-[18px] font-medium" style="color: var(--color-primary)">{g.t}</h3>
+            <p class="mt-1.5 text-[13px] leading-[1.55]" style="color: var(--color-secondary)">{g.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Process steps={steps} alt={false} />
+  <Faq items={faqs} />
+  <CtaBand
+    title="Let's shape your growth curve."
+    text="Share where you are and where you want to go. We will suggest the marketing mix that fits."
+    source="marketing-growth-cta"
+  />
+</BaseLayout>

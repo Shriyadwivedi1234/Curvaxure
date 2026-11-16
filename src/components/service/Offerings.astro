@@ -1,0 +1,41 @@
+---
+import SectionHead from './SectionHead.astro';
+interface Item { title: string; desc: string; points: string[]; }
+interface Props { id?: string; eyebrow: string; title: string; intro?: string; items: Item[]; }
+const { id, eyebrow, title, intro, items } = Astro.props;
+const cols = items.length === 3 ? 'md:grid-cols-3' : items.length === 5 ? 'md:grid-cols-2 lg:grid-cols-6' : 'md:grid-cols-2';
+---
+<section id={id} class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+  <div class="container-page">
+    <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+    <div class:list={['mt-12 grid gap-4', cols]}>
+      {items.map((item, i) => (
+        <article
+          class:list={['offer-card flex flex-col rounded-[20px] p-6 md:p-7', items.length === 5 && (i < 3 ? 'lg:col-span-2' : 'lg:col-span-3')]}
+          style="border: 1px solid var(--color-line); background: var(--color-surface-2)"
+        >
+          <p class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="mt-4 text-[24px] font-medium leading-[1.15]" style="color: var(--color-primary)">{item.title}</h3>
+          <p class="mt-2 text-[14px] leading-[1.65]" style="color: var(--color-secondary)">{item.desc}</p>
+          <ul class="mt-5 space-y-2.5 pt-5" style="border-top: 1px solid var(--color-line)">
+            {item.points.map((p) => (
+              <li class="flex items-start gap-3 text-[13.5px] leading-[1.5]" style="color: var(--color-primary)">
+                <span class="mt-[7px] h-1.5 w-1.5 flex-none rounded-full" style="background: var(--color-lime)"></span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .offer-card { transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease; }
+  .offer-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-violet) 40%, transparent) !important;
+    box-shadow: 0 14px 32px -18px color-mix(in srgb, var(--color-violet) 55%, transparent);
+  }
+</style>

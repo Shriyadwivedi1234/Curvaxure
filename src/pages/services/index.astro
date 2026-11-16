@@ -1,0 +1,498 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import Motion from '@/components/service/Motion.astro';
+import Icon from '@/components/service/Icon.astro';
+import Illustration from '@/components/service/Illustration.astro';
+import { serviceMenu } from '@/config/site';
+
+// ---- Hero flow ----
+const stages = [
+  { t: 'Attract', d: 'Found on Google, ads and social', icon: 'search', tag: 'Presence + Marketing', tone: 'violet' },
+  { t: 'Convert', d: 'A website that turns visits into enquiries', icon: 'browser', tag: 'Digital Presence', tone: 'violet' },
+  { t: 'Capture', d: 'Forms, WhatsApp and calls land in one place', icon: 'inbox', tag: 'Data', tone: 'lime' },
+  { t: 'Organise', d: 'Every lead cleaned, in one CRM', icon: 'database', tag: 'Data', tone: 'lime' },
+  { t: 'Understand', d: 'See what works in plain dashboards', icon: 'chart', tag: 'Data', tone: 'lime' },
+  { t: 'Nurture', d: 'Auto replies, follow-ups, AI agents', icon: 'bolt', tag: 'Automation', tone: 'violet' },
+];
+
+// ---- Scattered -> connected diagram ----
+const sources = [
+  { n: 'Website', o: [20, 20], s: [30, 40] },
+  { n: 'Google Ads', o: [20, 75], s: [330, 30] },
+  { n: 'Meta Ads', o: [20, 130], s: [620, 60] },
+  { n: 'Instagram DMs', o: [20, 185], s: [150, 130] },
+  { n: 'WhatsApp chats', o: [20, 240], s: [460, 150] },
+  { n: 'Phone calls', o: [20, 295], s: [700, 190] },
+  { n: 'Email', o: [20, 350], s: [40, 250] },
+  { n: 'LinkedIn', o: [20, 405], s: [330, 300] },
+];
+const outputs = [
+  { n: 'Dashboards', y: 70 },
+  { n: 'Your CRM', y: 190 },
+  { n: 'Automation', y: 310 },
+];
+
+// ---- Four pieces ----
+const meta = [
+  { id: 'digital-presence', ill: 'website', tagline: 'Get found.', needs: 'Start here' },
+  { id: 'marketing-growth', ill: 'marketing', tagline: 'Bring people in.', needs: 'Needs a website to land on' },
+  { id: 'data-intelligence', ill: 'data', tagline: 'Organise and see clearly.', needs: 'Needs leads coming in' },
+  { id: 'automation', ill: 'automation', tagline: 'Reply and follow up instantly.', needs: 'Needs clean data' },
+];
+const cards = serviceMenu.map((m, i) => ({ ...m, ...meta[i], num: String(i + 1).padStart(2, '0') }));
+
+// ---- Add-on orbit ----
+const orbit = ['WhatsApp', 'Email', 'LinkedIn', 'AI SDR', 'AI Calling'];
+
+// ---- Gap finder ----
+const finder = [
+  { t: 'I have no website, or mine brings no enquiries', m: 'presence' },
+  { t: 'I post and run ads but cannot tell what works', m: 'marketing,data' },
+  { t: 'Leads are scattered in chats, calls and sheets', m: 'data' },
+  { t: 'I reply late and miss follow-ups', m: 'automation' },
+  { t: 'I repeat the same tasks all day', m: 'automation' },
+  { t: 'I am just starting and unsure what to do first', m: 'presence,marketing' },
+];
+const finderSvc = [
+  { k: 'presence', n: 'Digital Presence', href: '/services/digital-presence' },
+  { k: 'marketing', n: 'Marketing & Growth', href: '/services/marketing-growth' },
+  { k: 'data', n: 'Data & Intelligence', href: '/services/data-intelligence' },
+  { k: 'automation', n: 'Automation', href: '/services/automation' },
+];
+
+// ---- Way of working ----
+const way = [
+  { t: 'Assess', d: 'A free call to find your leaks.', icon: 'target' },
+  { t: 'Blueprint', d: 'A clear plan, in the right order.', icon: 'blueprint' },
+  { t: 'Build', d: 'Launched in stages, value early.', icon: 'build' },
+  { t: 'Improve', d: 'We watch the numbers and refine.', icon: 'loop' },
+];
+
+const tools = ['Power BI', 'Metabase', 'n8n', 'Zapier', 'WhatsApp Business API', 'Google Ads', 'Meta Ads', 'Google Search Console', 'AI agents', 'Email platforms', 'CRM integrations', 'GEO & AEO ready'];
+---
+<BaseLayout
+  title="Services"
+  description="Websites, marketing, data and AI automation, connected as one funnel. See how Curvaxure's services work together to capture, organise and grow your customers."
+>
+  <Motion />
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden pt-10 pb-10 md:pt-20 md:pb-14">
+    <div class="container-page relative z-10 flex flex-col items-center text-center">
+      <div class="enter mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[12px] font-mono" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)">
+        <span class="relative flex h-2 w-2"><span class="cvx-ping absolute inline-flex h-full w-full rounded-full" style="background: var(--color-lime)"></span><span class="relative inline-flex h-2 w-2 rounded-full" style="background: var(--color-lime)"></span></span>
+        <span style="color: var(--color-secondary)">Our services</span>
+      </div>
+      <h1 class="enter max-w-[16em] text-[clamp(38px,5.2vw,64px)] font-extrabold leading-[1.05] tracking-[-0.035em]" style="color: var(--color-primary)">
+        Your growth, as one
+        <span class="block" style="color: var(--color-violet)">connected flow.</span>
+      </h1>
+      <p class="enter mt-6 max-w-[30em] text-[17px] leading-[1.6] md:text-[19px]" style="color: var(--color-secondary)">
+        Website, marketing, data and automation. Built to work together.
+      </p>
+      <div class="enter mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <a href="/book-consultation?source=services-page" class="btn btn-lime h-12 px-6 text-[15px] shadow-xl shadow-lime/10"><span>Book a growth call</span><span class="text-[14px]">→</span></a>
+        <a href="#find-yours" class="btn btn-secondary h-12 px-6 text-[15px]">Find what you need</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE FLOW -->
+  <section class="pb-20 md:pb-28">
+    <div class="container-page" data-reveal>
+      <div class="rounded-[28px] p-5 md:p-8" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)">
+        <div class="mb-6 flex items-center justify-between gap-4">
+          <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">How a customer moves through your business</p>
+          <span class="hidden items-center gap-2 text-[11px] font-mono sm:flex" style="color: var(--color-lime-text)"><span class="h-1.5 w-1.5 rounded-full" style="background: var(--color-lime)"></span>Live flow</span>
+        </div>
+        <ol class="flex flex-col lg:flex-row lg:items-stretch">
+          {stages.map((s, i) => (
+            <Fragment>
+              <li class="flex-1">
+                <div class="stage-card flex h-full flex-col rounded-[18px] p-4" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+                  <div class="flex items-center justify-between">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-[12px]" style={`background: ${s.tone === 'lime' ? 'var(--color-lime)' : 'var(--color-violet)'}; color: ${s.tone === 'lime' ? '#000' : '#fff'}`}>
+                      <Icon name={s.icon} class="h-5 w-5" />
+                    </span>
+                    <span class="font-mono text-[11px] tabular-nums" style="color: var(--color-muted)">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                  <h3 class="mt-4 text-[18px] font-medium" style="color: var(--color-primary)">{s.t}</h3>
+                  <p class="mt-1 flex-1 text-[12.5px] leading-[1.5]" style="color: var(--color-secondary)">{s.d}</p>
+                  <p class="mt-3 text-[11px] font-medium" style="color: var(--color-lime-text)">{s.tag}</p>
+                </div>
+              </li>
+              {i < stages.length - 1 && (
+                <li aria-hidden="true" class="flex items-center justify-center py-1.5 lg:px-1.5 lg:py-0">
+                  <span class="cvx-line-y block h-6 lg:hidden"></span>
+                  <span class="cvx-line-x hidden w-5 lg:block"></span>
+                </li>
+              )}
+            </Fragment>
+          ))}
+        </ol>
+        <div class="mt-5 flex items-center justify-center gap-3 rounded-[14px] px-4 py-3 text-center text-[12.5px]" style="border: 1px dashed var(--color-line-mid); color: var(--color-secondary)">
+          <Icon name="loop" class="h-4 w-4 flex-none" /> What the dashboards show feeds back into marketing and automation.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCATTERED -> CONNECTED -->
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">The problem we fix</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">From scattered to connected.</h2>
+      </div>
+
+      <div class="ba mt-10" data-ba data-state="before" data-reveal>
+        <div class="mx-auto flex w-fit rounded-full p-1" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-2)">
+          <button type="button" data-set="before" aria-pressed="true" class="ba-btn rounded-full px-5 py-2 text-[13px] font-medium">Scattered</button>
+          <button type="button" data-set="after" aria-pressed="false" class="ba-btn rounded-full px-5 py-2 text-[13px] font-medium">Connected</button>
+        </div>
+
+        <!-- Desktop diagram -->
+        <div class="mt-8 hidden overflow-hidden rounded-[24px] p-4 md:block" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+          <svg viewBox="0 0 960 460" class="h-auto w-full" role="img" aria-label="Customer data scattered across many tools, then connected into one hub feeding dashboards, CRM and automation">
+            <!-- messy lines -->
+            <g class="ba-before-lines" stroke="var(--color-negative)" stroke-width="1.6" fill="none" stroke-linecap="round">
+              <path class="cvx-dash" d="M115 58L415 48L235 148L545 168L705 78" />
+              <path class="cvx-dash" d="M545 168L785 208M235 148L125 268L415 318L545 168" />
+              <path class="cvx-dash" d="M115 58L235 148M415 48L545 168M125 268L235 148" />
+              <text x="320" y="110" font-size="26" fill="var(--color-negative)" stroke="none">?</text>
+              <text x="560" y="250" font-size="26" fill="var(--color-negative)" stroke="none">?</text>
+              <text x="170" y="210" font-size="26" fill="var(--color-negative)" stroke="none">?</text>
+            </g>
+            <!-- clean lines -->
+            <g class="ba-after-lines" fill="none" stroke-linecap="round" stroke-width="2.2">
+              {sources.map((s) => (
+                <path class="cvx-dash" stroke="var(--color-violet)" d={`M${s.o[0] + 170} ${s.o[1] + 18} C 290 ${s.o[1] + 18}, 290 230, 390 230`} />
+              ))}
+              {outputs.map((o) => (
+                <path class="cvx-dash" stroke="var(--color-lime)" d={`M550 230 C 645 230, 645 ${o.y + 35}, 740 ${o.y + 35}`} />
+              ))}
+            </g>
+            <!-- hub -->
+            <g class="ba-hub">
+              <circle cx="470" cy="230" r="78" fill="var(--color-violet)" opacity="0.18" class="cvx-pulse" />
+              <rect x="390" y="165" width="160" height="130" rx="26" fill="var(--color-violet)" />
+              <text x="470" y="222" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">One data hub</text>
+              <text x="470" y="248" text-anchor="middle" font-size="13" fill="#fff" opacity="0.8">Pipelines + CRM</text>
+            </g>
+            <!-- outputs -->
+            <g class="ba-out">
+              {outputs.map((o, i) => (
+                <g>
+                  <rect x="740" y={o.y} width="200" height="70" rx="16" fill="var(--color-surface-3)" stroke="var(--color-lime)" stroke-width="1.5" />
+                  <text x="765" y={o.y + 42} font-size="17" font-weight="600" fill="var(--color-primary)">{o.n}</text>
+                  {i === 0 && (<g><rect class="cvx-bar" x="890" y={o.y + 36} width="7" height="16" rx="2" fill="var(--color-lime)" /><rect class="cvx-bar" style="animation-delay:-0.6s" x="902" y={o.y + 26} width="7" height="26" rx="2" fill="var(--color-lime)" /><rect class="cvx-bar" style="animation-delay:-1.2s" x="914" y={o.y + 18} width="7" height="34" rx="2" fill="var(--color-lime)" /></g>)}
+                  {i === 1 && (<g><circle cx="905" cy={o.y + 28} r="5" fill="var(--color-lime)" /><circle cx="921" cy={o.y + 28} r="5" fill="var(--color-line-mid)" /><circle cx="905" cy={o.y + 46} r="5" fill="var(--color-line-mid)" /><circle cx="921" cy={o.y + 46} r="5" fill="var(--color-lime)" class="cvx-pulse" /></g>)}
+                  {i === 2 && (<path class="cvx-pulse" d={`M912 ${o.y + 16}l-12 20h9l-3 16 14-22h-9z`} fill="var(--color-lime)" />)}
+                </g>
+              ))}
+            </g>
+            <!-- sources -->
+            {sources.map((s) => (
+              <g class="ba-pill" style={`--ox:${s.o[0]}px; --oy:${s.o[1]}px; --sx:${s.s[0]}px; --sy:${s.s[1]}px`}>
+                <rect width="170" height="36" rx="18" fill="var(--color-surface-3)" stroke="var(--color-line-mid)" stroke-width="1.5" />
+                <text x="85" y="23" text-anchor="middle" font-size="14.5" font-weight="500" fill="var(--color-primary)">{s.n}</text>
+              </g>
+            ))}
+          </svg>
+        </div>
+
+        <!-- Mobile diagram -->
+        <div class="mt-8 md:hidden">
+          <div class="rounded-[20px] p-4" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+            <div class="ba-m-before">
+              <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-negative)">Data everywhere</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {sources.map((s, i) => (
+                  <span class="rounded-full px-3 py-1.5 text-[12.5px]" style={`border: 1px dashed var(--color-line-mid); color: var(--color-secondary); transform: rotate(${[-2, 1.5, -1, 2, -1.5, 1, -2, 1][i]}deg)`}>{s.n}</span>
+                ))}
+              </div>
+            </div>
+            <div class="ba-m-after">
+              <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">One flow</p>
+              <div class="mt-3 flex flex-wrap justify-center gap-1.5">
+                {sources.slice(0, 4).map((s) => (<span class="rounded-full px-2.5 py-1 text-[11.5px]" style="border: 1px solid var(--color-line-mid); color: var(--color-secondary)">{s.n}</span>))}
+                <span class="rounded-full px-2.5 py-1 text-[11.5px]" style="border: 1px solid var(--color-line-mid); color: var(--color-muted)">+4 more</span>
+              </div>
+              <div class="my-2 flex justify-center"><span class="cvx-line-y block h-6"></span></div>
+              <div class="rounded-[16px] px-4 py-3 text-center text-[15px] font-semibold text-white" style="background: var(--color-violet)">One data hub</div>
+              <div class="my-2 flex justify-center"><span class="cvx-line-y block h-6"></span></div>
+              <div class="grid grid-cols-3 gap-2 text-center text-[12.5px] font-medium" style="color: var(--color-primary)">
+                {outputs.map((o) => (<span class="rounded-[12px] px-2 py-2.5" style="border: 1px solid var(--color-lime); background: var(--color-surface-3)">{o.n}</span>))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-5 text-center text-[15px] font-medium" style="color: var(--color-primary)">
+          <span class="ba-cap-before" style="color: var(--color-negative)">Who replied? Which ad worked? Nobody knows.</span>
+          <span class="ba-cap-after" style="color: var(--color-lime-text)">Every lead, one place. Every result, one view.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR PIECES -->
+  <section id="pieces" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">The four pieces</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Each one makes the next one work.</h2>
+      </div>
+      <div class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {cards.map((c, i) => (
+          <div data-reveal style={`--d:${i * 90}ms`}>
+            <article class="service-card group relative flex h-full flex-col overflow-hidden rounded-[22px] transition-all duration-300 shadow-sm" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+              <div class="h-[170px] p-5" style="background: var(--color-surface); border-bottom: 1px solid var(--color-line)">
+                <Illustration name={c.ill as any} />
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <p class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">{c.num}</p>
+                <h3 class="mt-2 text-[22px] font-medium leading-[1.15]" style="color: var(--color-primary)">
+                  <a href={c.href} class="service-card-link after:absolute after:inset-0 after:content-['']">{c.label}</a>
+                </h3>
+                <p class="mt-1 text-[14px] font-medium" style="color: var(--color-violet)">{c.tagline}</p>
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  {c.items.slice(0, 4).map((t) => (<span class="rounded-full px-2.5 py-1 text-[11.5px]" style="border: 1px solid var(--color-line); color: var(--color-secondary)">{t}</span>))}
+                </div>
+                <p class="mt-auto flex items-center gap-2 pt-5 text-[12px]" style="color: var(--color-muted)">
+                  <Icon name="arrow" class="h-3.5 w-3.5" /> {c.needs}
+                </p>
+                <div class="mt-4 flex items-center justify-between pt-4" style="border-top: 1px solid var(--color-line)">
+                  <span class="text-[13px] font-medium" style="color: var(--color-primary)">See details <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></span>
+                  <a href={`/book-consultation?source=services-${c.id}`} class="relative z-10 text-[13px] font-medium" style="color: var(--color-lime-text)">Consult →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD-ONS ORBIT -->
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">Add-ons</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium leading-[1.08] tracking-[-0.03em]" style="color: var(--color-primary)">More channels. Still one organised system.</h2>
+        <ul class="mt-8 space-y-4">
+          {['Every message and call is logged in your CRM.', 'Your team sees the full conversation in one place.', 'Dashboards stay accurate as you add channels.'].map((t) => (
+            <li class="flex items-start gap-3 text-[16px]" style="color: var(--color-primary)">
+              <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full" style="background: var(--color-lime); color: #000"><Icon name="check" class="h-3.5 w-3.5" /></span>{t}
+            </li>
+          ))}
+        </ul>
+        <a href="/services/automation" class="btn btn-secondary mt-8 h-11 px-5 text-[14px]">See automation <span>→</span></a>
+      </div>
+
+      <div class="cvx-orbit relative mx-auto aspect-square w-full max-w-[440px]" data-reveal>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full" style="width: calc(var(--r) * 2); height: calc(var(--r) * 2); border: 1.5px dashed var(--color-line-mid)"></div>
+        <div class="absolute left-1/2 top-1/2 flex h-[118px] w-[118px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full text-center sm:h-[132px] sm:w-[132px]" style="background: var(--color-violet); box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-violet) 18%, transparent)">
+          <Icon name="database" class="h-6 w-6 text-white" />
+          <span class="mt-1 text-[14px] font-semibold text-white">Your CRM</span>
+        </div>
+        <div class="cvx-spin absolute inset-0">
+          {orbit.map((o, i) => (
+            <div class="absolute left-1/2 top-1/2" style={`transform: rotate(${i * 72}deg) translateY(calc(var(--r) * -1)) rotate(${-i * 72}deg)`}>
+              <div class="cvx-spin-rev -translate-x-1/2 -translate-y-1/2">
+                <span class="block whitespace-nowrap rounded-full px-4 py-2.5 text-[13px] font-medium shadow-lg" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3); color: var(--color-primary)">{o}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAP FINDER -->
+  <section id="find-yours" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page" data-finder>
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">Find your starting point</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Tap what sounds like you.</h2>
+      </div>
+      <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]" data-reveal>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {finder.map((f) => (
+            <button type="button" data-map={f.m} aria-pressed="false" class="finder-btn rounded-[16px] p-4 text-left text-[14px] leading-[1.45] transition-all duration-200">
+              <span class="finder-tick mb-3 flex h-6 w-6 items-center justify-center rounded-full"><Icon name="check" class="h-3.5 w-3.5" /></span>
+              {f.t}
+            </button>
+          ))}
+        </div>
+        <div class="rounded-[22px] p-5 md:p-6" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3)">
+          <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">We would start with</p>
+          <p class="mt-2 min-h-[2.6em] text-[15px] leading-[1.5]" style="color: var(--color-primary)" data-finder-msg>Pick one or more on the left.</p>
+          <div class="mt-4 grid gap-2">
+            {finderSvc.map((s) => (
+              <a href={s.href} data-svc={s.k} data-on="false" class="svc-chip flex items-center justify-between rounded-[14px] px-4 py-3 text-[14px] font-medium">
+                <span>{s.n}</span><Icon name="arrow" class="h-4 w-4" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAY OF WORKING -->
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface)">
+    <div class="container-page">
+      <div class="mx-auto max-w-[36em] text-center" data-reveal>
+        <p class="font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-lime-text)">How we work with you</p>
+        <h2 class="mt-3 text-[clamp(30px,4vw,48px)] font-medium tracking-[-0.03em]" style="color: var(--color-primary)">Simple. In stages. No surprises.</h2>
+      </div>
+      <ol class="mt-12 flex flex-col lg:flex-row lg:items-stretch" data-reveal>
+        {way.map((w, i) => (
+          <Fragment>
+            <li class="flex-1">
+              <div class="stage-card h-full rounded-[20px] p-5" style="border: 1px solid var(--color-line); background: var(--color-surface-2)">
+                <span class="flex h-11 w-11 items-center justify-center rounded-[14px]" style="background: var(--color-violet); color: #fff"><Icon name={w.icon} class="h-5 w-5" /></span>
+                <p class="mt-4 font-mono text-[11px] tabular-nums" style="color: var(--color-lime-text)">Step {String(i + 1).padStart(2, '0')}</p>
+                <h3 class="mt-1 text-[21px] font-medium" style="color: var(--color-primary)">{w.t}</h3>
+                <p class="mt-1.5 text-[14px] leading-[1.5]" style="color: var(--color-secondary)">{w.d}</p>
+              </div>
+            </li>
+            {i < way.length - 1 && (
+              <li aria-hidden="true" class="flex items-center justify-center py-1.5 lg:px-2 lg:py-0">
+                <span class="cvx-line-y block h-6 lg:hidden"></span>
+                <span class="cvx-line-x hidden w-8 lg:block"></span>
+              </li>
+            )}
+          </Fragment>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- TECH MARQUEE -->
+  <section class="overflow-hidden py-14" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <p class="mb-6 text-center font-mono text-[11px] uppercase tracking-wider" style="color: var(--color-muted)">Built with tools that are current today</p>
+    <div class="marquee-mask">
+      <div class="cvx-marquee flex w-max gap-3 pr-3">
+        {[...tools, ...tools].map((t) => (
+          <span class="whitespace-nowrap rounded-full px-5 py-2.5 text-[14px] font-medium" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3); color: var(--color-primary)">{t}</span>
+        ))}
+      </div>
+    </div>
+    <p class="mt-6 text-center text-[13px]" style="color: var(--color-muted)">You own your website, accounts and data.</p>
+  </section>
+
+  <CtaBand
+    title="Not sure where your funnel leaks?"
+    text="Book a free growth call. We will map how customers reach you today and show the first connection worth building."
+    source="services-page-cta"
+  />
+</BaseLayout>
+
+<style>
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-violet) 45%, transparent) !important;
+    box-shadow: 0 16px 36px -16px color-mix(in srgb, var(--color-violet) 55%, transparent);
+  }
+  .service-card:hover h3 a,
+  .service-card:focus-within h3 a { color: var(--color-violet); }
+  .service-card-link { color: inherit; text-decoration: none; }
+
+  .stage-card { transition: transform 250ms ease, border-color 250ms ease; }
+  .stage-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--color-violet) 45%, transparent) !important; }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  /* Scattered / connected toggle */
+  .ba-btn { color: var(--color-secondary); transition: background-color 200ms ease, color 200ms ease; }
+  .ba-btn[aria-pressed='true'] { background: var(--color-violet); color: #fff; }
+
+  .ba-pill { transition: transform 1000ms cubic-bezier(0.22, 1, 0.36, 1); transform: translate(var(--sx), var(--sy)); }
+  .ba[data-state='after'] .ba-pill { transform: translate(var(--ox), var(--oy)); }
+
+  .ba-before-lines, .ba-after-lines, .ba-hub, .ba-out { transition: opacity 600ms ease; }
+  .ba-after-lines { opacity: 0; }
+  .ba-hub, .ba-out { opacity: 0.18; }
+  .ba[data-state='after'] .ba-before-lines { opacity: 0; }
+  .ba[data-state='after'] .ba-after-lines { opacity: 1; }
+  .ba[data-state='after'] .ba-hub, .ba[data-state='after'] .ba-out { opacity: 1; }
+
+  .ba-cap-after, .ba-m-after { display: none; }
+  .ba[data-state='after'] .ba-cap-after, .ba[data-state='after'] .ba-m-after { display: inline; }
+  .ba[data-state='after'] .ba-m-after { display: block; }
+  .ba[data-state='after'] .ba-cap-before, .ba[data-state='after'] .ba-m-before { display: none; }
+
+  /* Finder */
+  .finder-btn { border: 1px solid var(--color-line); background: var(--color-surface-3); color: var(--color-primary); }
+  .finder-btn:hover { border-color: color-mix(in srgb, var(--color-violet) 50%, transparent); transform: translateY(-2px); }
+  .finder-tick { border: 1.5px solid var(--color-line-mid); color: transparent; transition: all 200ms ease; }
+  .finder-btn[aria-pressed='true'] { border-color: var(--color-violet); background: color-mix(in srgb, var(--color-violet) 12%, var(--color-surface-3)); }
+  .finder-btn[aria-pressed='true'] .finder-tick { background: var(--color-lime); border-color: var(--color-lime); color: #000; }
+  .svc-chip { border: 1px solid var(--color-line); color: var(--color-muted); opacity: 0.55; transition: all 250ms ease; }
+  .svc-chip[data-on='true'] { opacity: 1; color: #fff; background: var(--color-violet); border-color: var(--color-violet); transform: translateX(4px); }
+</style>
+
+<script>
+  // Scattered <-> connected diagram
+  document.querySelectorAll<HTMLElement>('[data-ba]').forEach((root) => {
+    let touched = false;
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-set]');
+    const set = (state: string) => {
+      root.dataset.state = state;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.set === state)));
+    };
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        touched = true;
+        set(b.dataset.set || 'before');
+      })
+    );
+    set('before');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            setTimeout(() => { if (!touched) set('after'); }, 1500);
+            io.disconnect();
+          }
+        },
+        { threshold: 0.4 }
+      );
+      io.observe(root);
+    } else {
+      set('after');
+    }
+  });
+
+  // "Tap what sounds like you" finder
+  const finder = document.querySelector<HTMLElement>('[data-finder]');
+  if (finder) {
+    const names: Record<string, string> = { presence: 'Digital Presence', marketing: 'Marketing & Growth', data: 'Data & Intelligence', automation: 'Automation' };
+    const msg = finder.querySelector<HTMLElement>('[data-finder-msg]');
+    const btns = finder.querySelectorAll<HTMLButtonElement>('[data-map]');
+    const chips = finder.querySelectorAll<HTMLElement>('[data-svc]');
+    const update = () => {
+      const on = new Set<string>();
+      btns.forEach((b) => {
+        if (b.getAttribute('aria-pressed') === 'true') (b.dataset.map || '').split(',').forEach((k) => on.add(k));
+      });
+      chips.forEach((c) => c.setAttribute('data-on', String(on.has(c.dataset.svc || ''))));
+      if (msg) {
+        msg.textContent = on.size ? 'Start with ' + [...on].map((k) => names[k]).join(' + ') + '. We connect the rest around it.' : 'Pick one or more on the left.';
+      }
+    };
+    btns.forEach((b) =>
+      b.addEventListener('click', () => {
+        b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+        update();
+      })
+    );
+  }
+</script>

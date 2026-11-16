@@ -1,0 +1,16 @@
+---
+interface Props { title: string; text: string; source: string; }
+const { title, text, source } = Astro.props;
+---
+<section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+  <div class="container-page">
+    <div class="rounded-[28px] px-6 py-14 text-center md:px-14 md:py-20" style="background: var(--color-violet)">
+      <h2 class="mx-auto max-w-[16em] text-[clamp(30px,4.2vw,52px)] font-medium tracking-[-0.03em]" style="color: #fff">{title}</h2>
+      <p class="mx-auto mt-4 max-w-[34em] text-[16px] leading-[1.7]" style="color: rgba(255,255,255,0.78)">{text}</p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href={`/book-consultation?source=${source}`} class="btn btn-lime h-12 px-6 text-[15px]">Book a growth call <span>→</span></a>
+        <a href="/services" class="btn h-12 px-6 text-[15px]" style="border: 1px solid rgba(255,255,255,0.35); color: #fff">All services</a>
+      </div>
+    </div>
+  </div>
+</section>

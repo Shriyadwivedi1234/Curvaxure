@@ -1,71 +1,150 @@
 ---
-import '@/styles/global.css';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import { site } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/service/ServiceHero.astro';
+import Offerings from '@/components/service/Offerings.astro';
+import Showcase from '@/components/service/Showcase.astro';
+import Process from '@/components/service/Process.astro';
+import Faq from '@/components/service/Faq.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import SectionHead from '@/components/service/SectionHead.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
-}
-const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const offerings = [
+  {
+    title: 'WhatsApp Automation',
+    desc: 'Reply, qualify and follow up with customers on the channel they already use.',
+    points: ['Instant replies and FAQ handling', 'Lead capture and qualification flows', 'Booking, reminders and order updates', 'Human handoff when needed'],
+  },
+  {
+    title: 'Email Automation',
+    desc: 'Timely, relevant emails sent automatically at the right moment.',
+    points: ['Welcome and nurture sequences', 'Follow-ups triggered by behaviour', 'Newsletter and campaign setup', 'Connected to your CRM and forms'],
+  },
+  {
+    title: 'LinkedIn Automation',
+    desc: 'Consistent, respectful outreach that supports your B2B pipeline.',
+    points: ['Target audience and message planning', 'Connection and follow-up workflows', 'Lead tracking into your CRM', 'Set up within platform limits and rules'],
+  },
+  {
+    title: 'AI SDR',
+    desc: 'An AI sales development rep that researches, reaches out and books meetings.',
+    points: ['Lead research and enrichment', 'Personalized first-touch messaging', 'Reply handling and follow-ups', 'Meeting booking and handover to your team'],
+  },
+  {
+    title: 'AI Calling Agent',
+    desc: 'Voice agents that answer, qualify and schedule calls around the clock.',
+    points: ['Inbound call answering and routing', 'Outbound qualification and reminders', 'Appointment booking', 'Call summaries sent to your CRM'],
+  },
+];
 
-const orgSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  description: site.description,
-};
+const flows = [
+  { title: 'Lead qualification workflow', tag: 'n8n · Enrich, score and route', image: '/work/flow-1.png' },
+  { title: 'Follow-up and CRM sync', tag: 'n8n · Messages and deal creation', image: '/work/flow-2.png' },
+];
+
+const useCases = [
+  { t: 'Lead follow-up', d: 'Every enquiry gets a reply in minutes, with no one on your team chasing.' },
+  { t: 'Appointment booking', d: 'Customers choose a slot, get reminders and reschedule themselves.' },
+  { t: 'Customer onboarding', d: 'New clients receive the right messages and documents automatically.' },
+  { t: 'Outbound outreach', d: 'Targeted, personalized sequences instead of manual copy and paste.' },
+  { t: 'After-hours coverage', d: 'Calls and chats are answered at night and on weekends.' },
+  { t: 'Internal admin', d: 'Data moves between your tools without re-typing.' },
+];
+
+const steps = [
+  { title: 'Map', desc: 'We find the repetitive tasks and handoffs that cost you the most time.' },
+  { title: 'Design', desc: 'We design the workflow, the messages and the points where a human steps in.' },
+  { title: 'Build', desc: 'We build and connect your tools, then test with real scenarios.' },
+  { title: 'Improve', desc: 'We monitor results and tune the automation as your business changes.' },
+];
+
+const faqs = [
+  { q: 'Which tools do you use?', a: 'Mainly n8n and Zapier for workflows, the WhatsApp Business API, your CRM and email platform, and AI models for conversations and calling. We choose what fits your setup and budget.' },
+  { q: 'Will it feel robotic to my customers?', a: 'We write and test conversations carefully, keep messages short and natural, and always provide a clear path to a human. Automation should make service feel faster, not colder.' },
+  { q: 'Is this compliant with platform and telecom rules?', a: 'We build with consent and platform rules in mind: opt-in for WhatsApp and email, LinkedIn usage limits, and calling consent and do-not-disturb requirements. You stay in control of who gets contacted.' },
+  { q: 'Can a human take over a conversation?', a: 'Yes. Every flow includes handoff rules, so complex or sensitive conversations go to your team with full context.' },
+  { q: 'What do I need to get started?', a: 'A short call about your process and the tools you already use. We then propose a small first automation so you can see results before expanding.' },
+];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<BaseLayout
+  title="Automation: WhatsApp, Email, LinkedIn, AI SDR and AI Calling"
+  description="WhatsApp, email and LinkedIn automation, AI SDR and AI calling agents from Curvaxure. Remove manual work and respond faster."
+>
+  <ServiceHero
+    eyebrow="AI Automations"
+    title="Remove manual work."
+    highlight="Respond to every lead, instantly."
+    description="WhatsApp, email and LinkedIn automation, plus AI sales reps and calling agents, connected to the tools you already use."
+    chips={['WhatsApp', 'Email', 'LinkedIn', 'AI SDR', 'AI Calling Agent']}
+    source="automation"
+  />
 
-    <!-- Anti-flash theme initialization -->
-    <script is:inline>
-      (function () {
-        try {
-          const stored = localStorage.getItem('curvaxure-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.remove('light');
-          }
-        } catch (_) {}
-      })();
-    </script>
-  </head>
-  <body class="flex min-h-screen flex-col">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:px-4 focus:py-2"
-      style="background: var(--color-violet); color: #fff"
-    >
-      Skip to content
-    </a>
-    <Header />
-    <main id="main" class="flex-1"><slot /></main>
-    <Footer />
-  </body>
-</html>
+  <Offerings
+    id="what-we-do"
+    eyebrow="What we do"
+    title="Five ways to put busywork on autopilot."
+    intro="Start with the channel where most of your customers already are, then connect the rest."
+    items={offerings}
+  />
+
+  <section id="demo" class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <SectionHead eyebrow="See it in action" title="A conversation that books itself." intro="An illustrative WhatsApp flow. Swap this for a real demo video or screen recording." />
+      <div class="mt-12 grid items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+        <div class="mx-auto w-full max-w-[380px] rounded-[32px] p-3" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3)">
+          <div class="rounded-[24px] p-4" style="background: var(--color-surface)">
+            <div class="flex items-center gap-3 pb-3" style="border-bottom: 1px solid var(--color-line)">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-semibold" style="background: var(--color-violet); color: #fff">C</span>
+              <div>
+                <p class="text-[14px] font-medium" style="color: var(--color-primary)">Your business</p>
+                <p class="text-[11px]" style="color: var(--color-lime-text)">online</p>
+              </div>
+            </div>
+            <div class="mt-4 space-y-2.5 text-[13px] leading-[1.45]">
+              <p class="max-w-[85%] rounded-[14px] rounded-tl-[4px] px-3.5 py-2.5" style="background: var(--color-surface-3); color: var(--color-primary)">Hi! Do you have a slot this week?</p>
+              <p class="ml-auto max-w-[85%] rounded-[14px] rounded-tr-[4px] px-3.5 py-2.5" style="background: var(--color-violet); color: #fff">Hello! Yes. Which day works best for you?</p>
+              <p class="max-w-[85%] rounded-[14px] rounded-tl-[4px] px-3.5 py-2.5" style="background: var(--color-surface-3); color: var(--color-primary)">Thursday afternoon</p>
+              <p class="ml-auto max-w-[85%] rounded-[14px] rounded-tr-[4px] px-3.5 py-2.5" style="background: var(--color-violet); color: #fff">Booked for Thursday, 3:00 PM. You will get a reminder the day before.</p>
+              <p class="ml-auto max-w-[85%] rounded-[14px] px-3.5 py-2 text-[11.5px]" style="border: 1px solid var(--color-line-mid); color: var(--color-muted)">Lead added to CRM · Team notified</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {useCases.map((u) => (
+            <article class="offer-card rounded-[18px] p-5" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+              <h3 class="text-[17px] font-medium" style="color: var(--color-primary)">{u.t}</h3>
+              <p class="mt-1.5 text-[13.5px] leading-[1.6]" style="color: var(--color-secondary)">{u.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Showcase
+    id="work"
+    eyebrow="Workflows we build"
+    title="Our automation workflows."
+    intro="Real workflows behind the scenes, from first message to CRM record."
+    items={flows}
+    variant="dashboard"
+    note="Placeholder images. Replace /public/work/flow-1.png and flow-2.png with screenshots of your workflows, or add an embed URL for a demo video (Loom, YouTube) of an AI calling agent."
+  />
+
+  <Process steps={steps} />
+  <Faq items={faqs} />
+  <CtaBand
+    title="Ready to give your team their time back?"
+    text="Tell us which tasks eat your week. We will suggest a small first automation you can see working quickly."
+    source="automation-cta"
+  />
+</BaseLayout>
+
+<style>
+  .offer-card { transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease; }
+  .offer-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-violet) 40%, transparent) !important;
+    box-shadow: 0 14px 32px -18px color-mix(in srgb, var(--color-violet) 55%, transparent);
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+/**
+ * Portfolio / work showcase.
+ * - image: path in /public (swap the dummy PNG by overwriting the file or changing the path)
+ * - embed: optional iframe URL (Power BI "Publish to web", Loom, live site, Figma embed...). Overrides the image.
+ * - href: optional "open full project" link
+ * variant: 'browser' (websites), 'dashboard' (BI / CRM / analytics), 'post' (social 4:5 posts)
+ */
+import SectionHead from './SectionHead.astro';
+interface Item { title: string; tag: string; image: string; embed?: string; href?: string; }
+interface Props {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  items: Item[];
+  variant?: 'browser' | 'dashboard' | 'post';
+  alt?: boolean;
+  note?: string;
+}
+const { id, eyebrow, title, intro, items, variant = 'browser', alt = false, note } = Astro.props;
+const grid = variant === 'post'
+  ? 'grid-cols-2 md:grid-cols-3'
+  : items.length === 1 ? 'grid-cols-1' : items.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
+---
+<section id={id} class="py-20 md:py-28" style={`border-top: 1px solid var(--color-line); background: ${alt ? 'var(--color-surface-2)' : 'var(--color-surface)'}`}>
+  <div class="container-page">
+    <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+    <div class:list={['mt-12 grid gap-5', grid]}>
+      {items.map((item) => (
+        <figure class="work-card group flex flex-col">
+          <div class="work-frame overflow-hidden rounded-[18px]" style="border: 1px solid var(--color-line-mid); background: var(--color-surface-3)">
+            {variant !== 'post' && (
+              <div class="flex items-center gap-2 px-4 py-2.5" style="border-bottom: 1px solid var(--color-line); background: var(--color-surface-2)">
+                <span class="flex gap-1.5">
+                  <span class="h-2.5 w-2.5 rounded-full" style="background: var(--color-line-mid)"></span>
+                  <span class="h-2.5 w-2.5 rounded-full" style="background: var(--color-line-mid)"></span>
+                  <span class="h-2.5 w-2.5 rounded-full" style="background: var(--color-line-mid)"></span>
+                </span>
+                <span class="ml-2 flex-1 truncate rounded-full px-3 py-0.5 text-[11px] font-mono" style="background: var(--color-surface-3); color: var(--color-muted)">
+                  {item.href ? item.href.replace(/^https?:\/\//, '') : (variant === 'dashboard' ? 'dashboard.yourclient.com' : 'yourclient.com')}
+                </span>
+              </div>
+            )}
+            <div class:list={['relative w-full overflow-hidden', variant === 'post' ? 'aspect-[4/5]' : 'aspect-[16/10]']}>
+              {item.embed ? (
+                <iframe src={item.embed} title={item.title} loading="lazy" class="absolute inset-0 h-full w-full border-0" allowfullscreen></iframe>
+              ) : (
+                <img src={item.image} alt={item.title} loading="lazy" class="work-img h-full w-full object-cover" />
+              )}
+            </div>
+          </div>
+          <figcaption class="mt-3.5 flex items-start justify-between gap-3">
+            <div>
+              <p class="text-[15px] font-medium" style="color: var(--color-primary)">{item.title}</p>
+              <p class="mt-0.5 text-[12px] font-mono" style="color: var(--color-muted)">{item.tag}</p>
+            </div>
+            {item.href && (
+              <a href={item.href} target="_blank" rel="noopener noreferrer" class="flex-none text-[13px] font-medium" style="color: var(--color-lime-text)">View →</a>
+            )}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    {note && <p class="mt-8 text-[12.5px] leading-[1.6]" style="color: var(--color-muted)">{note}</p>}
+  </div>
+</section>
+
+<style>
+  .work-frame { transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease; }
+  .work-card:hover .work-frame {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-violet) 45%, transparent);
+    box-shadow: 0 18px 40px -20px color-mix(in srgb, var(--color-violet) 60%, transparent);
+  }
+  .work-img { transition: transform 500ms ease; }
+  .work-card:hover .work-img { transform: scale(1.03); }
+</style>

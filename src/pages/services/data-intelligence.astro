@@ -1,71 +1,143 @@
 ---
-import '@/styles/global.css';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import { site } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceHero from '@/components/service/ServiceHero.astro';
+import Offerings from '@/components/service/Offerings.astro';
+import Showcase from '@/components/service/Showcase.astro';
+import Process from '@/components/service/Process.astro';
+import Faq from '@/components/service/Faq.astro';
+import CtaBand from '@/components/service/CtaBand.astro';
+import SectionHead from '@/components/service/SectionHead.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
-}
-const { title, description = site.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const offerings = [
+  {
+    title: 'Data Engineered Pipelines',
+    desc: 'Reliable plumbing that brings scattered data into one clean, trusted place.',
+    points: ['Connect sheets, ERPs, ads, forms and databases', 'Automated cleaning and transformation', 'Central warehouse or database setup', 'Scheduled refresh and basic monitoring'],
+  },
+  {
+    title: 'Customized CRM',
+    desc: 'A CRM shaped around how you sell, not the other way round.',
+    points: ['Custom pipeline stages, fields and views', 'Lead capture from website, WhatsApp and email', 'Tasks, reminders and team dashboards', 'Or integrate a CRM you already use'],
+  },
+  {
+    title: 'Data Analytics',
+    desc: 'Dashboards and reports that answer the questions your team actually asks.',
+    points: ['Power BI, Metabase and similar dashboards', 'KPI design tied to business decisions', 'Sales, marketing and operations reporting', 'Walkthroughs so your team can use them'],
+  },
+];
 
-const orgSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: site.name,
-  url: site.url,
-  description: site.description,
-};
+const dashboards = [
+  { title: 'Sales performance dashboard', tag: 'Power BI · Sample data', image: '/work/dash-1.png' },
+  { title: 'Operations tracker', tag: 'Power BI · Sample data', image: '/work/dash-2.png' },
+  { title: 'Marketing performance', tag: 'Metabase · Sample data', image: '/work/dash-3.png' },
+];
+
+const crms = [
+  { title: 'Sales pipeline CRM', tag: 'Custom CRM · Kanban view', image: '/work/crm-1.png' },
+  { title: 'Client management CRM', tag: 'Custom CRM · Contacts and tasks', image: '/work/crm-2.png' },
+];
+
+const analytics = [
+  { title: 'Monthly business report', tag: 'Analytics · Sample data', image: '/work/analytics-1.png' },
+  { title: 'Channel and campaign analysis', tag: 'Analytics · Sample data', image: '/work/analytics-2.png' },
+];
+
+const pipeline = [
+  { t: 'Sources', d: 'Sheets, ERP, ads, forms, apps' },
+  { t: 'Ingest', d: 'Automated connections' },
+  { t: 'Clean & model', d: 'One consistent structure' },
+  { t: 'Store', d: 'Warehouse or database' },
+  { t: 'Use', d: 'Dashboards, CRM, reports' },
+];
+
+const steps = [
+  { title: 'Discover', desc: 'We learn the decisions you need to make and which data supports them.' },
+  { title: 'Connect', desc: 'We link your sources and clean the data so the numbers can be trusted.' },
+  { title: 'Visualize', desc: 'Dashboards and CRM views designed for the people who will use them daily.' },
+  { title: 'Decide', desc: 'We train your team and refine until the reports drive real decisions.' },
+];
+
+const faqs = [
+  { q: 'Which tools do you work with?', a: 'We commonly use Power BI and Metabase for dashboards, and build custom CRMs or integrate tools you already use. We recommend the stack after understanding your data and budget.' },
+  { q: 'Can you work with my Excel or Google Sheets data?', a: 'Yes. Many projects start from spreadsheets. We clean them up, automate the refresh and move to a more reliable setup when it makes sense.' },
+  { q: 'Is my data safe?', a: 'We only access what is needed for the project, use your own accounts where possible and agree on handling in writing. Public demos on our site use sample data only.' },
+  { q: 'Do I need a custom CRM or can I use an existing one?', a: 'If an existing CRM fits how you sell, we integrate and configure it. A custom CRM makes sense when your process is specific and off-the-shelf tools get in the way.' },
+  { q: 'Will my team be able to use the dashboards?', a: 'That is the goal. We design around your team, run a walkthrough and document how to read and maintain everything.' },
+];
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+<BaseLayout
+  title="Data & Intelligence: Pipelines, CRM and Analytics"
+  description="Data engineered pipelines, customized CRM and analytics dashboards from Curvaxure. Turn scattered data into decisions."
+>
+  <ServiceHero
+    eyebrow="Data & Intelligence"
+    title="Turn scattered data"
+    highlight="into clear decisions."
+    description="Pipelines, custom CRMs and dashboards that put the numbers you need in front of the people who decide."
+    chips={['Data Pipelines', 'Custom CRM', 'Dashboards', 'Analytics']}
+    source="data-intelligence"
+  />
 
-    <!-- Anti-flash theme initialization -->
-    <script is:inline>
-      (function () {
-        try {
-          const stored = localStorage.getItem('curvaxure-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.remove('light');
-          }
-        } catch (_) {}
-      })();
-    </script>
-  </head>
-  <body class="flex min-h-screen flex-col">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-[6px] focus:px-4 focus:py-2"
-      style="background: var(--color-violet); color: #fff"
-    >
-      Skip to content
-    </a>
-    <Header />
-    <main id="main" class="flex-1"><slot /></main>
-    <Footer />
-  </body>
-</html>
+  <Offerings
+    id="what-we-do"
+    eyebrow="What we do"
+    title="From raw data to confident decisions."
+    intro="Good dashboards depend on good data, and good data depends on good plumbing. We handle the whole chain."
+    items={offerings}
+  />
+
+  <section class="py-20 md:py-28" style="border-top: 1px solid var(--color-line); background: var(--color-surface-2)">
+    <div class="container-page">
+      <SectionHead eyebrow="How data flows" title="One connected path, end to end." intro="An illustrative view of what we set up behind every dashboard and CRM." />
+      <ol class="mt-12 grid gap-3 md:grid-cols-5">
+        {pipeline.map((p, i) => (
+          <li class="relative rounded-[16px] p-5" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+            <span class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-3 text-[18px] font-medium" style="color: var(--color-primary)">{p.t}</h3>
+            <p class="mt-1.5 text-[13px] leading-[1.55]" style="color: var(--color-secondary)">{p.d}</p>
+            {i < pipeline.length - 1 && <span aria-hidden="true" class="absolute -right-[14px] top-1/2 z-10 hidden -translate-y-1/2 text-[16px] md:block" style="color: var(--color-violet)">→</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Showcase
+    id="work"
+    eyebrow="Dashboards"
+    title="Our dashboards."
+    intro="Interactive views built for sales, operations and marketing teams."
+    items={dashboards}
+    variant="dashboard"
+    note="Placeholder images. Replace /public/work/dash-1.png to dash-3.png, or add an embed URL (for example a Power BI Publish to web link) to show a live dashboard. Only embed dashboards that use non-confidential or sample data."
+  />
+
+  <Showcase
+    id="crms"
+    alt
+    eyebrow="CRMs"
+    title="Our CRM builds."
+    intro="Custom CRMs shaped around how each team sells and follows up."
+    items={crms}
+    variant="dashboard"
+    note="Placeholder images. Replace /public/work/crm-1.png and crm-2.png."
+  />
+
+  <Showcase
+    id="analytics"
+    eyebrow="Analytics"
+    title="Reports and analysis."
+    intro="Regular reporting that explains what changed and what to do next."
+    items={analytics}
+    variant="dashboard"
+    note="Placeholder images. Replace /public/work/analytics-1.png and analytics-2.png."
+  />
+
+  <Process steps={steps} />
+  <Faq items={faqs} />
+  <CtaBand
+    title="Ready to see your business clearly?"
+    text="Book a free data assessment call. We will look at your current data and show where better visibility would help most."
+    source="data-intelligence-cta"
+  />
+</BaseLayout>

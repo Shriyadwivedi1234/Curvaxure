@@ -1,0 +1,20 @@
+---
+import SectionHead from './SectionHead.astro';
+interface Step { title: string; desc: string; }
+interface Props { eyebrow?: string; title?: string; intro?: string; steps: Step[]; alt?: boolean; }
+const { eyebrow = 'How we work', title = 'A simple process, no surprises.', intro, steps, alt = true } = Astro.props;
+---
+<section class="py-20 md:py-28" style={`border-top: 1px solid var(--color-line); background: ${alt ? 'var(--color-surface-2)' : 'var(--color-surface)'}`}>
+  <div class="container-page">
+    <SectionHead eyebrow={eyebrow} title={title} intro={intro} />
+    <ol class:list={['mt-12 grid gap-4', steps.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-4']}>
+      {steps.map((s, i) => (
+        <li class="rounded-[20px] p-6" style="border: 1px solid var(--color-line); background: var(--color-surface-3)">
+          <span class="font-mono text-[12px] tabular-nums" style="color: var(--color-lime-text)">Step {String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-4 text-[22px] font-medium leading-[1.15]" style="color: var(--color-primary)">{s.title}</h3>
+          <p class="mt-2 text-[14px] leading-[1.65]" style="color: var(--color-secondary)">{s.desc}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

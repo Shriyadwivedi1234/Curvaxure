@@ -55,7 +55,7 @@ const serviceCategories = [
     ],
     accent: 'lime',
     badge: 'Automation & AI',
-    href: "/services/digital-presence"
+    href: "/services/automation"
   },
 ];
 ---
@@ -79,13 +79,13 @@ const serviceCategories = [
     <div class="mt-14 grid gap-4 md:grid-cols-2">
       {serviceCategories.map((cat) => (
         <article
-          class="group relative flex flex-col justify-between rounded-[20px] p-5 md:p-5 transition-all duration-300 shadow-sm"
+          class="service-card group relative flex flex-col justify-between rounded-[20px] p-5 md:p-5 transition-all duration-300 shadow-sm"
           style="border: 1px solid var(--color-line); background: var(--color-surface-2)"
         >
           <div>
 
             <h3 class="mt-5 text-[26px] font-medium leading-[1.15] transition-colors" style="color: var(--color-primary)">
-              {cat.title}
+              <a href={cat.href} class="service-card-link focus-visible:outline-offset-4 after:absolute after:inset-0 after:rounded-[20px] after:content-['']">{cat.title}</a>
             </h3>
             
             <p class="mt-2 text-[14px] font-medium" style="color: var(--color-lime-text)">
@@ -108,8 +108,8 @@ const serviceCategories = [
 
           <div class="mt-8 pt-5 flex items-center justify-between" style="border-top: 1px solid var(--color-line)">
             <a
-              href={cat.href}
-              class="inline-flex items-center gap-1.5 text-[13px] font-medium transition-colors"
+              href={`/book-consultation?source=services-${cat.id}`}
+              class="relative z-10 inline-flex items-center gap-1.5 text-[13px] font-medium transition-colors"
               style="color: var(--color-lime-text)"
             >
               <span>Consult on this</span>
@@ -121,3 +121,20 @@ const serviceCategories = [
     </div>
   </div>
 </section>
+
+<style>
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-violet) 45%, transparent) !important;
+    box-shadow: 0 14px 32px -16px color-mix(in srgb, var(--color-violet) 55%, transparent);
+  }
+  .service-card:hover h3 a,
+  .service-card:focus-within h3 a {
+    color: var(--color-violet);
+  }
+  .service-card-link {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
