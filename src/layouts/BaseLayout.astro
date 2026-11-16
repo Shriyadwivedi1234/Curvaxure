@@ -26,7 +26,7 @@ const orgSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0a" id="meta-theme-color" />
+    <meta name="theme-color" content="#fafafc" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -39,22 +39,6 @@ const orgSchema = {
     <link rel="icon" href="curvaxure-mark.png" type="image/svg+xml" />
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
 
-    <!-- Anti-flash theme initialization -->
-    <script is:inline>
-      (function () {
-        try {
-          const stored = localStorage.getItem('curvaxure-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ? stored : (prefersDark ? 'dark' : 'light');
-          document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            document.documentElement.classList.add('light');
-          } else {
-            document.documentElement.classList.remove('light');
-          }
-        } catch (_) {}
-      })();
-    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <a
